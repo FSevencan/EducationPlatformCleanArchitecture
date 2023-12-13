@@ -21,5 +21,5 @@ public class Module : Entity<Guid>
     public ICollection<ModuleCourse> ModuleCourses { get; set; }
 
     public ICollection<ModuleInstructor>? ModuleInstructors { get; set; }
-
+    //live class sonrasında tartışılacak
 }
