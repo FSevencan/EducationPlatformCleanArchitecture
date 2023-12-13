@@ -14,10 +14,7 @@ public class Course : Entity<Guid>
     public Guid CategoryId { get; set; }
     public Category Category { get; set; }
 
-    public Guid AboutId { get; set; }
-    public About About { get; set; }
+    public ICollection<ModuleCourse> ModuleCourses { get; set; }
 
-    public ICollection<CourseModule> CourseModules { get; set; }
-
-    public ICollection<CourseInstructor>? CourseInstructor { get; set; }
+    public ICollection<ModuleInstructor>? CourseInstructor { get; set; }
 }

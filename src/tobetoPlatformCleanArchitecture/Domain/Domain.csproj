@@ -11,4 +11,8 @@
     <ProjectReference Include="..\..\corePackages\Core.Security\Core.Security.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Enums\" />
+  </ItemGroup>
+
 </Project>

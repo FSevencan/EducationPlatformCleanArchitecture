@@ -9,8 +9,17 @@ using System.Threading.Tasks;
 namespace Domain.Entities;
 public class Module : Entity<Guid>
 {
-    public string Title { get; set; }
+    public string Name { get; set; }
+    public string ImageUrl { get; set; }
+    public string Description { get; set; }
+    public Guid CategoryId { get; set; }
+    public Category Category { get; set; }
 
-    public ICollection<Content> Contents { get; set; }
-    public ICollection<CourseModule> CourseModules { get; set; } // Bir Modülü başka kurslarda da kullanmak için
+    public Guid ModuleAboutId { get; set; }
+    public ModuleAbout ModuleAbout { get; set; }
+
+    public ICollection<ModuleCourse> ModuleCourses { get; set; }
+
+    public ICollection<ModuleInstructor>? ModuleInstructors { get; set; }
+
 }

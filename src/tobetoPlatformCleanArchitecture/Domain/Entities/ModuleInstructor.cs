@@ -6,10 +6,10 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class CourseModule : Entity<Guid>
+public class ModuleInstructor : Entity<Guid>
 {
-    public Guid CourseId { get; set; }
-    public Course Course { get; set; }
     public Guid ModuleId { get; set; }
-    public Module Module { get; set; }
+    public Guid InstructorId { get; set; }
+    public Module? Module { get; set; }
+    public Instructor? Instructor { get; set; }
 }

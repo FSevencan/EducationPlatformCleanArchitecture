@@ -6,9 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class AssignmentContent : Content
+public class Language : Entity<Guid>
 {
-    public string Description { get; set; }
-    public string File { get; set; }
-    public DateTime SendDate { get; set; }
+    public string Name { get; set; }
+    
 }

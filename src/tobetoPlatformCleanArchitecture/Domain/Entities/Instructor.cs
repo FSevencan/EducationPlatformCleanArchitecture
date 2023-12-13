@@ -11,5 +11,5 @@ public class Instructor : Entity<Guid>
     public string Name { get; set; }
     public string? ImageUrl { get; set; }
 
-    public ICollection<CourseInstructor>? CourseInstructor { get; set; }
+    public ICollection<ModuleInstructor>? ModuleInstructor { get; set; }
 }

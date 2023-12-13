@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Domain.Entities;
-public class VideoContent : Content
+public class LessonCategory : Entity<Guid>
 {
-    public string Url { get; set; }
+    public string Name { get; set; }
+    public ICollection<Lesson> Lessons { get; set; }
 }
