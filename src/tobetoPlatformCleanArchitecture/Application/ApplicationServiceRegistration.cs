@@ -1,4 +1,4 @@
-﻿using Application.Services.AuthenticatorService;
+using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
 using Core.Application.Pipelines.Authorization;
@@ -15,6 +15,22 @@ using Core.Mailing.MailKitImplementations;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
+using Application.Services.Announcements;
+using Application.Services.ApplicationEducations;
+using Application.Services.Categories;
+using Application.Services.Courses;
+using Application.Services.Exams;
+using Application.Services.Instructors;
+using Application.Services.Languages;
+using Application.Services.Lessons;
+using Application.Services.ProducerCompanies;
+using Application.Services.Sections;
+using Application.Services.SectionAbouts;
+using Application.Services.SectionCourses;
+using Application.Services.SectionInstructors;
+using Application.Services.Surveys;
+using Application.Services.UserSections;
+using Application.Services.UserSurveys;
 
 namespace Application;
 
@@ -45,6 +61,22 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
         services.AddScoped<IUserService, UserManager>();
 
+        services.AddScoped<IAnnouncementsService, AnnouncementsManager>();
+        services.AddScoped<IApplicationEducationsService, ApplicationEducationsManager>();
+        services.AddScoped<ICategoriesService, CategoriesManager>();
+        services.AddScoped<ICoursesService, CoursesManager>();
+        services.AddScoped<IExamsService, ExamsManager>();
+        services.AddScoped<IInstructorsService, InstructorsManager>();
+        services.AddScoped<ILanguagesService, LanguagesManager>();
+        services.AddScoped<ILessonsService, LessonsManager>();
+        services.AddScoped<IProducerCompaniesService, ProducerCompaniesManager>();
+        services.AddScoped<ISectionsService, SectionsManager>();
+        services.AddScoped<ISectionAboutsService, SectionAboutsManager>();
+        services.AddScoped<ISectionCoursesService, SectionCoursesManager>();
+        services.AddScoped<ISectionInstructorsService, SectionInstructorsManager>();
+        services.AddScoped<ISurveysService, SurveysManager>();
+        services.AddScoped<IUserSectionsService, UserSectionsManager>();
+        services.AddScoped<IUserSurveysService, UserSurveysManager>();
         return services;
     }
 

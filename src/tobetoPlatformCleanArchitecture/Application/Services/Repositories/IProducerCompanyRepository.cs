@@ -1,0 +1,8 @@
+using Domain.Entities;
+using Core.Persistence.Repositories;
+
+namespace Application.Services.Repositories;
+
+public interface IProducerCompanyRepository : IAsyncRepository<ProducerCompany, Guid>, IRepository<ProducerCompany, Guid>
+{
+}
