@@ -1,7 +1,6 @@
 ﻿using Core.Persistence.Repositories;
 
 namespace Domain.Entities;
-//Şimdilik görsel amaçlıdır.
 public class Exam:Entity<Guid> 
 {
     public string Name { get; set; }

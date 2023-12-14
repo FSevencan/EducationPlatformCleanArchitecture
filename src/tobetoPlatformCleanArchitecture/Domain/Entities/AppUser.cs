@@ -9,7 +9,7 @@ public class AppUser : User
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
 
-    public virtual ICollection<UserModule> UserModules { get; set; }
-    public virtual ICollection<UserSurvey> UserSurveys { get; set; }
+    public  ICollection<UserSection> UserSections { get; set; }
+    public  ICollection<UserSurvey> UserSurveys { get; set; }
 }
 

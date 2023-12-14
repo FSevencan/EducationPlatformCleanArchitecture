@@ -1,11 +1,11 @@
 ﻿using Core.Persistence.Repositories;
 
 namespace Domain.Entities;
-public class UserSurvey : Entity<Guid>
+public class UserSection : Entity<Guid>
 {
+    public Guid SectionId { get; set; }
     public int UserId { get; set; }
-    public Guid SurveyId { get; set; }
 
     public  AppUser User { get; set; }
-    public  Survey Survey { get; set; }
+    public  Section Section { get; set; }   
 }

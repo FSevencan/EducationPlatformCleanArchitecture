@@ -5,6 +5,6 @@ public class ProducerCompany:Entity<Guid>
 {
     public string Name { get; set; }
 
-    public virtual ICollection<Lesson> Lessons { get; set; }
-    public virtual ICollection<ModuleAbout> ModuleAbouts { get; set; }
+    public  ICollection<Lesson> Lessons { get; set; }
+    public  ICollection<SectionAbout> SectionAbouts { get; set; }
 }
