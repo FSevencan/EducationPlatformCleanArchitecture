@@ -24,6 +24,8 @@ public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequ
     public string? CacheKey { get; }
     public string CacheGroupKey => "GetCourses";
 
+    public ICollection<Guid> SectionIds { get; set; }
+
     public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, CreatedCourseResponse>
     {
         private readonly IMapper _mapper;
@@ -41,6 +43,8 @@ public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequ
         public async Task<CreatedCourseResponse> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
             Course course = _mapper.Map<Course>(request);
+
+            course.SectionCourses = request.SectionIds.Select(s => new SectionCourse { SectionId = s, CreatedDate = DateTime.Now }).ToList();
 
             await _courseRepository.AddAsync(course);
 
