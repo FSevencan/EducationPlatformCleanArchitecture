@@ -12,7 +12,7 @@ public class Lesson : Entity<Guid>
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
 
-    public  Course Course { get; set; }
-    public  Language Language { get; set; }
-    public  ProducerCompany ProducerCompany { get; set; }
+    public Course Course { get; set; }
+    public Language Language { get; set; }
+    public ProducerCompany ProducerCompany { get; set; }
 }
