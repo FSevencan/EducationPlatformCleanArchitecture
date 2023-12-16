@@ -32,6 +32,7 @@ public class BaseDbContext : DbContext
     public DbSet<Survey> Surveys { get; set; }
     public DbSet<UserSection> UserSections { get; set; }
     public DbSet<UserSurvey> UserSurveys { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
@@ -53,6 +54,9 @@ public class BaseDbContext : DbContext
              .WithMany(s => s.SectionCourses)
              .HasForeignKey(sc => sc.SectionId)
              .OnDelete(DeleteBehavior.NoAction);
+
+
+
 
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }

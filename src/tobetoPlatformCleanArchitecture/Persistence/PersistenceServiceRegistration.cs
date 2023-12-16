@@ -35,6 +35,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ISurveyRepository, SurveyRepository>();
         services.AddScoped<IUserSectionRepository, UserSectionRepository>();
         services.AddScoped<IUserSurveyRepository, UserSurveyRepository>();
+        services.AddScoped<IAppUserRepository, AppUserRepository>();
         return services;
     }
 }

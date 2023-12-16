@@ -12,7 +12,6 @@ public class SectionConfiguration : IEntityTypeConfiguration<Section>
 
         builder.Property(s => s.Id).HasColumnName("Id").IsRequired();
         builder.Property(s => s.CategoryId).HasColumnName("CategoryId");
-        builder.Property(s => s.SectionAboutId).HasColumnName("SectionAboutId");
         builder.Property(s => s.Name).HasColumnName("Name");
         builder.Property(s => s.ImageUrl).HasColumnName("ImageUrl");
         builder.Property(s => s.Description).HasColumnName("Description");

@@ -14,8 +14,7 @@ namespace Application.Features.Courses.Commands.Create;
 
 public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public Guid CategoryId { get; set; }
-    public TimeSpan? TotalTime { get; set; }
+    public int TotalTime { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
 
