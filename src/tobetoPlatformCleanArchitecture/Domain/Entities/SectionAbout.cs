@@ -13,5 +13,5 @@ public class SectionAbout : Entity<Guid>
 
     public Section Section { get; set; }
     public ProducerCompany ProducerCompany { get; set; }
-    //---------
+    //-----------
 }
