@@ -31,6 +31,7 @@ using Application.Services.SectionInstructors;
 using Application.Services.Surveys;
 using Application.Services.UserSections;
 using Application.Services.UserSurveys;
+using Application.Services.AppUsers;
 
 namespace Application;
 
@@ -77,6 +78,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISurveysService, SurveysManager>();
         services.AddScoped<IUserSectionsService, UserSectionsManager>();
         services.AddScoped<IUserSurveysService, UserSurveysManager>();
+        services.AddScoped<IAppUsersService, AppUsersManager>();
         return services;
     }
 
