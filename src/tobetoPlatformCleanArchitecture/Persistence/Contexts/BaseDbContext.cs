@@ -32,6 +32,7 @@ public class BaseDbContext : DbContext
     public DbSet<Survey> Surveys { get; set; }
     public DbSet<UserSection> UserSections { get; set; }
     public DbSet<UserSurvey> UserSurveys { get; set; }
+    public DbSet<AppUser> AppUsers { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
@@ -41,12 +42,7 @@ public class BaseDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        base.OnModelCreating(modelBuilder);
-
-        modelBuilder.Entity<Section>()
-            .HasOne(s => s.SectionAbout)
-            .WithOne(sa => sa.Section)
-            .HasForeignKey<SectionAbout>(sa => sa.SectionId);
+       
 
         modelBuilder.Entity<SectionCourse>()
              .HasOne(sc => sc.Section)

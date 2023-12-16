@@ -161,7 +161,17 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Add" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Delete" });
+        #endregion
+      
+        #region AppUsers
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Delete" });
+        #endregion
         return seeds;
+       
     }
 }
-#endregion

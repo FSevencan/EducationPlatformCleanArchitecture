@@ -15,7 +15,6 @@ namespace Application.Features.Sections.Commands.Create;
 public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid CategoryId { get; set; }
-    public Guid SectionAboutId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }

@@ -674,6 +674,42 @@ namespace Persistence.Migrations
                             Id = 97,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "UserSurveys.Delete"
+                        },
+                        new
+                        {
+                            Id = 98,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AppUsers.Admin"
+                        },
+                        new
+                        {
+                            Id = 99,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AppUsers.Read"
+                        },
+                        new
+                        {
+                            Id = 100,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AppUsers.Write"
+                        },
+                        new
+                        {
+                            Id = 101,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AppUsers.Add"
+                        },
+                        new
+                        {
+                            Id = 102,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AppUsers.Update"
+                        },
+                        new
+                        {
+                            Id = 103,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "AppUsers.Delete"
                         });
                 });
 
@@ -857,8 +893,8 @@ namespace Persistence.Migrations
                             Email = "admin@admin.com",
                             FirstName = "Admin",
                             LastName = "NArchitecture",
-                            PasswordHash = new byte[] { 107, 203, 55, 30, 253, 157, 25, 85, 199, 49, 182, 250, 0, 173, 200, 245, 248, 95, 233, 227, 135, 234, 19, 217, 168, 190, 146, 58, 78, 64, 117, 138, 8, 43, 226, 142, 46, 222, 249, 151, 86, 211, 95, 193, 145, 73, 126, 2, 91, 223, 155, 62, 99, 227, 223, 171, 100, 50, 192, 219, 160, 116, 226, 100 },
-                            PasswordSalt = new byte[] { 85, 111, 158, 57, 195, 229, 181, 83, 225, 197, 52, 80, 104, 196, 64, 22, 209, 188, 176, 111, 187, 33, 222, 116, 76, 243, 86, 240, 42, 97, 138, 73, 211, 8, 69, 197, 37, 200, 222, 90, 113, 73, 34, 81, 186, 53, 102, 192, 241, 97, 218, 130, 250, 100, 234, 104, 180, 164, 29, 80, 212, 30, 250, 245, 175, 221, 197, 27, 70, 21, 11, 157, 67, 200, 221, 99, 231, 43, 21, 36, 17, 141, 240, 49, 28, 53, 234, 169, 84, 58, 57, 101, 93, 208, 183, 249, 64, 150, 47, 251, 238, 243, 26, 61, 250, 48, 57, 7, 48, 150, 29, 40, 35, 5, 176, 214, 153, 226, 186, 152, 218, 114, 234, 109, 127, 133, 204, 20 },
+                            PasswordHash = new byte[] { 251, 27, 139, 195, 154, 97, 133, 106, 172, 154, 143, 96, 41, 144, 141, 133, 124, 212, 101, 136, 17, 204, 95, 107, 218, 249, 180, 11, 53, 39, 185, 156, 249, 62, 63, 15, 241, 83, 188, 93, 207, 206, 52, 60, 39, 61, 36, 178, 98, 138, 205, 200, 184, 50, 149, 70, 150, 79, 99, 156, 180, 202, 72, 131 },
+                            PasswordSalt = new byte[] { 248, 83, 60, 102, 0, 37, 87, 193, 6, 165, 55, 134, 1, 42, 234, 122, 178, 209, 51, 69, 85, 224, 224, 141, 149, 63, 112, 228, 204, 231, 108, 176, 79, 173, 52, 149, 40, 231, 228, 76, 71, 105, 178, 175, 136, 20, 130, 31, 192, 194, 86, 38, 8, 242, 223, 171, 95, 218, 101, 232, 154, 91, 223, 45, 123, 35, 74, 73, 255, 85, 104, 235, 15, 169, 100, 22, 16, 53, 221, 130, 232, 162, 134, 207, 185, 253, 242, 55, 220, 14, 96, 116, 88, 244, 97, 46, 217, 149, 7, 62, 170, 228, 225, 88, 156, 88, 225, 216, 223, 29, 95, 144, 232, 73, 56, 210, 237, 26, 138, 171, 20, 37, 233, 73, 4, 147, 108, 141 },
                             Status = true
                         });
                 });
@@ -1027,8 +1063,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
-                    b.Property<TimeSpan?>("TotalTime")
-                        .HasColumnType("time")
+                    b.Property<double>("TotalTime")
+                        .HasColumnType("float")
                         .HasColumnName("TotalTime");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -1060,9 +1096,8 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Description");
 
-                    b.Property<string>("Duration")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
+                    b.Property<int>("Duration")
+                        .HasColumnType("int")
                         .HasColumnName("Duration");
 
                     b.Property<DateTime>("EndDate")
@@ -1198,8 +1233,8 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("ProducerCompanyId");
 
-                    b.Property<TimeSpan?>("Time")
-                        .HasColumnType("time")
+                    b.Property<double>("Time")
+                        .HasColumnType("float")
                         .HasColumnName("Time");
 
                     b.Property<DateTime?>("UpdatedDate")
@@ -1280,10 +1315,6 @@ namespace Persistence.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Name");
 
-                    b.Property<Guid>("SectionAboutId")
-                        .HasColumnType("uniqueidentifier")
-                        .HasColumnName("SectionAboutId");
-
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("UpdatedDate");
@@ -1314,8 +1345,8 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("EndDate");
 
-                    b.Property<TimeSpan?>("EstimatedDuration")
-                        .HasColumnType("time")
+                    b.Property<double>("EstimatedDuration")
+                        .HasColumnType("float")
                         .HasColumnName("EstimatedDuration");
 
                     b.Property<Guid>("ProducerCompanyId")
@@ -1342,8 +1373,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("ProducerCompanyId");
 
-                    b.HasIndex("SectionId")
-                        .IsUnique();
+                    b.HasIndex("SectionId");
 
                     b.ToTable("SectionAbouts", (string)null);
                 });
@@ -1613,7 +1643,7 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Lesson", b =>
                 {
                     b.HasOne("Domain.Entities.Course", "Course")
-                        .WithMany()
+                        .WithMany("Lessons")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1657,8 +1687,8 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.HasOne("Domain.Entities.Section", "Section")
-                        .WithOne("SectionAbout")
-                        .HasForeignKey("Domain.Entities.SectionAbout", "SectionId")
+                        .WithMany()
+                        .HasForeignKey("SectionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1766,6 +1796,8 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Course", b =>
                 {
+                    b.Navigation("Lessons");
+
                     b.Navigation("SectionCourses");
                 });
 
@@ -1783,9 +1815,6 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Section", b =>
                 {
-                    b.Navigation("SectionAbout")
-                        .IsRequired();
-
                     b.Navigation("SectionCourses");
 
                     b.Navigation("SectionInstructors");

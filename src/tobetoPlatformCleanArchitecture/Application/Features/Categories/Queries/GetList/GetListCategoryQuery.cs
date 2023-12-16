@@ -16,7 +16,7 @@ public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryList
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
+    public string[] Roles => new[] { Admin, Read  };
 
     public bool BypassCache { get; }
     public string CacheKey => $"GetListCategories({PageRequest.PageIndex},{PageRequest.PageSize})";

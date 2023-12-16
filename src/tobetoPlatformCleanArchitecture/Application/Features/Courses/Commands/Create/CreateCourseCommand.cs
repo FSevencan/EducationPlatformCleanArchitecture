@@ -2,11 +2,11 @@ using Application.Features.Courses.Constants;
 using Application.Features.Courses.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
-using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
 using Core.Application.Pipelines.Caching;
 using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
+using Domain.Entities;
 using MediatR;
 using static Application.Features.Courses.Constants.CoursesOperationClaims;
 
@@ -14,8 +14,7 @@ namespace Application.Features.Courses.Commands.Create;
 
 public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public Guid CategoryId { get; set; }
-    public TimeSpan? TotalTime { get; set; }
+    public double TotalTime { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
 
@@ -24,6 +23,8 @@ public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequ
     public bool BypassCache { get; }
     public string? CacheKey { get; }
     public string CacheGroupKey => "GetCourses";
+
+    public ICollection<Guid> SectionIds { get; set; }
 
     public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, CreatedCourseResponse>
     {
@@ -42,6 +43,13 @@ public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequ
         public async Task<CreatedCourseResponse> Handle(CreateCourseCommand request, CancellationToken cancellationToken)
         {
             Course course = _mapper.Map<Course>(request);
+
+            course.SectionCourses = request.SectionIds.Select
+                (sectionId => new SectionCourse
+                {
+                    SectionId = sectionId,
+                    CreatedDate = DateTime.Now
+                }).ToList();
 
             await _courseRepository.AddAsync(course);
 
