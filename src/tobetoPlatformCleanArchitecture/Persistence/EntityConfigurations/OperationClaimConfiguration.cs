@@ -33,7 +33,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new OperationClaim { Id = ++id, Name = GeneralOperationClaims.Admin }
             };
 
-        
+
         #region Announcements
         seeds.Add(new OperationClaim { Id = ++id, Name = "Announcements.Admin" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Announcements.Read" });
@@ -161,7 +161,17 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Add" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Delete" });
+        #region AppUsers
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Delete" });
+        
         return seeds;
     }
 }
 #endregion
+
+        #endregion
