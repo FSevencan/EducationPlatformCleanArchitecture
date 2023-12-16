@@ -1,6 +1,4 @@
-﻿using Core.Persistence.Repositories;
-using Core.Security.Entities;
-using Core.Security.Enums;
+﻿using Core.Security.Entities;
 
 namespace Domain.Entities;
 public class AppUser : User
@@ -11,12 +9,7 @@ public class AppUser : User
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
 
-
     public  ICollection<UserSection> UserSections { get; set; }
     public  ICollection<UserSurvey> UserSurveys { get; set; }
-
-   
-   
-
 }
 
