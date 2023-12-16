@@ -5,6 +5,8 @@ public class Section : Entity<Guid>
 {
     public Guid CategoryId { get; set; }
 
+    //public Guid SectionAboutId { get; set; }
+
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }

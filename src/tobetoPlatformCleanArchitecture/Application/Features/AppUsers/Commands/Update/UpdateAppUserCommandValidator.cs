@@ -17,5 +17,9 @@ public class UpdateAppUserCommandValidator : AbstractValidator<UpdateAppUserComm
         RuleFor(c => c.About).NotEmpty();
         RuleFor(c => c.GithubUrl).NotEmpty();
         RuleFor(c => c.LinkedinUrl).NotEmpty();
+        RuleFor(c => c.FirstName).NotEmpty();
+        RuleFor(c => c.LastName).NotEmpty();
+        RuleFor(c => c.Email).NotEmpty();
+        RuleFor(c => c.Status).NotEmpty();
     }
 }

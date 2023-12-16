@@ -6,6 +6,7 @@ public class CreateAppUserCommandValidator : AbstractValidator<CreateAppUserComm
 {
     public CreateAppUserCommandValidator()
     {
+       
         RuleFor(c => c.FirstName).NotEmpty();
         RuleFor(c => c.LastName).NotEmpty();
         RuleFor(c => c.Email).NotEmpty();

@@ -50,6 +50,9 @@ public class BaseDbContext : DbContext
              .HasForeignKey(sc => sc.SectionId)
              .OnDelete(DeleteBehavior.NoAction);
 
+
+
+
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

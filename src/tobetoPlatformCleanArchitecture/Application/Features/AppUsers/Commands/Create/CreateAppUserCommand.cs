@@ -51,10 +51,10 @@ public class CreateAppUserCommand : IRequest<CreatedAppUserResponse>,  ICacheRem
             AppUser appUser = _mapper.Map<AppUser>(request);
 
             HashingHelper.CreatePasswordHash(
-               request.Password,
-               passwordHash: out byte[] passwordHash,
-            passwordSalt: out byte[] passwordSalt
-           );
+              request.Password,
+              passwordHash: out byte[] passwordHash,
+              passwordSalt: out byte[] passwordSalt
+                );
             appUser.PasswordHash = passwordHash;
             appUser.PasswordSalt = passwordSalt;
 

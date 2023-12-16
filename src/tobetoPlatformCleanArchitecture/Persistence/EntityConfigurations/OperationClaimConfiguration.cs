@@ -33,7 +33,7 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new OperationClaim { Id = ++id, Name = GeneralOperationClaims.Admin }
             };
 
-        
+
         #region Announcements
         seeds.Add(new OperationClaim { Id = ++id, Name = "Announcements.Admin" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Announcements.Read" });
@@ -175,3 +175,4 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
        
     }
 }
+#endregion

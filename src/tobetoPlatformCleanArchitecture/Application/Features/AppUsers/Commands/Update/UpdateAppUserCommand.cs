@@ -26,6 +26,10 @@ public class UpdateAppUserCommand : IRequest<UpdatedAppUserResponse>, ICacheRemo
     public string About { get; set; }
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public bool Status { get; set; }
 
     public string[] Roles => new[] { Admin, Write, AppUsersOperationClaims.Update };
 
