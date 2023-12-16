@@ -16,8 +16,4 @@ public class GetByIdAppUserResponse : IResponse
     public string About { get; set; }
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public bool Status { get; set; }
 }
