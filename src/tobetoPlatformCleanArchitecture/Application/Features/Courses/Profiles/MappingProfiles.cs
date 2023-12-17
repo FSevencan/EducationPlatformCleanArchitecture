@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Lessons.Queries.GetList;
 
 namespace Application.Features.Courses.Profiles;
 
@@ -23,5 +24,6 @@ public class MappingProfiles : Profile
         CreateMap<Course, GetByIdCourseResponse>().ReverseMap();
         CreateMap<Course, GetListCourseListItemDto>().ReverseMap();
         CreateMap<IPaginate<Course>, GetListResponse<GetListCourseListItemDto>>().ReverseMap();
+        CreateMap<IPaginate<Course>, GetListResponse<GetListLessonListItemDto>>().ReverseMap();                  
     }
 }

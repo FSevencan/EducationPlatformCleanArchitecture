@@ -19,7 +19,7 @@ public class UpdateLessonCommand : IRequest<UpdatedLessonResponse>, ISecuredRequ
     public Guid CourseId { get; set; }
     public Guid LanguageId { get; set; }
     public string Name { get; set; }
-    public TimeSpan? Time { get; set; }
+    public double? Time { get; set; }
     public string? ImageUrl { get; set; }
     public string? Description { get; set; }
 

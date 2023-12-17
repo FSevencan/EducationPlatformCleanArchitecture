@@ -20,7 +20,7 @@ public class UpdateSectionAboutCommand : IRequest<UpdatedSectionAboutResponse>, 
     public string? Text { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public TimeSpan? EstimatedDuration { get; set; }
+    public double? EstimatedDuration { get; set; }
 
     public string[] Roles => new[] { Admin, Write, SectionAboutsOperationClaims.Update };
 
