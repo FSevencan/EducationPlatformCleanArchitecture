@@ -34,6 +34,7 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
             _mapper = mapper;
         }
 
+
         public async Task<GetListResponse<GetListSectionListItemDto>> Handle(GetListSectionQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Section> sections = await _sectionRepository.GetListAsync(

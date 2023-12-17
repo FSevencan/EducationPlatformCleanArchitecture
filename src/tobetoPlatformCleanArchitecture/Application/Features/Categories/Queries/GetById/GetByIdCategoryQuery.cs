@@ -33,6 +33,8 @@ public class GetByIdCategoryQuery : IRequest<GetByIdCategoryResponse>, ISecuredR
             Category? category = await _categoryRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _categoryBusinessRules.CategoryShouldExistWhenSelected(category);
 
+           
+
             GetByIdCategoryResponse response = _mapper.Map<GetByIdCategoryResponse>(category);
             return response;
         }

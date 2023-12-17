@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Categories.Queries.GetList;
 
 namespace Application.Features.Sections.Profiles;
 
@@ -22,6 +23,7 @@ public class MappingProfiles : Profile
         CreateMap<Section, DeletedSectionResponse>().ReverseMap();
         CreateMap<Section, GetByIdSectionResponse>().ReverseMap();
         CreateMap<Section, GetListSectionListItemDto>().ReverseMap();
+        CreateMap<Section, GetListCategorySectionsDto>().ReverseMap();
         CreateMap<IPaginate<Section>, GetListResponse<GetListSectionListItemDto>>().ReverseMap();
     }
 }

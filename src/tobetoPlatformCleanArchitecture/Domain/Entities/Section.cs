@@ -11,7 +11,7 @@ public class Section : Entity<Guid>
     public string ImageUrl { get; set; }
     public string Description { get; set; }
 
-    public Category Category { get; set; }
-    public ICollection<SectionCourse> SectionCourses { get; set; }
-    public ICollection<SectionInstructor> SectionInstructors { get; set; }
+    public Category? Category { get; set; }
+    public ICollection<SectionCourse>? SectionCourses { get; set; }
+    public ICollection<SectionInstructor>? SectionInstructors { get; set; }
 }

@@ -6,4 +6,7 @@ public class GetListCategoryListItemDto : IDto
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+
+    public ICollection<GetListCategorySectionsDto> Sections { get; set; }
+
 }
