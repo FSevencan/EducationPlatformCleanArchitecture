@@ -8,6 +8,8 @@ using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
 using Application.Features.Categories.Queries.GetList;
+using Application.Features.Instructors.Queries.GetList;
+using Application.Features.Courses.Queries.GetList;
 
 namespace Application.Features.Sections.Profiles;
 
@@ -24,6 +26,19 @@ public class MappingProfiles : Profile
         CreateMap<Section, GetByIdSectionResponse>().ReverseMap();
         CreateMap<Section, GetListSectionListItemDto>().ReverseMap();
         CreateMap<Section, GetListCategorySectionsDto>().ReverseMap();
+        CreateMap<Section, GetListInstructorsSectionListDto>().ReverseMap();
         CreateMap<IPaginate<Section>, GetListResponse<GetListSectionListItemDto>>().ReverseMap();
+        CreateMap<IPaginate<Section>, GetListResponse<GetListInstructorsSectionListDto>>().ReverseMap();
+
+
+
+        CreateMap<Section, GetListSectionListItemDto>()
+            .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))
+            .ForMember(dest => dest.Courses, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course).ToList()))
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.Sectionabout, opt => opt.MapFrom(src => src.SectionAbout))
+            .ForMember(dest => dest.ProducerCompany, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
+
+
     }
 }

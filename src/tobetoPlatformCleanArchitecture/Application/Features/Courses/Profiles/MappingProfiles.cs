@@ -23,7 +23,8 @@ public class MappingProfiles : Profile
         CreateMap<Course, DeletedCourseResponse>().ReverseMap();
         CreateMap<Course, GetByIdCourseResponse>().ReverseMap();
         CreateMap<Course, GetListCourseListItemDto>().ReverseMap();
+        CreateMap<Course, GetListCourseDto>().ReverseMap();
         CreateMap<IPaginate<Course>, GetListResponse<GetListCourseListItemDto>>().ReverseMap();
-        CreateMap<IPaginate<Course>, GetListResponse<GetListLessonListItemDto>>().ReverseMap();                  
+        CreateMap<IPaginate<Course>, GetListResponse<GetListLessonListItemDto>>().ReverseMap();
     }
 }

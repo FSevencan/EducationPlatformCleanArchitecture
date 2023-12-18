@@ -22,6 +22,7 @@ public class MappingProfiles : Profile
         CreateMap<SectionAbout, DeletedSectionAboutResponse>().ReverseMap();
         CreateMap<SectionAbout, GetByIdSectionAboutResponse>().ReverseMap();
         CreateMap<SectionAbout, GetListSectionAboutListItemDto>().ReverseMap();
+        CreateMap<SectionAbout, GetSectionAboutDto>().ReverseMap();
         CreateMap<IPaginate<SectionAbout>, GetListResponse<GetListSectionAboutListItemDto>>().ReverseMap();
     }
 }

@@ -12,8 +12,8 @@ public class AppUser : User
     public string? LinkedinUrl { get; set; }
 
 
-    public  ICollection<UserSection> UserSections { get; set; }
-    public  ICollection<UserSurvey> UserSurveys { get; set; }
+    public ICollection<UserSection> UserSections { get; set; }
+    public ICollection<UserSurvey> UserSurveys { get; set; }
 
    
    
