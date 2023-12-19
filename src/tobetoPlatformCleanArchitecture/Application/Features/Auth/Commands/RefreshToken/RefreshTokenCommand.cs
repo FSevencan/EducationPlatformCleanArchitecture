@@ -1,8 +1,10 @@
 ﻿using Application.Features.Auth.Rules;
+using Application.Services.AppUsers;
 using Application.Services.AuthService;
 using Application.Services.UsersService;
 using Core.Security.Entities;
 using Core.Security.JWT;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Auth.Commands.RefreshToken;
@@ -27,10 +29,10 @@ public class RefreshTokenCommand : IRequest<RefreshedTokensResponse>
     public class RefreshTokenCommandHandler : IRequestHandler<RefreshTokenCommand, RefreshedTokensResponse>
     {
         private readonly IAuthService _authService;
-        private readonly IUserService _userService;
+        private readonly IAppUsersService _userService;
         private readonly AuthBusinessRules _authBusinessRules;
 
-        public RefreshTokenCommandHandler(IAuthService authService, IUserService userService, AuthBusinessRules authBusinessRules)
+        public RefreshTokenCommandHandler(IAuthService authService, IAppUsersService userService, AuthBusinessRules authBusinessRules)
         {
             _authService = authService;
             _userService = userService;
@@ -50,7 +52,7 @@ public class RefreshTokenCommand : IRequest<RefreshedTokensResponse>
                 );
             await _authBusinessRules.RefreshTokenShouldBeActive(refreshToken);
 
-            User? user = await _userService.GetAsync(predicate: u => u.Id == refreshToken.UserId, cancellationToken: cancellationToken);
+            AppUser? user = await _userService.GetAsync(predicate: u => u.Id == refreshToken.UserId, cancellationToken: cancellationToken);
             await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
 
             Core.Security.Entities.RefreshToken newRefreshToken = await _authService.RotateRefreshToken(

@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.AppUsers.Dto;
 
 namespace Application.Features.AppUsers.Profiles;
 
@@ -22,6 +23,7 @@ public class MappingProfiles : Profile
         CreateMap<AppUser, DeletedAppUserResponse>().ReverseMap();
         CreateMap<AppUser, GetByIdAppUserResponse>().ReverseMap();
         CreateMap<AppUser, GetListAppUserListItemDto>().ReverseMap();
+        CreateMap<AppUser, AppUserForRegisterDto>().ReverseMap();
         CreateMap<IPaginate<AppUser>, GetListResponse<GetListAppUserListItemDto>>().ReverseMap();
     }
 }

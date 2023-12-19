@@ -14,8 +14,7 @@ using WebAPI;
 
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
-// ////
+// Add services to the container.
 
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices();
@@ -75,7 +74,7 @@ builder.Services.AddSwaggerGen(opt =>
     opt.OperationFilter<BearerSecurityRequirementOperationFilter>();
 });
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -91,7 +90,6 @@ if (app.Environment.IsProduction())
     app.ConfigureCustomExceptionMiddleware();
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
@@ -103,4 +101,3 @@ WebApiConfiguration webApiConfiguration =
 app.UseCors(opt => opt.WithOrigins(webApiConfiguration.AllowedOrigins).AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 
 app.Run();
-//

@@ -1,38 +1,40 @@
-﻿using Application.Features.Auth.Rules;
+﻿using Application.Features.AppUsers.Dto;
+using Application.Features.Auth.Rules;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Core.Application.Dtos;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Core.Security.JWT;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Auth.Commands.Register;
 
 public class RegisterCommand : IRequest<RegisteredResponse>
 {
-    public UserForRegisterDto UserForRegisterDto { get; set; }
+    public AppUserForRegisterDto AppUserForRegisterDto { get; set; }
     public string IpAddress { get; set; }
 
     public RegisterCommand()
     {
-        UserForRegisterDto = null!;
+        AppUserForRegisterDto = null!;
         IpAddress = string.Empty;
     }
 
-    public RegisterCommand(UserForRegisterDto userForRegisterDto, string ipAddress)
+    public RegisterCommand(AppUserForRegisterDto userForRegisterDto, string ipAddress)
     {
-        UserForRegisterDto = userForRegisterDto;
+        AppUserForRegisterDto = userForRegisterDto;
         IpAddress = ipAddress;
     }
 
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, RegisteredResponse>
     {
-        private readonly IUserRepository _userRepository;
+        private readonly IAppUserRepository _userRepository;
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
 
-        public RegisterCommandHandler(IUserRepository userRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
+        public RegisterCommandHandler(IAppUserRepository userRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
         {
             _userRepository = userRepository;
             _authService = authService;
@@ -41,24 +43,24 @@ public class RegisterCommand : IRequest<RegisteredResponse>
 
         public async Task<RegisteredResponse> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            await _authBusinessRules.UserEmailShouldBeNotExists(request.UserForRegisterDto.Email);
+            await _authBusinessRules.UserEmailShouldBeNotExists(request.AppUserForRegisterDto.Email);
 
             HashingHelper.CreatePasswordHash(
-                request.UserForRegisterDto.Password,
+                request.AppUserForRegisterDto.Password,
                 passwordHash: out byte[] passwordHash,
                 passwordSalt: out byte[] passwordSalt
             );
-            User newUser =
+            AppUser newUser =
                 new()
                 {
-                    Email = request.UserForRegisterDto.Email,
-                    FirstName = request.UserForRegisterDto.FirstName,
-                    LastName = request.UserForRegisterDto.LastName,
+                    Email = request.AppUserForRegisterDto.Email,
+                    FirstName = request.AppUserForRegisterDto.FirstName,
+                    LastName = request.AppUserForRegisterDto.LastName,
                     PasswordHash = passwordHash,
                     PasswordSalt = passwordSalt,
                     Status = true
                 };
-            User createdUser = await _userRepository.AddAsync(newUser);
+            AppUser createdUser = await _userRepository.AddAsync(newUser);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
