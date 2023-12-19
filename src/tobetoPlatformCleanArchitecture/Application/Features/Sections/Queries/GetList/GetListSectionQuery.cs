@@ -48,6 +48,7 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
                                .Include(sabout => sabout.SectionAbout)
                                .ThenInclude(producer => producer.ProducerCompany),
 
+                //predicate: section => section.DeletedDate == null,
 
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 

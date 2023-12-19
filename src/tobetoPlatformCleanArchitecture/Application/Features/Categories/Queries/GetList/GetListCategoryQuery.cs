@@ -39,7 +39,8 @@ public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryList
         {
             IPaginate<Category> categories = await _categoryRepository.GetListAsync(
                 include: c => c.Include(section => section.Sections),
-                predicate: c => c.DeletedDate == null,
+                //predicate: c => c.DeletedDate == null,
+                //withDeleted: true,
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken
