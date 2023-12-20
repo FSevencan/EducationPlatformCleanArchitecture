@@ -1,5 +1,4 @@
-﻿using Application.Features.AppUsers.Dto;
-using Application.Features.Auth.Commands.EnableEmailAuthenticator;
+﻿using Application.Features.Auth.Commands.EnableEmailAuthenticator;
 using Application.Features.Auth.Commands.EnableOtpAuthenticator;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
@@ -41,9 +40,9 @@ public class AuthController : BaseController
     }
 
     [HttpPost("Register")]
-    public async Task<IActionResult> Register([FromBody] AppUserForRegisterDto userForRegisterDto)
+    public async Task<IActionResult> Register([FromBody] UserForRegisterDto userForRegisterDto)
     {
-        RegisterCommand registerCommand = new() { AppUserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
+        RegisterCommand registerCommand = new() { UserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
         RegisteredResponse result = await Mediator.Send(registerCommand);
         setRefreshTokenToCookie(result.RefreshToken);
         return Created(uri: "", result.AccessToken);

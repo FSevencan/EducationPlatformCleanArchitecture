@@ -16,7 +16,7 @@ public class CreateExamCommand : IRequest<CreatedExamResponse>, ISecuredRequest,
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Duration { get; set; }
+    public int Duration { get; set; }
     public int QuestionCount { get; set; }
     public string QuestionType { get; set; }
     public DateTime StartDate { get; set; }

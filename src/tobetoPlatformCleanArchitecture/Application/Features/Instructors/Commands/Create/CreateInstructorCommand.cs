@@ -9,13 +9,22 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Instructors.Constants.InstructorsOperationClaims;
+using Core.Security.Entities;
 
 namespace Application.Features.Instructors.Commands.Create;
 
 public class CreateInstructorCommand : IRequest<CreatedInstructorResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public string Name { get; set; }
-    public string? ImageUrl { get; set; }
+    public int UserId { get; set; }
+    public string FirstName { get; set; }
+    public string LastName { get; set; }
+    public string ImageUrl { get; set; }
+    public string Email { get; set; }
+    public DateTime BirthDate { get; set; }
+    public string PhoneNumber { get; set; }
+    public string About { get; set; }
+    public string Title { get; set; }
+    public User User { get; set; }
 
     public string[] Roles => new[] { Admin, Write, InstructorsOperationClaims.Create };
 

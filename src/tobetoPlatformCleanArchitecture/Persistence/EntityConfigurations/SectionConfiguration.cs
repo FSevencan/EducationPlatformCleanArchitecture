@@ -12,10 +12,11 @@ public class SectionConfiguration : IEntityTypeConfiguration<Section>
 
         builder.Property(s => s.Id).HasColumnName("Id").IsRequired();
         builder.Property(s => s.CategoryId).HasColumnName("CategoryId");
-
         builder.Property(s => s.Name).HasColumnName("Name");
         builder.Property(s => s.ImageUrl).HasColumnName("ImageUrl");
         builder.Property(s => s.Description).HasColumnName("Description");
+        builder.Property(s => s.SectionAbout).HasColumnName("SectionAbout");
+        builder.Property(s => s.Category).HasColumnName("Category");
         builder.Property(s => s.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(s => s.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");

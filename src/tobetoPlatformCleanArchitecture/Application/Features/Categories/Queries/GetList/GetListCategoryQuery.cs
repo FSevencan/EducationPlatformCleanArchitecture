@@ -9,7 +9,6 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Categories.Constants.CategoriesOperationClaims;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Categories.Queries.GetList;
 
@@ -17,7 +16,7 @@ public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryList
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read  };
+    public string[] Roles => new[] { Admin, Read };
 
     public bool BypassCache { get; }
     public string CacheKey => $"GetListCategories({PageRequest.PageIndex},{PageRequest.PageSize})";
@@ -38,15 +37,11 @@ public class GetListCategoryQuery : IRequest<GetListResponse<GetListCategoryList
         public async Task<GetListResponse<GetListCategoryListItemDto>> Handle(GetListCategoryQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Category> categories = await _categoryRepository.GetListAsync(
-                include: c => c.Include(section => section.Sections),
-                //predicate: c => c.DeletedDate == null,
-                //withDeleted: true,
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken
             );
 
-            //GetListCategorySectionsDto
             GetListResponse<GetListCategoryListItemDto> response = _mapper.Map<GetListResponse<GetListCategoryListItemDto>>(categories);
             return response;
         }

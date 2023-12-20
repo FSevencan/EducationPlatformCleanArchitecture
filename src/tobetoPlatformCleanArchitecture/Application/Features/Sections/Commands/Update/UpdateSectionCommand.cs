@@ -9,19 +9,18 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Sections.Constants.SectionsOperationClaims;
-using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Sections.Commands.Update;
 
-public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
     public Guid CategoryId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
-
-    public ICollection<Guid>? InstructorIds { get; set; }
+    public SectionAbout SectionAbout { get; set; }
+    public Category? Category { get; set; }
 
     public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Update };
 
@@ -45,16 +44,9 @@ public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ICacheRemo
 
         public async Task<UpdatedSectionResponse> Handle(UpdateSectionCommand request, CancellationToken cancellationToken)
         {
-            Section? section = await _sectionRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);          
-
+            Section? section = await _sectionRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);
             await _sectionBusinessRules.SectionShouldExistWhenSelected(section);
             section = _mapper.Map(request, section);
-
-            section.SectionInstructors = request.InstructorIds.Select(instructorIds => new SectionInstructor
-            {
-                InstructorId = instructorIds,
-                CreatedDate = DateTime.Now
-            }).ToList();
 
             await _sectionRepository.UpdateAsync(section!);
 

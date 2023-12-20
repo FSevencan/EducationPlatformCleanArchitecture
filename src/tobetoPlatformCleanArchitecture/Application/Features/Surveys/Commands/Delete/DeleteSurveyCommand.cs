@@ -1,15 +1,27 @@
 using Application.Features.Surveys.Constants;
+using Application.Features.Surveys.Constants;
 using Application.Features.Surveys.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
+using Core.Application.Pipelines.Transaction;
 using MediatR;
+using static Application.Features.Surveys.Constants.SurveysOperationClaims;
 
 namespace Application.Features.Surveys.Commands.Delete;
 
-public class DeleteSurveyCommand : IRequest<DeletedSurveyResponse>
+public class DeleteSurveyCommand : IRequest<DeletedSurveyResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, SurveysOperationClaims.Delete };
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string CacheGroupKey => "GetSurveys";
 
     public class DeleteSurveyCommandHandler : IRequestHandler<DeleteSurveyCommand, DeletedSurveyResponse>
     {

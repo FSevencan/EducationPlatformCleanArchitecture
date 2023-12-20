@@ -1,22 +1,15 @@
-using Application.Features.Categories.Queries.GetList;
-using Application.Features.Courses.Queries.GetList;
-using Application.Features.Instructors.Queries.GetList;
-using Application.Features.SectionAbouts.Queries.GetList;
 using Core.Application.Dtos;
+using Domain.Entities;
 
 namespace Application.Features.Sections.Queries.GetList;
 
 public class GetListSectionListItemDto : IDto
 {
     public Guid Id { get; set; }
-    public string CategoryName { get; set; }
+    public Guid CategoryId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
-    public string ProducerCompany { get; set; }
-
-    public GetSectionAboutDto Sectionabout { get; set; }
-    public ICollection<GetListCourseDto> Courses { get; set; }
-    public ICollection<GetListInstructorDto> Instructors { get; set; }
-
+    public SectionAbout SectionAbout { get; set; }
+    public Category? Category { get; set; }
 }

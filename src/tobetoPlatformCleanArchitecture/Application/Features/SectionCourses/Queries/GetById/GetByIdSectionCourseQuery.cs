@@ -33,8 +33,6 @@ public class GetByIdSectionCourseQuery : IRequest<GetByIdSectionCourseResponse>,
             SectionCourse? sectionCourse = await _sectionCourseRepository.GetAsync(predicate: sc => sc.Id == request.Id, cancellationToken: cancellationToken);
             await _sectionCourseBusinessRules.SectionCourseShouldExistWhenSelected(sectionCourse);
 
-
-
             GetByIdSectionCourseResponse response = _mapper.Map<GetByIdSectionCourseResponse>(sectionCourse);
             return response;
         }

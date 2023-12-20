@@ -18,8 +18,8 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
-
-    public ICollection<Guid>? InstructorIds { get; set; }
+    public SectionAbout SectionAbout { get; set; }
+    public Category? Category { get; set; }
 
     public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Create };
 
@@ -45,12 +45,6 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
         {
             Section section = _mapper.Map<Section>(request);
 
-            section.SectionInstructors = request.InstructorIds.Select(instructorId => new SectionInstructor
-            {
-                InstructorId = instructorId,
-                CreatedDate = DateTime.Now,                
-            }).ToList();
-            
             await _sectionRepository.AddAsync(section);
 
             CreatedSectionResponse response = _mapper.Map<CreatedSectionResponse>(section);

@@ -33,7 +33,15 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
                 new OperationClaim { Id = ++id, Name = GeneralOperationClaims.Admin }
             };
 
-
+        
+        #region Categories
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Delete" });
+        #endregion
         #region Announcements
         seeds.Add(new OperationClaim { Id = ++id, Name = "Announcements.Admin" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Announcements.Read" });
@@ -50,15 +58,23 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "ApplicationEducations.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "ApplicationEducations.Delete" });
         #endregion
-        #region Categories
-        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Admin" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Read" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Write" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Add" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Update" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "Categories.Delete" });
+        #region Certificates
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Certificates.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Certificates.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Certificates.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Certificates.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Certificates.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Certificates.Delete" });
         #endregion
-        #region Courses       
+        #region ClassRooms
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRooms.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRooms.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRooms.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRooms.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRooms.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRooms.Delete" });
+        #endregion
+        #region Courses
         seeds.Add(new OperationClaim { Id = ++id, Name = "Courses.Admin" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Courses.Read" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Courses.Write" });
@@ -138,6 +154,54 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "SectionInstructors.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "SectionInstructors.Delete" });
         #endregion
+        #region Skills
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Skills.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Skills.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Skills.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Skills.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Skills.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Skills.Delete" });
+        #endregion
+        #region Students
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Students.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Students.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Students.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Students.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Students.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Students.Delete" });
+        #endregion
+        #region StudentClassRooms
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentClassRooms.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentClassRooms.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentClassRooms.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentClassRooms.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentClassRooms.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentClassRooms.Delete" });
+        #endregion
+        #region StudentSections
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSections.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSections.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSections.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSections.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSections.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSections.Delete" });
+        #endregion
+        #region StudentSkills
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSkills.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSkills.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSkills.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSkills.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSkills.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSkills.Delete" });
+        #endregion
+        #region StudentSurveys
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSurveys.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSurveys.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSurveys.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSurveys.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSurveys.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "StudentSurveys.Delete" });
+        #endregion
         #region Surveys
         seeds.Add(new OperationClaim { Id = ++id, Name = "Surveys.Admin" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Surveys.Read" });
@@ -146,33 +210,6 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "Surveys.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Surveys.Delete" });
         #endregion
-        #region UserSections
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSections.Admin" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSections.Read" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSections.Write" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSections.Add" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSections.Update" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSections.Delete" });
-        #endregion
-        #region UserSurveys
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Admin" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Read" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Write" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Add" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Update" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "UserSurveys.Delete" });
-        #endregion
-      
-        #region AppUsers
-        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Admin" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Read" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Write" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Add" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Update" });
-        seeds.Add(new OperationClaim { Id = ++id, Name = "AppUsers.Delete" });
-        #endregion
         return seeds;
-       
     }
 }
-

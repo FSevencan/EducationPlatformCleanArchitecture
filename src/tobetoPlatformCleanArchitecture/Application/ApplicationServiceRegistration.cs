@@ -18,6 +18,8 @@ using System.Reflection;
 using Application.Services.Announcements;
 using Application.Services.ApplicationEducations;
 using Application.Services.Categories;
+using Application.Services.Certificates;
+using Application.Services.ClassRooms;
 using Application.Services.Courses;
 using Application.Services.Exams;
 using Application.Services.Instructors;
@@ -28,10 +30,14 @@ using Application.Services.Sections;
 using Application.Services.SectionAbouts;
 using Application.Services.SectionCourses;
 using Application.Services.SectionInstructors;
+using Application.Services.Skills;
+using Application.Services.Students;
+using Application.Services.StudentClassRooms;
+using Application.Services.StudentSections;
+using Application.Services.StudentSkills;
+using Application.Services.StudentSurveys;
 using Application.Services.Surveys;
-using Application.Services.UserSections;
-using Application.Services.UserSurveys;
-using Application.Services.AppUsers;
+
 
 namespace Application;
 
@@ -65,6 +71,8 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAnnouncementsService, AnnouncementsManager>();
         services.AddScoped<IApplicationEducationsService, ApplicationEducationsManager>();
         services.AddScoped<ICategoriesService, CategoriesManager>();
+        services.AddScoped<ICertificatesService, CertificatesManager>();
+        services.AddScoped<IClassRoomsService, ClassRoomsManager>();
         services.AddScoped<ICoursesService, CoursesManager>();
         services.AddScoped<IExamsService, ExamsManager>();
         services.AddScoped<IInstructorsService, InstructorsManager>();
@@ -75,10 +83,13 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISectionAboutsService, SectionAboutsManager>();
         services.AddScoped<ISectionCoursesService, SectionCoursesManager>();
         services.AddScoped<ISectionInstructorsService, SectionInstructorsManager>();
+        services.AddScoped<ISkillsService, SkillsManager>();
+        services.AddScoped<IStudentsService, StudentsManager>();
+        services.AddScoped<IStudentClassRoomsService, StudentClassRoomsManager>();
+        services.AddScoped<IStudentSectionsService, StudentSectionsManager>();
+        services.AddScoped<IStudentSkillsService, StudentSkillsManager>();
+        services.AddScoped<IStudentSurveysService, StudentSurveysManager>();
         services.AddScoped<ISurveysService, SurveysManager>();
-        services.AddScoped<IUserSectionsService, UserSectionsManager>();
-        services.AddScoped<IUserSurveysService, UserSurveysManager>();
-        services.AddScoped<IAppUsersService, AppUsersManager>();
         return services;
     }
 

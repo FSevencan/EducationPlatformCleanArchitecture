@@ -11,7 +11,7 @@ public static class PersistenceServiceRegistration
 {
     public static IServiceCollection AddPersistenceServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("TobetoPlatformConnectionString")));        
+        services.AddDbContext<BaseDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("TobetoPlatformConnectionString")));
         services.AddScoped<IEmailAuthenticatorRepository, EmailAuthenticatorRepository>();
         services.AddScoped<IOperationClaimRepository, OperationClaimRepository>();
         services.AddScoped<IOtpAuthenticatorRepository, OtpAuthenticatorRepository>();
@@ -19,9 +19,12 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserOperationClaimRepository, UserOperationClaimRepository>();
 
+
         services.AddScoped<IAnnouncementRepository, AnnouncementRepository>();
         services.AddScoped<IApplicationEducationRepository, ApplicationEducationRepository>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<ICertificateRepository, CertificateRepository>();
+        services.AddScoped<IClassRoomRepository, ClassRoomRepository>();
         services.AddScoped<ICourseRepository, CourseRepository>();
         services.AddScoped<IExamRepository, ExamRepository>();
         services.AddScoped<IInstructorRepository, InstructorRepository>();
@@ -32,10 +35,13 @@ public static class PersistenceServiceRegistration
         services.AddScoped<ISectionAboutRepository, SectionAboutRepository>();
         services.AddScoped<ISectionCourseRepository, SectionCourseRepository>();
         services.AddScoped<ISectionInstructorRepository, SectionInstructorRepository>();
+        services.AddScoped<ISkillRepository, SkillRepository>();
+        services.AddScoped<IStudentRepository, StudentRepository>();
+        services.AddScoped<IStudentClassRoomRepository, StudentClassRoomRepository>();
+        services.AddScoped<IStudentSectionRepository, StudentSectionRepository>();
+        services.AddScoped<IStudentSkillRepository, StudentSkillRepository>();
+        services.AddScoped<IStudentSurveyRepository, StudentSurveyRepository>();
         services.AddScoped<ISurveyRepository, SurveyRepository>();
-        services.AddScoped<IUserSectionRepository, UserSectionRepository>();
-        services.AddScoped<IUserSurveyRepository, UserSurveyRepository>();
-        services.AddScoped<IAppUserRepository, AppUserRepository>();
         return services;
     }
 }

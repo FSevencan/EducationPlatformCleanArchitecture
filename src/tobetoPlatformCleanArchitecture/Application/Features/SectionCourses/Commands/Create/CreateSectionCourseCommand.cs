@@ -16,6 +16,8 @@ public class CreateSectionCourseCommand : IRequest<CreatedSectionCourseResponse>
 {
     public Guid CourseId { get; set; }
     public Guid SectionId { get; set; }
+    public Section Section { get; set; }
+    public Course Course { get; set; }
 
     public string[] Roles => new[] { Admin, Write, SectionCoursesOperationClaims.Create };
 

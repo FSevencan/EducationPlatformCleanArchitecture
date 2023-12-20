@@ -1,4 +1,5 @@
 using Core.Application.Responses;
+using Domain.Entities;
 
 namespace Application.Features.Sections.Commands.Update;
 
@@ -9,4 +10,6 @@ public class UpdatedSectionResponse : IResponse
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
+    public SectionAbout SectionAbout { get; set; }
+    public Category? Category { get; set; }
 }

@@ -13,5 +13,7 @@ public class UpdateSectionAboutCommandValidator : AbstractValidator<UpdateSectio
         RuleFor(c => c.StartDate).NotEmpty();
         RuleFor(c => c.EndDate).NotEmpty();
         RuleFor(c => c.EstimatedDuration).NotEmpty();
+        RuleFor(c => c.Section).NotEmpty();
+        RuleFor(c => c.ProducerCompany).NotEmpty();
     }
 }

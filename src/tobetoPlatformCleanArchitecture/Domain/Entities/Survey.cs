@@ -8,5 +8,5 @@ public class Survey : Entity<Guid>
     public DateTime StartDate { get; set; }
     public DateTime FinishDate { get; set; }
 
-    public  ICollection<UserSurvey> UserSurveys { get; set; }
+    public  ICollection<StudentSurvey> StudentSurveys { get; set; }
 }

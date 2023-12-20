@@ -28,7 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Dtos" />
     <Folder Include="logs\" />
   </ItemGroup>
 

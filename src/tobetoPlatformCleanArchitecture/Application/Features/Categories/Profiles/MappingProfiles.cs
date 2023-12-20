@@ -22,7 +22,6 @@ public class MappingProfiles : Profile
         CreateMap<Category, DeletedCategoryResponse>().ReverseMap();
         CreateMap<Category, GetByIdCategoryResponse>().ReverseMap();
         CreateMap<Category, GetListCategoryListItemDto>().ReverseMap();
-        CreateMap<Category, CategoryDto>().ReverseMap();
         CreateMap<IPaginate<Category>, GetListResponse<GetListCategoryListItemDto>>().ReverseMap();
     }
 }

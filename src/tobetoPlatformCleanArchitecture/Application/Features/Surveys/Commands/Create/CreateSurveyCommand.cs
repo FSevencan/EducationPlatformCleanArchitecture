@@ -1,17 +1,29 @@
+using Application.Features.Surveys.Constants;
 using Application.Features.Surveys.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
+using Core.Application.Pipelines.Logging;
+using Core.Application.Pipelines.Transaction;
 using MediatR;
+using static Application.Features.Surveys.Constants.SurveysOperationClaims;
 
 namespace Application.Features.Surveys.Commands.Create;
 
-public class CreateSurveyCommand : IRequest<CreatedSurveyResponse>
+public class CreateSurveyCommand : IRequest<CreatedSurveyResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Name { get; set; }
     public string Description { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime FinishDate { get; set; }
+
+    public string[] Roles => new[] { Admin, Write, SurveysOperationClaims.Create };
+
+    public bool BypassCache { get; }
+    public string? CacheKey { get; }
+    public string CacheGroupKey => "GetSurveys";
 
     public class CreateSurveyCommandHandler : IRequestHandler<CreateSurveyCommand, CreatedSurveyResponse>
     {

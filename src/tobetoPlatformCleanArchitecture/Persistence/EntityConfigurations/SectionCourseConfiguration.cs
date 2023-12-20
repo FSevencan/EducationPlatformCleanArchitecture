@@ -13,6 +13,8 @@ public class SectionCourseConfiguration : IEntityTypeConfiguration<SectionCourse
         builder.Property(sc => sc.Id).HasColumnName("Id").IsRequired();
         builder.Property(sc => sc.CourseId).HasColumnName("CourseId");
         builder.Property(sc => sc.SectionId).HasColumnName("SectionId");
+        builder.Property(sc => sc.Section).HasColumnName("Section");
+        builder.Property(sc => sc.Course).HasColumnName("Course");
         builder.Property(sc => sc.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(sc => sc.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(sc => sc.DeletedDate).HasColumnName("DeletedDate");
