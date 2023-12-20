@@ -20,7 +20,6 @@ public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
         builder.Property(i => i.PhoneNumber).HasColumnName("PhoneNumber");
         builder.Property(i => i.About).HasColumnName("About");
         builder.Property(i => i.Title).HasColumnName("Title");
-        builder.Property(i => i.User).HasColumnName("User");
         builder.Property(i => i.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(i => i.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(i => i.DeletedDate).HasColumnName("DeletedDate");

@@ -13,8 +13,6 @@ public class StudentClassRoomConfiguration : IEntityTypeConfiguration<StudentCla
         builder.Property(scr => scr.Id).HasColumnName("Id").IsRequired();
         builder.Property(scr => scr.StudentId).HasColumnName("StudentId");
         builder.Property(scr => scr.ClassRoomId).HasColumnName("ClassRoomId");
-        builder.Property(scr => scr.Student).HasColumnName("Student");
-        builder.Property(scr => scr.ClassRoom).HasColumnName("ClassRoom");
         builder.Property(scr => scr.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(scr => scr.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(scr => scr.DeletedDate).HasColumnName("DeletedDate");

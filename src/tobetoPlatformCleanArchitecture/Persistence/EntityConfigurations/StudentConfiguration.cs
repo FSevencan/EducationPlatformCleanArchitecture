@@ -21,7 +21,6 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
         builder.Property(s => s.About).HasColumnName("About");
         builder.Property(s => s.GithubUrl).HasColumnName("GithubUrl");
         builder.Property(s => s.LinkedinUrl).HasColumnName("LinkedinUrl");
-        builder.Property(s => s.User).HasColumnName("User");
         builder.Property(s => s.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(s => s.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");
