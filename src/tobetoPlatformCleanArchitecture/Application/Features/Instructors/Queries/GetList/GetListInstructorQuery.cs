@@ -9,6 +9,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Instructors.Constants.InstructorsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Instructors.Queries.GetList;
 
@@ -37,10 +38,11 @@ public class GetListInstructorQuery : IRequest<GetListResponse<GetListInstructor
         public async Task<GetListResponse<GetListInstructorListItemDto>> Handle(GetListInstructorQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Instructor> instructors = await _instructorRepository.GetListAsync(
-                index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
-                cancellationToken: cancellationToken
-            );
+               include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section),
+               index: request.PageRequest.PageIndex,
+               size: request.PageRequest.PageSize,
+               cancellationToken: cancellationToken
+           );
 
             GetListResponse<GetListInstructorListItemDto> response = _mapper.Map<GetListResponse<GetListInstructorListItemDto>>(instructors);
             return response;

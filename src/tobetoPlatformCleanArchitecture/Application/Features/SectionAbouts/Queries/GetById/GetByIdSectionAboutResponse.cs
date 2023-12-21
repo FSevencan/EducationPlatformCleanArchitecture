@@ -12,6 +12,6 @@ public class GetByIdSectionAboutResponse : IResponse
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
     public double EstimatedDuration { get; set; }
-    public Section Section { get; set; }
-    public ProducerCompany ProducerCompany { get; set; }
+    //public Section Section { get; set; }
+    //public ProducerCompany ProducerCompany { get; set; }
 }

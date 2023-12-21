@@ -1,5 +1,7 @@
+using Application.Features.Sections.Queries.GetList;
 using Core.Application.Dtos;
 using Core.Security.Entities;
+using Domain.Entities;
 
 namespace Application.Features.Instructors.Queries.GetList;
 
@@ -15,5 +17,6 @@ public class GetListInstructorListItemDto : IDto
     public string PhoneNumber { get; set; }
     public string About { get; set; }
     public string Title { get; set; }
-   
+    public ICollection<GetListInstructorsSectionListDto> Sections { get; set; }
+
 }

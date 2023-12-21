@@ -9,10 +9,11 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Sections.Constants.SectionsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Sections.Queries.GetList;
 
-public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListItemDto>>, /*ISecuredRequest*/ ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
@@ -34,11 +35,23 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
             _mapper = mapper;
         }
 
+
         public async Task<GetListResponse<GetListSectionListItemDto>> Handle(GetListSectionQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Section> sections = await _sectionRepository.GetListAsync(
+                include: section => section
+                               .Include(category => category.Category)
+                               .Include(section => section.SectionCourses)
+                               .ThenInclude(course => course.Course)
+                               .Include(section => section.SectionInstructors)
+                               .ThenInclude(sectionInstructor => sectionInstructor.Instructor)
+                               .Include(sabout => sabout.SectionAbout)
+                               .ThenInclude(producer => producer.ProducerCompany),
+
+                //predicate: section => section.DeletedDate == null,
+
                 index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize, 
+                size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken
             );
 
