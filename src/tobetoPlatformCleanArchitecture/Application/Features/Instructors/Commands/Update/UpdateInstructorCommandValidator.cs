@@ -16,6 +16,6 @@ public class UpdateInstructorCommandValidator : AbstractValidator<UpdateInstruct
         RuleFor(c => c.PhoneNumber).NotEmpty();
         RuleFor(c => c.About).NotEmpty();
         RuleFor(c => c.Title).NotEmpty();
-        RuleFor(c => c.User).NotEmpty();
+       
     }
 }

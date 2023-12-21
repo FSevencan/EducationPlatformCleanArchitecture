@@ -9,7 +9,6 @@ public class UpdateSectionCourseCommandValidator : AbstractValidator<UpdateSecti
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.CourseId).NotEmpty();
         RuleFor(c => c.SectionId).NotEmpty();
-        RuleFor(c => c.Section).NotEmpty();
-        RuleFor(c => c.Course).NotEmpty();
+       
     }
 }

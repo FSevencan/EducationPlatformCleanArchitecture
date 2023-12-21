@@ -17,8 +17,7 @@ public class UpdateStudentSkillCommand : IRequest<UpdatedStudentSkillResponse>, 
     public Guid Id { get; set; }
     public int StudentId { get; set; }
     public Guid SkillId { get; set; }
-    public Student Student { get; set; }
-    public Skill Skill { get; set; }
+    
 
     public string[] Roles => new[] { Admin, Write, StudentSkillsOperationClaims.Update };
 

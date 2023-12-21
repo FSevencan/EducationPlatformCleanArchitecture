@@ -8,7 +8,6 @@ public class CreateSectionCourseCommandValidator : AbstractValidator<CreateSecti
     {
         RuleFor(c => c.CourseId).NotEmpty();
         RuleFor(c => c.SectionId).NotEmpty();
-        RuleFor(c => c.Section).NotEmpty();
-        RuleFor(c => c.Course).NotEmpty();
+       
     }
 }

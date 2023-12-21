@@ -16,6 +16,6 @@ public class CreateStudentCommandValidator : AbstractValidator<CreateStudentComm
         RuleFor(c => c.About).NotEmpty();
         RuleFor(c => c.GithubUrl).NotEmpty();
         RuleFor(c => c.LinkedinUrl).NotEmpty();
-        RuleFor(c => c.User).NotEmpty();
+       
     }
 }

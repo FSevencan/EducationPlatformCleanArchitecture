@@ -9,7 +9,6 @@ public class UpdateStudentSurveyCommandValidator : AbstractValidator<UpdateStude
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.StudentId).NotEmpty();
         RuleFor(c => c.SurveyId).NotEmpty();
-        RuleFor(c => c.Student).NotEmpty();
-        RuleFor(c => c.Survey).NotEmpty();
+       
     }
 }

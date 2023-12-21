@@ -25,7 +25,7 @@ public class CreateStudentCommand : IRequest<CreatedStudentResponse>, ISecuredRe
     public string About { get; set; }
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
-    public User User { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, StudentsOperationClaims.Create };
 

@@ -16,5 +16,5 @@ public class CreatedStudentResponse : IResponse
     public string About { get; set; }
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
-    public User User { get; set; }
+    
 }

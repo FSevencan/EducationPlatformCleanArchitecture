@@ -15,5 +15,5 @@ public class GetListInstructorListItemDto : IDto
     public string PhoneNumber { get; set; }
     public string About { get; set; }
     public string Title { get; set; }
-    public User User { get; set; }
+   
 }

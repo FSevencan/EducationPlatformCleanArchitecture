@@ -10,7 +10,6 @@ public class CreateSectionCommandValidator : AbstractValidator<CreateSectionComm
         RuleFor(c => c.Name).NotEmpty();
         RuleFor(c => c.ImageUrl).NotEmpty();
         RuleFor(c => c.Description).NotEmpty();
-        RuleFor(c => c.SectionAbout).NotEmpty();
-        RuleFor(c => c.Category).NotEmpty();
+       
     }
 }

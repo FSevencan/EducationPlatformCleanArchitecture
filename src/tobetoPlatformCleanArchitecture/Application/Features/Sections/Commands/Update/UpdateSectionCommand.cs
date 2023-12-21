@@ -19,8 +19,7 @@ public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ISecuredRe
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
-    public SectionAbout SectionAbout { get; set; }
-    public Category? Category { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Update };
 

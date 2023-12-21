@@ -8,7 +8,6 @@ public class CreateStudentSkillCommandValidator : AbstractValidator<CreateStuden
     {
         RuleFor(c => c.StudentId).NotEmpty();
         RuleFor(c => c.SkillId).NotEmpty();
-        RuleFor(c => c.Student).NotEmpty();
-        RuleFor(c => c.Skill).NotEmpty();
+      
     }
 }

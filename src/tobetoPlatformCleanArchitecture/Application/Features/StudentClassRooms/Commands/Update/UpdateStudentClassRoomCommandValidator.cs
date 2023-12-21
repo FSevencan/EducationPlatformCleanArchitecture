@@ -9,7 +9,6 @@ public class UpdateStudentClassRoomCommandValidator : AbstractValidator<UpdateSt
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.StudentId).NotEmpty();
         RuleFor(c => c.ClassRoomId).NotEmpty();
-        RuleFor(c => c.Student).NotEmpty();
-        RuleFor(c => c.ClassRoom).NotEmpty();
+      
     }
 }

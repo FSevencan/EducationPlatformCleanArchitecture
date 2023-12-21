@@ -24,7 +24,7 @@ public class CreateInstructorCommand : IRequest<CreatedInstructorResponse>, ISec
     public string PhoneNumber { get; set; }
     public string About { get; set; }
     public string Title { get; set; }
-    public User User { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, InstructorsOperationClaims.Create };
 

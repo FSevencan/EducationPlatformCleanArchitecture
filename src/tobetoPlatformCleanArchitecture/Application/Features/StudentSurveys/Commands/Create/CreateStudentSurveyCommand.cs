@@ -16,8 +16,7 @@ public class CreateStudentSurveyCommand : IRequest<CreatedStudentSurveyResponse>
 {
     public int StudentId { get; set; }
     public Guid SurveyId { get; set; }
-    public Student Student { get; set; }
-    public Survey Survey { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, StudentSurveysOperationClaims.Create };
 

@@ -16,7 +16,7 @@ public class CreateCertificateCommand : IRequest<CreatedCertificateResponse>, IS
 {
     public string? Image { get; set; }
     public int StudentId { get; set; }
-    public Student Student { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, CertificatesOperationClaims.Create };
 

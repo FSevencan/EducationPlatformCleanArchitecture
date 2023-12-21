@@ -8,6 +8,6 @@ public class CreateCertificateCommandValidator : AbstractValidator<CreateCertifi
     {
         RuleFor(c => c.Image).NotEmpty();
         RuleFor(c => c.StudentId).NotEmpty();
-        RuleFor(c => c.Student).NotEmpty();
+     
     }
 }
