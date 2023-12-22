@@ -1,5 +1,6 @@
 ﻿using Application.Features.Auth.Commands.EnableEmailAuthenticator;
 using Application.Features.Auth.Commands.EnableOtpAuthenticator;
+using Application.Features.Auth.Commands.InstructorRegister;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
@@ -50,22 +51,22 @@ public class AuthController : BaseController
     }
 
     [HttpPost("StudentRegister")]
-    public async Task<IActionResult> StudentRegister([FromBody] UserForRegisterDto userForRegisterDto)
+    public async Task<IActionResult> StudentRegister([FromBody] StudentForRegisterDto studentForRegisterDto)
     {
-        StudentRegisterCommand registerCommand = new() { UserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
-        StudentRegisteredResponse result = await Mediator.Send(registerCommand);
+        StudentRegisterCommand studentRegisterCommand = new() { StudentForRegisterDto = studentForRegisterDto, IpAddress = getIpAddress() };
+        StudentRegisteredResponse result = await Mediator.Send(studentRegisterCommand);
         setRefreshTokenToCookie(result.RefreshToken);
         return Created(uri: "", result.AccessToken);
     }
 
-    //[HttpPost("InstructorRegister")]
-    //public async Task<IActionResult> InstructorRegister([FromBody] UserForRegisterDto userForRegisterDto)
-    //{
-    //    InstructorRegisterCommand registerCommand = new() { UserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
-    //    InstructorRegisteredResponse result = await Mediator.Send(registerCommand);
-    //    setRefreshTokenToCookie(result.RefreshToken);
-    //    return Created(uri: "", result.AccessToken);
-    //}
+    [HttpPost("InstructorRegister")]
+    public async Task<IActionResult> InstructorRegister([FromBody] InstructorForRegisterDto instructorForRegisterDto)
+    {
+        InstructorRegisterCommand instructorRegisterCommand = new() { InstructorForRegisterDto = instructorForRegisterDto, IpAddress = getIpAddress() };
+        InstructorRegisteredResponse result = await Mediator.Send(instructorRegisterCommand);
+        setRefreshTokenToCookie(result.RefreshToken);
+        return Created(uri: "", result.AccessToken);
+    }
 
     [HttpGet("RefreshToken")]
     public async Task<IActionResult> RefreshToken()
