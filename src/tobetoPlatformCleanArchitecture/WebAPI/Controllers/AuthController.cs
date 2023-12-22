@@ -4,6 +4,7 @@ using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Commands.RevokeToken;
+using Application.Features.Auth.Commands.StudentRegister;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
 using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Core.Application.Dtos;
@@ -47,6 +48,24 @@ public class AuthController : BaseController
         setRefreshTokenToCookie(result.RefreshToken);
         return Created(uri: "", result.AccessToken);
     }
+
+    [HttpPost("StudentRegister")]
+    public async Task<IActionResult> StudentRegister([FromBody] UserForRegisterDto userForRegisterDto)
+    {
+        StudentRegisterCommand registerCommand = new() { UserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
+        StudentRegisteredResponse result = await Mediator.Send(registerCommand);
+        setRefreshTokenToCookie(result.RefreshToken);
+        return Created(uri: "", result.AccessToken);
+    }
+
+    //[HttpPost("InstructorRegister")]
+    //public async Task<IActionResult> InstructorRegister([FromBody] UserForRegisterDto userForRegisterDto)
+    //{
+    //    InstructorRegisterCommand registerCommand = new() { UserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
+    //    InstructorRegisteredResponse result = await Mediator.Send(registerCommand);
+    //    setRefreshTokenToCookie(result.RefreshToken);
+    //    return Created(uri: "", result.AccessToken);
+    //}
 
     [HttpGet("RefreshToken")]
     public async Task<IActionResult> RefreshToken()
