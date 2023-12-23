@@ -12,13 +12,10 @@ public class InstructorConfiguration : IEntityTypeConfiguration<Instructor>
 
         builder.Property(i => i.Id).HasColumnName("Id").IsRequired();
         builder.Property(i => i.UserId).HasColumnName("UserId");
-        //builder.Property(i => i.FirstName).HasColumnName("FirstName");
-        //builder.Property(i => i.LastName).HasColumnName("LastName");
         builder.Property(i => i.ImageUrl).HasColumnName("ImageUrl");
-        //builder.Property(i => i.Email).HasColumnName("Email");
         builder.Property(i => i.BirthDate).HasColumnName("BirthDate");
         builder.Property(i => i.PhoneNumber).HasColumnName("PhoneNumber");
-        builder.Property(i => i.About).HasColumnName("About");
+        builder.Property(i => i.Biography).HasColumnName("Biography");
         builder.Property(i => i.Title).HasColumnName("Title");
         builder.Property(i => i.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(i => i.UpdatedDate).HasColumnName("UpdatedDate");

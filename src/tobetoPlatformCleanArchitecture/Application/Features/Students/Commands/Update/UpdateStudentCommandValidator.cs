@@ -6,17 +6,16 @@ public class UpdateStudentCommandValidator : AbstractValidator<UpdateStudentComm
 {
     public UpdateStudentCommandValidator()
     {
-        RuleFor(c => c.StudentDto.Id).NotEmpty();
-        RuleFor(c => c.StudentDto.UserId).NotEmpty();
-        RuleFor(c => c.StudentDto.FirstName).NotEmpty();
-        RuleFor(c => c.StudentDto.LastName).NotEmpty();
-        RuleFor(c => c.StudentDto.ImageUrl).NotEmpty();
-        RuleFor(c => c.StudentDto.Email).NotEmpty();
-        RuleFor(c => c.StudentDto.BirthDate).NotEmpty();
-        RuleFor(c => c.StudentDto.PhoneNumber).NotEmpty();
-        RuleFor(c => c.StudentDto.About).NotEmpty();
-        RuleFor(c => c.StudentDto.GithubUrl).NotEmpty();
-        RuleFor(c => c.StudentDto.LinkedinUrl).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.Id).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.FirstName).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.LastName).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.ImageUrl).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.Email).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.BirthDate).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.PhoneNumber).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.Biography).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.GithubUrl).NotEmpty();
+        RuleFor(c => c.UpdateStudentDto.LinkedinUrl).NotEmpty();
 
        
     }

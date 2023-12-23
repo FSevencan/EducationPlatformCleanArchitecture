@@ -12,7 +12,7 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20231220211334_initial")]
+    [Migration("20231223134817_initial")]
     partial class initial
     {
         /// <inheritdoc />
@@ -1068,8 +1068,8 @@ namespace Persistence.Migrations
                             Email = "admin@admin.com",
                             FirstName = "Admin",
                             LastName = "NArchitecture",
-                            PasswordHash = new byte[] { 26, 149, 150, 124, 144, 44, 127, 194, 150, 134, 201, 32, 61, 92, 99, 215, 16, 244, 122, 137, 241, 197, 14, 72, 34, 170, 207, 252, 233, 16, 253, 121, 232, 80, 9, 130, 106, 108, 85, 110, 225, 101, 42, 37, 60, 114, 169, 241, 113, 138, 27, 74, 98, 210, 72, 198, 106, 35, 148, 59, 93, 14, 191, 90 },
-                            PasswordSalt = new byte[] { 198, 149, 206, 34, 228, 94, 157, 172, 172, 109, 164, 31, 147, 60, 18, 94, 55, 226, 194, 155, 222, 138, 235, 56, 104, 145, 159, 169, 146, 162, 243, 235, 105, 55, 188, 184, 159, 248, 90, 219, 10, 177, 143, 121, 254, 63, 65, 87, 167, 182, 200, 212, 90, 33, 0, 157, 254, 224, 30, 24, 238, 4, 119, 166, 51, 180, 25, 247, 211, 95, 23, 73, 131, 204, 44, 239, 65, 96, 97, 181, 202, 136, 236, 227, 67, 110, 214, 17, 254, 178, 197, 122, 224, 53, 78, 121, 147, 81, 22, 214, 34, 80, 77, 13, 55, 180, 159, 239, 55, 175, 216, 113, 212, 77, 120, 250, 26, 40, 80, 254, 86, 0, 163, 243, 198, 126, 218, 135 },
+                            PasswordHash = new byte[] { 103, 108, 19, 201, 211, 5, 104, 188, 28, 197, 227, 80, 109, 138, 98, 129, 222, 137, 17, 226, 125, 13, 39, 19, 17, 167, 164, 34, 58, 228, 22, 92, 183, 180, 230, 127, 67, 144, 78, 186, 141, 120, 144, 130, 226, 109, 181, 158, 49, 211, 79, 214, 222, 107, 181, 204, 172, 32, 92, 135, 167, 108, 1, 239 },
+                            PasswordSalt = new byte[] { 165, 210, 39, 107, 227, 94, 165, 113, 18, 64, 215, 198, 248, 17, 247, 209, 241, 189, 107, 223, 21, 244, 74, 169, 121, 84, 77, 15, 68, 94, 253, 24, 107, 99, 177, 107, 53, 36, 146, 81, 103, 222, 86, 67, 182, 201, 87, 231, 186, 52, 196, 65, 114, 156, 183, 143, 43, 230, 216, 144, 252, 213, 133, 116, 101, 0, 139, 215, 2, 74, 137, 51, 82, 39, 253, 30, 250, 89, 208, 244, 230, 99, 71, 211, 25, 254, 26, 136, 237, 185, 75, 4, 54, 30, 198, 52, 67, 76, 132, 146, 206, 132, 209, 13, 249, 68, 173, 192, 52, 171, 18, 162, 192, 74, 100, 66, 108, 241, 128, 246, 48, 62, 1, 7, 79, 172, 108, 44 },
                             Status = true
                         });
                 });
@@ -1371,17 +1371,18 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Instructor", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
 
-                    b.Property<string>("About")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("About");
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<string>("Biography")
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Biography");
+
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("BirthDate");
 
@@ -1393,35 +1394,26 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Email");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FirstName");
+                    b.Property<string>("GithubUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageUrl");
 
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("LastName");
+                    b.Property<string>("LinkedinUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PhoneNumber");
 
                     b.Property<string>("Title")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
+
+                    b.Property<string>("TwitterUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -1704,8 +1696,8 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid>("InstructorId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int")
                         .HasColumnName("InstructorId");
 
                     b.Property<Guid>("SectionId")
@@ -1767,12 +1759,11 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("About")
-                        .IsRequired()
+                    b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("About");
+                        .HasColumnName("Biography");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
                         .HasColumnName("BirthDate");
 
@@ -1784,36 +1775,19 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("Email");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("FirstName");
-
                     b.Property<string>("GithubUrl")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("GithubUrl");
 
                     b.Property<string>("ImageUrl")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageUrl");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)")
-                        .HasColumnName("LastName");
 
                     b.Property<string>("LinkedinUrl")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("LinkedinUrl");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("PhoneNumber");
 
@@ -1839,12 +1813,9 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<int>("ClassRoomId")
-                        .HasColumnType("int")
+                    b.Property<Guid>("ClassRoomId")
+                        .HasColumnType("uniqueidentifier")
                         .HasColumnName("ClassRoomId");
-
-                    b.Property<Guid>("ClassRoomId1")
-                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -1864,7 +1835,7 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClassRoomId1");
+                    b.HasIndex("ClassRoomId");
 
                     b.HasIndex("StudentId");
 
@@ -2205,7 +2176,7 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.ClassRoom", "ClassRoom")
                         .WithMany("StudentClassRooms")
-                        .HasForeignKey("ClassRoomId1")
+                        .HasForeignKey("ClassRoomId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -15,7 +15,7 @@ namespace Application.Features.Instructors.Commands.Delete;
 
 public class DeleteInstructorCommand : IRequest<DeletedInstructorResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     public string[] Roles => new[] { Admin, Write, InstructorsOperationClaims.Delete };
 

@@ -16,9 +16,9 @@ using Core.Security.Hashing;
 
 namespace Application.Features.Instructors.Commands.Update;
 
-public class UpdateInstructorCommand : IRequest<UpdatedInstructorResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class UpdateInstructorCommand : IRequest<UpdatedInstructorResponse>/*, ISecuredRequest*/, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public UpdateInstructorDto InstructorDto { get; set; }
+    public UpdateInstructorDto UpdateInstructorDto { get; set; }
     
    
 
@@ -48,26 +48,16 @@ public class UpdateInstructorCommand : IRequest<UpdatedInstructorResponse>, ISec
 
         public async Task<UpdatedInstructorResponse> Handle(UpdateInstructorCommand request, CancellationToken cancellationToken)
         {
-            Instructor? instructor = await _instructorRepository.GetAsync(predicate: i => i.Id == request.InstructorDto.Id, cancellationToken: cancellationToken);
+            Instructor? instructor = await _instructorRepository.GetAsync(predicate: i => i.Id == request.UpdateInstructorDto.Id, cancellationToken: cancellationToken);
             await _instructorBusinessRules.InstructorShouldExistWhenSelected(instructor);
-            instructor = _mapper.Map(request.InstructorDto, instructor);
+
+            _mapper.Map(request.UpdateInstructorDto, instructor);
             await _instructorRepository.UpdateAsync(instructor!);
 
-            User? user = await _userService.GetAsync(predicate: u => u.Id == request.InstructorDto.UserId, cancellationToken: cancellationToken);
+            User? user = await _userService.GetAsync(predicate: u => u.Id == instructor.UserId, cancellationToken: cancellationToken);
             await _userBusinessRules.UserShouldBeExistsWhenSelected(user);
-            user.FirstName = request.InstructorDto.FirstName;
-            user.LastName = request.InstructorDto.LastName;
-            user.Email = request.InstructorDto.Email;
-            if (request.InstructorDto.Password != null)
-            {
-                HashingHelper.CreatePasswordHash(
-                request.InstructorDto.Password,
-                passwordHash: out byte[] passwordHash,
-                passwordSalt: out byte[] passwordSalt
-                );
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-            };
+
+            _mapper.Map(request.UpdateInstructorDto, user);
             await _userService.UpdateAsync(user!);
 
             UpdatedInstructorResponse response = _mapper.Map<UpdatedInstructorResponse>(instructor);

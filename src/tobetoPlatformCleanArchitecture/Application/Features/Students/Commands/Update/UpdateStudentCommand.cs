@@ -19,8 +19,8 @@ namespace Application.Features.Students.Commands.Update;
 
 public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public UpdateStudentDto StudentDto { get; set; }
-    
+    public UpdateStudentDto UpdateStudentDto { get; set; }
+
 
     public string[] Roles => new[] { Admin, Write, StudentsOperationClaims.Update };
 
@@ -48,27 +48,16 @@ public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ISecuredRe
 
         public async Task<UpdatedStudentResponse> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
         {
-            Student? student = await _studentRepository.GetAsync(predicate: s => s.Id == request.StudentDto.Id, cancellationToken: cancellationToken);
+            Student? student = await _studentRepository.GetAsync(s => s.Id == request.UpdateStudentDto.Id, cancellationToken: cancellationToken);
             await _studentBusinessRules.StudentShouldExistWhenSelected(student);
-            student = _mapper.Map(request.StudentDto, student);
+          
+            _mapper.Map(request.UpdateStudentDto, student);
             await _studentRepository.UpdateAsync(student!);
 
-
-            User? user = await _userService.GetAsync(predicate: u=>u.Id==request.StudentDto.UserId, cancellationToken: cancellationToken);
+            User? user = await _userService.GetAsync(u => u.Id == student.UserId, cancellationToken: cancellationToken);
             await _userBusinessRules.UserShouldBeExistsWhenSelected(user);
-            user.FirstName = request.StudentDto.FirstName;
-            user.LastName = request.StudentDto.LastName;
-            user.Email = request.StudentDto.Email;
-            if(request.StudentDto.Password != null)
-            {
-                HashingHelper.CreatePasswordHash(
-                request.StudentDto.Password,
-                passwordHash: out byte[] passwordHash,
-                passwordSalt: out byte[] passwordSalt
-                );
-                user.PasswordHash = passwordHash;
-                user.PasswordSalt = passwordSalt;
-            };
+           
+            _mapper.Map(request.UpdateStudentDto, user);
             await _userService.UpdateAsync(user!);
 
             UpdatedStudentResponse response = _mapper.Map<UpdatedStudentResponse>(student);

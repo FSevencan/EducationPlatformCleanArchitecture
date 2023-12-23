@@ -22,7 +22,7 @@ public class InstructorBusinessRules : BaseBusinessRules
         return Task.CompletedTask;
     }
 
-    public async Task InstructorIdShouldExistWhenSelected(Guid id, CancellationToken cancellationToken)
+    public async Task InstructorIdShouldExistWhenSelected(int id, CancellationToken cancellationToken)
     {
         Instructor? instructor = await _instructorRepository.GetAsync(
             predicate: i => i.Id == id,

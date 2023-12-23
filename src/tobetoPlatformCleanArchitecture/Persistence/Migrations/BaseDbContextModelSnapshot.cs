@@ -1065,8 +1065,8 @@ namespace Persistence.Migrations
                             Email = "admin@admin.com",
                             FirstName = "Admin",
                             LastName = "NArchitecture",
-                            PasswordHash = new byte[] { 172, 148, 255, 52, 149, 122, 21, 43, 85, 87, 76, 22, 119, 49, 39, 94, 156, 239, 25, 143, 176, 108, 201, 66, 91, 121, 23, 198, 255, 105, 156, 227, 243, 165, 150, 218, 70, 210, 193, 77, 192, 100, 191, 128, 118, 240, 106, 245, 47, 95, 204, 231, 123, 230, 92, 222, 107, 70, 133, 232, 180, 161, 72, 111 },
-                            PasswordSalt = new byte[] { 7, 240, 74, 208, 67, 164, 234, 120, 245, 149, 52, 191, 251, 207, 46, 170, 202, 202, 23, 184, 253, 24, 225, 51, 124, 23, 67, 35, 100, 94, 212, 0, 128, 189, 214, 212, 50, 12, 4, 241, 122, 24, 181, 149, 38, 60, 149, 72, 56, 161, 58, 62, 123, 133, 67, 198, 234, 127, 59, 169, 80, 8, 8, 207, 149, 124, 230, 239, 34, 74, 160, 50, 255, 159, 66, 73, 143, 31, 58, 63, 36, 16, 251, 147, 16, 32, 128, 150, 18, 79, 45, 108, 217, 1, 92, 243, 45, 245, 173, 84, 143, 56, 26, 225, 213, 115, 217, 185, 145, 240, 175, 6, 240, 144, 22, 50, 223, 187, 106, 55, 176, 230, 238, 153, 150, 37, 101, 97 },
+                            PasswordHash = new byte[] { 103, 108, 19, 201, 211, 5, 104, 188, 28, 197, 227, 80, 109, 138, 98, 129, 222, 137, 17, 226, 125, 13, 39, 19, 17, 167, 164, 34, 58, 228, 22, 92, 183, 180, 230, 127, 67, 144, 78, 186, 141, 120, 144, 130, 226, 109, 181, 158, 49, 211, 79, 214, 222, 107, 181, 204, 172, 32, 92, 135, 167, 108, 1, 239 },
+                            PasswordSalt = new byte[] { 165, 210, 39, 107, 227, 94, 165, 113, 18, 64, 215, 198, 248, 17, 247, 209, 241, 189, 107, 223, 21, 244, 74, 169, 121, 84, 77, 15, 68, 94, 253, 24, 107, 99, 177, 107, 53, 36, 146, 81, 103, 222, 86, 67, 182, 201, 87, 231, 186, 52, 196, 65, 114, 156, 183, 143, 43, 230, 216, 144, 252, 213, 133, 116, 101, 0, 139, 215, 2, 74, 137, 51, 82, 39, 253, 30, 250, 89, 208, 244, 230, 99, 71, 211, 25, 254, 26, 136, 237, 185, 75, 4, 54, 30, 198, 52, 67, 76, 132, 146, 206, 132, 209, 13, 249, 68, 173, 192, 52, 171, 18, 162, 192, 74, 100, 66, 108, 241, 128, 246, 48, 62, 1, 7, 79, 172, 108, 44 },
                             Status = true
                         });
                 });
@@ -1368,14 +1368,16 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Instructor", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier")
+                        .HasColumnType("int")
                         .HasColumnName("Id");
 
-                    b.Property<string>("About")
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("About");
+                        .HasColumnName("Biography");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")
@@ -1389,9 +1391,15 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
+                    b.Property<string>("GithubUrl")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ImageUrl")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("ImageUrl");
+
+                    b.Property<string>("LinkedinUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)")
@@ -1400,6 +1408,9 @@ namespace Persistence.Migrations
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("Title");
+
+                    b.Property<string>("TwitterUrl")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -1682,8 +1693,8 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<Guid>("InstructorId")
-                        .HasColumnType("uniqueidentifier")
+                    b.Property<int>("InstructorId")
+                        .HasColumnType("int")
                         .HasColumnName("InstructorId");
 
                     b.Property<Guid>("SectionId")
@@ -1745,9 +1756,9 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("About")
+                    b.Property<string>("Biography")
                         .HasColumnType("nvarchar(max)")
-                        .HasColumnName("About");
+                        .HasColumnName("Biography");
 
                     b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2")

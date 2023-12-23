@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Application.Features.Auth.Commands.StudentRegister;
 public class StudentForRegisterDto : IDto
 {
+    
     public string Email { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }

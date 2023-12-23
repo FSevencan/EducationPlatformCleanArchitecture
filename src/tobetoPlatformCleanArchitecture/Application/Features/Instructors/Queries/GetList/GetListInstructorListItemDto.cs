@@ -7,7 +7,7 @@ namespace Application.Features.Instructors.Queries.GetList;
 
 public class GetListInstructorListItemDto : IDto
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
     public int UserId { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
@@ -15,8 +15,11 @@ public class GetListInstructorListItemDto : IDto
     public string Email { get; set; }
     public DateTime BirthDate { get; set; }
     public string PhoneNumber { get; set; }
-    public string About { get; set; }
+    public string Biography { get; set; }
     public string Title { get; set; }
+    public string? GithubUrl { get; set; }
+    public string? LinkedinUrl { get; set; }
+    public string? TwitterUrl { get; set; }
     public ICollection<GetListInstructorsSectionListDto> Sections { get; set; }
 
 }

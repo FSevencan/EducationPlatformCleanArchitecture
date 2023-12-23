@@ -20,7 +20,7 @@ public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ISecuredRe
     public string ImageUrl { get; set; }
     public string Description { get; set; }
 
-    public ICollection<Guid>? InstructorIds { get; set; }
+    public ICollection<int>? InstructorIds { get; set; }
     public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Update };
 
     public bool BypassCache { get; }

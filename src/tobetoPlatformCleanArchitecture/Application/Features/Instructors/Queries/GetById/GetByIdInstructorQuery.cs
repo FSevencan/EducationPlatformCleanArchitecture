@@ -11,7 +11,7 @@ namespace Application.Features.Instructors.Queries.GetById;
 
 public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>, ISecuredRequest
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 
     public string[] Roles => new[] { Admin, Read };
 

@@ -58,6 +58,7 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
             User newUser =
                 new()
                 {
+                   
                     Email = request.StudentForRegisterDto.Email,
                     FirstName = request.StudentForRegisterDto.FirstName,
                     LastName = request.StudentForRegisterDto.LastName,
@@ -74,6 +75,7 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
                    UserId = createdUser.Id
                };
 
+          
             var createdStudent = await _studentsService.AddAsync(newStudent);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
