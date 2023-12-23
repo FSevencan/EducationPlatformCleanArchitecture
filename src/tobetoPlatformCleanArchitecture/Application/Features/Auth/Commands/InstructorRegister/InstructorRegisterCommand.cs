@@ -1,6 +1,7 @@
 ﻿
 using Application.Features.Auth.Commands.InstructorRegister;
 using Application.Features.Auth.Commands.Register;
+using Application.Features.Auth.Commands.StudentRegister;
 using Application.Features.Auth.Rules;
 using Application.Services.AuthService;
 using Application.Services.Instructors;
@@ -49,6 +50,7 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
 
         public async Task<InstructorRegisteredResponse> Handle(InstructorRegisterCommand request, CancellationToken cancellationToken)
         {
+
             await _authBusinessRules.InstructorEmailShouldBeNotExists(request.InstructorForRegisterDto.Email);
 
             HashingHelper.CreatePasswordHash(
@@ -66,15 +68,13 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
                     PasswordSalt = passwordSalt,
                     Status = true
                 };
+
             User createdUser = await _userRepository.AddAsync(newUser);
 
             Instructor newInstructor =
                new()
                {
-                   UserId = createdUser.Id,
-                   Email = request.InstructorForRegisterDto.Email,
-                   FirstName = request.InstructorForRegisterDto.FirstName,
-                   LastName = request.InstructorForRegisterDto.LastName,
+                   UserId = createdUser.Id
                };
 
             var createdInstructor = await _instructorsService.AddAsync(newInstructor);
@@ -84,8 +84,8 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
             Core.Security.Entities.RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
             Core.Security.Entities.RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
-            InstructorRegisteredResponse registeredResponse = new() { AccessToken = createdAccessToken, RefreshToken = addedRefreshToken };
-            return registeredResponse;
+            InstructorRegisteredResponse instructorRegisteredResponse = new() { AccessToken = createdAccessToken, RefreshToken = addedRefreshToken };
+            return instructorRegisteredResponse;
         }
     }
 }

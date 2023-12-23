@@ -3,6 +3,7 @@ using Application.Services.Repositories;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
 using Domain.Entities;
+using System.Text.RegularExpressions;
 
 namespace Application.Features.Students.Rules;
 
@@ -31,4 +32,7 @@ public class StudentBusinessRules : BaseBusinessRules
         );
         await StudentShouldExistWhenSelected(student);
     }
+
+    
+
 }

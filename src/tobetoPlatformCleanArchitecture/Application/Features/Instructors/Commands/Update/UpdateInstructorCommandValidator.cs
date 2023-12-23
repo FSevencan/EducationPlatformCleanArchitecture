@@ -6,16 +6,16 @@ public class UpdateInstructorCommandValidator : AbstractValidator<UpdateInstruct
 {
     public UpdateInstructorCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.UserId).NotEmpty();
-        RuleFor(c => c.FirstName).NotEmpty();
-        RuleFor(c => c.LastName).NotEmpty();
-        RuleFor(c => c.ImageUrl).NotEmpty();
-        RuleFor(c => c.Email).NotEmpty();
-        RuleFor(c => c.BirthDate).NotEmpty();
-        RuleFor(c => c.PhoneNumber).NotEmpty();
-        RuleFor(c => c.About).NotEmpty();
-        RuleFor(c => c.Title).NotEmpty();
+        RuleFor(c => c.InstructorDto.Id).NotEmpty();
+        RuleFor(c => c.InstructorDto.UserId).NotEmpty();
+        RuleFor(c => c.InstructorDto.FirstName).NotEmpty();
+        RuleFor(c => c.InstructorDto.LastName).NotEmpty();
+        RuleFor(c => c.InstructorDto.ImageUrl).NotEmpty();
+        RuleFor(c => c.InstructorDto.Email).NotEmpty();
+        RuleFor(c => c.InstructorDto.BirthDate).NotEmpty();
+        RuleFor(c => c.InstructorDto.PhoneNumber).NotEmpty();
+        RuleFor(c => c.InstructorDto.About).NotEmpty();
+        RuleFor(c => c.InstructorDto.Title).NotEmpty();
        
     }
 }

@@ -10,23 +10,17 @@ using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Students.Constants.StudentsOperationClaims;
 using Core.Security.Entities;
+using Microsoft.EntityFrameworkCore;
+using Application.Services.UsersService;
+using Application.Features.Users.Rules;
+using Core.Security.Hashing;
 
 namespace Application.Features.Students.Commands.Update;
 
 public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
-    public string ImageUrl { get; set; }
-    public string Email { get; set; }
-    public DateTime BirthDate { get; set; }
-    public string PhoneNumber { get; set; }
-    public string About { get; set; }
-    public string? GithubUrl { get; set; }
-    public string? LinkedinUrl { get; set; }
-   
+    public UpdateStudentDto StudentDto { get; set; }
+    
 
     public string[] Roles => new[] { Admin, Write, StudentsOperationClaims.Update };
 
@@ -38,23 +32,44 @@ public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ISecuredRe
     {
         private readonly IMapper _mapper;
         private readonly IStudentRepository _studentRepository;
+        private readonly IUserService _userService;
         private readonly StudentBusinessRules _studentBusinessRules;
+        private readonly UserBusinessRules _userBusinessRules;
 
-        public UpdateStudentCommandHandler(IMapper mapper, IStudentRepository studentRepository,
-                                         StudentBusinessRules studentBusinessRules)
+        public UpdateStudentCommandHandler(IMapper mapper, IUserService userService, IStudentRepository studentRepository,
+                                         StudentBusinessRules studentBusinessRules, UserBusinessRules userBusinessRules)
         {
             _mapper = mapper;
+            _userService = userService;
             _studentRepository = studentRepository;
             _studentBusinessRules = studentBusinessRules;
+            _userBusinessRules = userBusinessRules;
         }
 
         public async Task<UpdatedStudentResponse> Handle(UpdateStudentCommand request, CancellationToken cancellationToken)
         {
-            Student? student = await _studentRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);
+            Student? student = await _studentRepository.GetAsync(predicate: s => s.Id == request.StudentDto.Id, cancellationToken: cancellationToken);
             await _studentBusinessRules.StudentShouldExistWhenSelected(student);
-            student = _mapper.Map(request, student);
-
+            student = _mapper.Map(request.StudentDto, student);
             await _studentRepository.UpdateAsync(student!);
+
+
+            User? user = await _userService.GetAsync(predicate: u=>u.Id==request.StudentDto.UserId, cancellationToken: cancellationToken);
+            await _userBusinessRules.UserShouldBeExistsWhenSelected(user);
+            user.FirstName = request.StudentDto.FirstName;
+            user.LastName = request.StudentDto.LastName;
+            user.Email = request.StudentDto.Email;
+            if(request.StudentDto.Password != null)
+            {
+                HashingHelper.CreatePasswordHash(
+                request.StudentDto.Password,
+                passwordHash: out byte[] passwordHash,
+                passwordSalt: out byte[] passwordSalt
+                );
+                user.PasswordHash = passwordHash;
+                user.PasswordSalt = passwordSalt;
+            };
+            await _userService.UpdateAsync(user!);
 
             UpdatedStudentResponse response = _mapper.Map<UpdatedStudentResponse>(student);
             return response;

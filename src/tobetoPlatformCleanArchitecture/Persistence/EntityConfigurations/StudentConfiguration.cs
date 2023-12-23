@@ -12,10 +12,10 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
 
         builder.Property(s => s.Id).HasColumnName("Id").IsRequired();
         builder.Property(s => s.UserId).HasColumnName("UserId");
-        builder.Property(s => s.FirstName).HasColumnName("FirstName");
-        builder.Property(s => s.LastName).HasColumnName("LastName");
+        //builder.Property(s => s.FirstName).HasColumnName("FirstName");
+        //builder.Property(s => s.LastName).HasColumnName("LastName");
         builder.Property(s => s.ImageUrl).HasColumnName("ImageUrl");
-        builder.Property(s => s.Email).HasColumnName("Email");
+        //builder.Property(s => s.Email).HasColumnName("Email");
         builder.Property(s => s.BirthDate).HasColumnName("BirthDate");
         builder.Property(s => s.PhoneNumber).HasColumnName("PhoneNumber");
         builder.Property(s => s.About).HasColumnName("About");

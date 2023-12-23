@@ -22,6 +22,7 @@ public class MappingProfiles : Profile
         CreateMap<Student, DeletedStudentResponse>().ReverseMap();
         CreateMap<Student, GetByIdStudentResponse>().ReverseMap();
         CreateMap<Student, GetListStudentListItemDto>().ReverseMap();
+        CreateMap<Student, UpdateStudentDto>().ReverseMap();
         CreateMap<IPaginate<Student>, GetListResponse<GetListStudentListItemDto>>().ReverseMap();
     }
 }

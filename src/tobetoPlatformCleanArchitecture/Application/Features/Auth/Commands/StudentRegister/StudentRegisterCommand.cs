@@ -71,10 +71,7 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
             Student newStudent =
                new()
                {
-                   UserId = createdUser.Id, 
-                   Email = request.StudentForRegisterDto.Email,
-                   FirstName = request.StudentForRegisterDto.FirstName,
-                   LastName = request.StudentForRegisterDto.LastName,
+                   UserId = createdUser.Id
                };
 
             var createdStudent = await _studentsService.AddAsync(newStudent);

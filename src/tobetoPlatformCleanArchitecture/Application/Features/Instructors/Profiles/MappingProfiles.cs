@@ -25,6 +25,7 @@ public class MappingProfiles : Profile
         CreateMap<Instructor, GetByIdInstructorResponse>().ReverseMap();
         CreateMap<Instructor, GetListInstructorListItemDto>().ReverseMap();
         CreateMap<Instructor, GetListInstructorDto>().ReverseMap();
+        CreateMap<Instructor, UpdateInstructorDto>().ReverseMap();
         CreateMap<IPaginate<Instructor>, GetListResponse<GetListInstructorListItemDto>>().ReverseMap();
         CreateMap<IPaginate<Instructor>, GetListResponse<GetListInstructorsSectionListDto>>().ReverseMap();
 

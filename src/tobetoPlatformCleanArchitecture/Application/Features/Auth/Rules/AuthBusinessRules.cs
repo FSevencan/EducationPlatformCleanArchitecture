@@ -90,14 +90,14 @@ public class AuthBusinessRules : BaseBusinessRules
 
     public async Task StudentEmailShouldBeNotExists(string email)
     {
-        bool doesExists = await _studentRepository.AnyAsync(predicate: u => u.Email == email, enableTracking: false);
+        bool doesExists = await _userRepository.AnyAsync(predicate: u => u.Email == email, enableTracking: false);
         if (doesExists)
             throw new BusinessException(AuthMessages.StudentMailAlreadyExists);
     }
 
     public async Task InstructorEmailShouldBeNotExists(string email)
     {
-        bool doesExists = await _instructorRepository.AnyAsync(predicate: u => u.Email == email, enableTracking: false);
+        bool doesExists = await _userRepository.AnyAsync(predicate: u => u.Email == email, enableTracking: false);
         if (doesExists)
             throw new BusinessException(AuthMessages.InstructorMailAlreadyExists);
     }
