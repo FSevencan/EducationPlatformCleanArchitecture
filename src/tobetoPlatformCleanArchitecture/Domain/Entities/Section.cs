@@ -9,9 +9,8 @@ public class Section : Entity<Guid>
     public string Description { get; set; }
 
     public SectionAbout SectionAbout { get; set; }
-
     public Category? Category { get; set; }
-    public ICollection<StudentSection>? StudentSections { get; set; } 
+    public ICollection<ClassRoomTypeSection>? ClassRoomTypeSection { get; set; }
     public ICollection<SectionCourse>? SectionCourses { get; set; }
     public ICollection<SectionInstructor>? SectionInstructors { get; set; }
 }
