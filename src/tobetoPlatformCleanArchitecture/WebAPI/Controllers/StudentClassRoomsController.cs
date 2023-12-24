@@ -5,6 +5,7 @@ using Application.Features.StudentClassRooms.Queries.GetById;
 using Application.Features.StudentClassRooms.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
+using Core.Security.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -24,6 +25,8 @@ public class StudentClassRoomsController : BaseController
     [HttpPut]
     public async Task<IActionResult> Update([FromBody] UpdateStudentClassRoomCommand updateStudentClassRoomCommand)
     {
+        int userId = User.GetUserId();
+
         UpdatedStudentClassRoomResponse response = await Mediator.Send(updateStudentClassRoomCommand);
 
         return Ok(response);

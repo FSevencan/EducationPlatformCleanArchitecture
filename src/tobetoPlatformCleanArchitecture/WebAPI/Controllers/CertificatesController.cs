@@ -5,6 +5,7 @@ using Application.Features.Certificates.Queries.GetById;
 using Application.Features.Certificates.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
+using Core.Security.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -16,6 +17,7 @@ public class CertificatesController : BaseController
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateCertificateCommand createCertificateCommand)
     {
+       
         CreatedCertificateResponse response = await Mediator.Send(createCertificateCommand);
 
         return Created(uri: "", response);
