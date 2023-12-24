@@ -3,6 +3,6 @@ using Core.Persistence.Repositories;
 
 namespace Application.Services.Repositories;
 
-public interface IStudentSectionRepository : IAsyncRepository<StudentSection, Guid>, IRepository<StudentSection, Guid>
+public interface IStudentSectionRepository : IAsyncRepository<StudentClassRoom, Guid>, IRepository<StudentClassRoom, Guid>
 {
 }

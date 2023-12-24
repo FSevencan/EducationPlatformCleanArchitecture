@@ -15,7 +15,8 @@ namespace Application.Features.ClassRooms.Commands.Update;
 public class UpdateClassRoomCommand : IRequest<UpdatedClassRoomResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
-    public string Name { get; set; }
+    public string Branch { get; set; }
+    public Guid ClassRoomTypeId { get; set; }
 
     public string[] Roles => new[] { Admin, Write, ClassRoomsOperationClaims.Update };
 

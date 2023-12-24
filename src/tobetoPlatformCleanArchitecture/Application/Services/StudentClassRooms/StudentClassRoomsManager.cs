@@ -18,22 +18,22 @@ public class StudentClassRoomsManager : IStudentClassRoomsService
         _studentClassRoomBusinessRules = studentClassRoomBusinessRules;
     }
 
-    public async Task<StudentClassRoom?> GetAsync(
-        Expression<Func<StudentClassRoom, bool>> predicate,
-        Func<IQueryable<StudentClassRoom>, IIncludableQueryable<StudentClassRoom, object>>? include = null,
+    public async Task<ClassRoomTypeSection?> GetAsync(
+        Expression<Func<ClassRoomTypeSection, bool>> predicate,
+        Func<IQueryable<ClassRoomTypeSection>, IIncludableQueryable<ClassRoomTypeSection, object>>? include = null,
         bool withDeleted = false,
         bool enableTracking = true,
         CancellationToken cancellationToken = default
     )
     {
-        StudentClassRoom? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate, include, withDeleted, enableTracking, cancellationToken);
+        ClassRoomTypeSection? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate, include, withDeleted, enableTracking, cancellationToken);
         return studentClassRoom;
     }
 
-    public async Task<IPaginate<StudentClassRoom>?> GetListAsync(
-        Expression<Func<StudentClassRoom, bool>>? predicate = null,
-        Func<IQueryable<StudentClassRoom>, IOrderedQueryable<StudentClassRoom>>? orderBy = null,
-        Func<IQueryable<StudentClassRoom>, IIncludableQueryable<StudentClassRoom, object>>? include = null,
+    public async Task<IPaginate<ClassRoomTypeSection>?> GetListAsync(
+        Expression<Func<ClassRoomTypeSection, bool>>? predicate = null,
+        Func<IQueryable<ClassRoomTypeSection>, IOrderedQueryable<ClassRoomTypeSection>>? orderBy = null,
+        Func<IQueryable<ClassRoomTypeSection>, IIncludableQueryable<ClassRoomTypeSection, object>>? include = null,
         int index = 0,
         int size = 10,
         bool withDeleted = false,
@@ -41,7 +41,7 @@ public class StudentClassRoomsManager : IStudentClassRoomsService
         CancellationToken cancellationToken = default
     )
     {
-        IPaginate<StudentClassRoom> studentClassRoomList = await _studentClassRoomRepository.GetListAsync(
+        IPaginate<ClassRoomTypeSection> studentClassRoomList = await _studentClassRoomRepository.GetListAsync(
             predicate,
             orderBy,
             include,
@@ -54,23 +54,23 @@ public class StudentClassRoomsManager : IStudentClassRoomsService
         return studentClassRoomList;
     }
 
-    public async Task<StudentClassRoom> AddAsync(StudentClassRoom studentClassRoom)
+    public async Task<ClassRoomTypeSection> AddAsync(ClassRoomTypeSection studentClassRoom)
     {
-        StudentClassRoom addedStudentClassRoom = await _studentClassRoomRepository.AddAsync(studentClassRoom);
+        ClassRoomTypeSection addedStudentClassRoom = await _studentClassRoomRepository.AddAsync(studentClassRoom);
 
         return addedStudentClassRoom;
     }
 
-    public async Task<StudentClassRoom> UpdateAsync(StudentClassRoom studentClassRoom)
+    public async Task<ClassRoomTypeSection> UpdateAsync(ClassRoomTypeSection studentClassRoom)
     {
-        StudentClassRoom updatedStudentClassRoom = await _studentClassRoomRepository.UpdateAsync(studentClassRoom);
+        ClassRoomTypeSection updatedStudentClassRoom = await _studentClassRoomRepository.UpdateAsync(studentClassRoom);
 
         return updatedStudentClassRoom;
     }
 
-    public async Task<StudentClassRoom> DeleteAsync(StudentClassRoom studentClassRoom, bool permanent = false)
+    public async Task<ClassRoomTypeSection> DeleteAsync(ClassRoomTypeSection studentClassRoom, bool permanent = false)
     {
-        StudentClassRoom deletedStudentClassRoom = await _studentClassRoomRepository.DeleteAsync(studentClassRoom);
+        ClassRoomTypeSection deletedStudentClassRoom = await _studentClassRoomRepository.DeleteAsync(studentClassRoom);
 
         return deletedStudentClassRoom;
     }

@@ -14,7 +14,8 @@ namespace Application.Features.ClassRooms.Commands.Create;
 
 public class CreateClassRoomCommand : IRequest<CreatedClassRoomResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public string Name { get; set; }
+    public string Branch { get; set; }
+    public Guid ClassRoomTypeId { get; set; }
 
     public string[] Roles => new[] { Admin, Write, ClassRoomsOperationClaims.Create };
 

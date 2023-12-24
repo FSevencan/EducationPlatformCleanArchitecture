@@ -30,7 +30,7 @@ public class GetByIdStudentClassRoomQuery : IRequest<GetByIdStudentClassRoomResp
 
         public async Task<GetByIdStudentClassRoomResponse> Handle(GetByIdStudentClassRoomQuery request, CancellationToken cancellationToken)
         {
-            StudentClassRoom? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate: scr => scr.Id == request.Id, cancellationToken: cancellationToken);
+            ClassRoomTypeSection? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate: scr => scr.Id == request.Id, cancellationToken: cancellationToken);
             await _studentClassRoomBusinessRules.StudentClassRoomShouldExistWhenSelected(studentClassRoom);
 
             GetByIdStudentClassRoomResponse response = _mapper.Map<GetByIdStudentClassRoomResponse>(studentClassRoom);

@@ -36,7 +36,7 @@ public class GetListStudentClassRoomQuery : IRequest<GetListResponse<GetListStud
 
         public async Task<GetListResponse<GetListStudentClassRoomListItemDto>> Handle(GetListStudentClassRoomQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<StudentClassRoom> studentClassRooms = await _studentClassRoomRepository.GetListAsync(
+            IPaginate<ClassRoomTypeSection> studentClassRooms = await _studentClassRoomRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken

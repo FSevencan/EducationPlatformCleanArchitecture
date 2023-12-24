@@ -6,6 +6,7 @@ public class CreateClassRoomCommandValidator : AbstractValidator<CreateClassRoom
 {
     public CreateClassRoomCommandValidator()
     {
-        RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.Branch).NotEmpty();
+        RuleFor(c => c.ClassRoomTypeId).NotEmpty();
     }
 }

@@ -33,7 +33,9 @@ using Application.Services.SectionInstructors;
 using Application.Services.Skills;
 using Application.Services.Students;
 using Application.Services.StudentClassRooms;
-using Application.Services.StudentSections;
+using Application.Services.ClassRoomTypes;
+using Application.Services.ClassRoomTypeSections;
+
 using Application.Services.StudentSkills;
 using Application.Services.StudentSurveys;
 using Application.Services.Surveys;
@@ -86,10 +88,13 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISkillsService, SkillsManager>();
         services.AddScoped<IStudentsService, StudentsManager>();
         services.AddScoped<IStudentClassRoomsService, StudentClassRoomsManager>();
-        services.AddScoped<IStudentSectionsService, StudentSectionsManager>();
+      
         services.AddScoped<IStudentSkillsService, StudentSkillsManager>();
         services.AddScoped<IStudentSurveysService, StudentSurveysManager>();
         services.AddScoped<ISurveysService, SurveysManager>();
+      services.AddScoped<IClassRoomsService, ClassRoomsManager>();
+      services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
+      services.AddScoped<IClassRoomTypeSectionsService, ClassRoomTypeSectionsManager>();
         return services;
     }
 

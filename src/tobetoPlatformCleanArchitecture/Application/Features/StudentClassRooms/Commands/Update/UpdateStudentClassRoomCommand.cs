@@ -41,7 +41,7 @@ public class UpdateStudentClassRoomCommand : IRequest<UpdatedStudentClassRoomRes
 
         public async Task<UpdatedStudentClassRoomResponse> Handle(UpdateStudentClassRoomCommand request, CancellationToken cancellationToken)
         {
-            StudentClassRoom? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate: scr => scr.Id == request.Id, cancellationToken: cancellationToken);
+            ClassRoomTypeSection? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate: scr => scr.Id == request.Id, cancellationToken: cancellationToken);
             await _studentClassRoomBusinessRules.StudentClassRoomShouldExistWhenSelected(studentClassRoom);
             studentClassRoom = _mapper.Map(request, studentClassRoom);
 

@@ -40,7 +40,7 @@ public class CreateStudentClassRoomCommand : IRequest<CreatedStudentClassRoomRes
 
         public async Task<CreatedStudentClassRoomResponse> Handle(CreateStudentClassRoomCommand request, CancellationToken cancellationToken)
         {
-            StudentClassRoom studentClassRoom = _mapper.Map<StudentClassRoom>(request);
+            ClassRoomTypeSection studentClassRoom = _mapper.Map<ClassRoomTypeSection>(request);
 
             await _studentClassRoomRepository.AddAsync(studentClassRoom);
 
