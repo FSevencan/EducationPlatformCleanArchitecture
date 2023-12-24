@@ -4,15 +4,15 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Persistence.EntityConfigurations;
 
-public class StudentClassRoomConfiguration : IEntityTypeConfiguration<StudentClassRoom>
+public class StudentClassRoomConfiguration : IEntityTypeConfiguration<ClassRoomTypeSection>
 {
-    public void Configure(EntityTypeBuilder<StudentClassRoom> builder)
+    public void Configure(EntityTypeBuilder<ClassRoomTypeSection> builder)
     {
-        builder.ToTable("StudentClassRooms").HasKey(scr => scr.Id);
+        builder.ToTable("ClassRoomTypeSection").HasKey(scr => scr.Id);
 
         builder.Property(scr => scr.Id).HasColumnName("Id").IsRequired();
-        builder.Property(scr => scr.StudentId).HasColumnName("StudentId");
-        builder.Property(scr => scr.ClassRoomId).HasColumnName("ClassRoomId");
+        builder.Property(scr => scr.SectionId).HasColumnName("SectionId");
+        builder.Property(scr => scr.ClassRoomTypeId).HasColumnName("ClassRoomTypeId");
         builder.Property(scr => scr.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(scr => scr.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(scr => scr.DeletedDate).HasColumnName("DeletedDate");

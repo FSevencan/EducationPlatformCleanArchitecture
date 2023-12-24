@@ -29,14 +29,15 @@ public class BaseDbContext : DbContext
     public DbSet<SectionInstructor> SectionInstructors { get; set; }
     public DbSet<ProducerCompany> ProducerCompanies { get; set; }
     public DbSet<Survey> Surveys { get; set; }
-    public DbSet<StudentSection> StudentSections { get; set; }
+    public DbSet<StudentClassRoom> StudentClassRooms { get; set; }
     public DbSet<StudentSurvey> StudentSurveys { get; set; }
     public DbSet<Student> Students { get; set; }
     public DbSet<Skill> Skills { get; set; }
     public DbSet<StudentSkill> StudentSkills { get; set; }
     public DbSet<Certificate> Certificates { get; set; }
     public DbSet<ClassRoom> ClassRooms { get; set; }
-    public DbSet<StudentClassRoom> StudentClassRooms { get; set; }
+    public DbSet<ClassRoomTypeSection> ClassRoomTypeSections { get; set; }
+    public DbSet<ClassRoomType> ClassRoomTypes { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

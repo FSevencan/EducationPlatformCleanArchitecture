@@ -60,7 +60,7 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClassRooms",
+                name: "ClassRoomTypes",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
@@ -71,7 +71,7 @@ namespace Persistence.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClassRooms", x => x.Id);
+                    table.PrimaryKey("PK_ClassRoomTypes", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -182,7 +182,7 @@ namespace Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    FinishDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
@@ -239,11 +239,32 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClassRooms",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Branch = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ClassRoomTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassRooms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClassRooms_ClassRoomTypes_ClassRoomTypeId",
+                        column: x => x.ClassRoomTypeId,
+                        principalTable: "ClassRoomTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Lessons",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProducerCompanyId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     CourseId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     LanguageId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -267,12 +288,6 @@ namespace Persistence.Migrations
                         name: "FK_Lessons_Languages_LanguageId",
                         column: x => x.LanguageId,
                         principalTable: "Languages",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_Lessons_ProducerCompanies_ProducerCompanyId",
-                        column: x => x.ProducerCompanyId,
-                        principalTable: "ProducerCompanies",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -442,6 +457,34 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClassRoomTypeSection",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ClassRoomTypeId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClassRoomTypeSection", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClassRoomTypeSection_ClassRoomTypes_ClassRoomTypeId",
+                        column: x => x.ClassRoomTypeId,
+                        principalTable: "ClassRoomTypes",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ClassRoomTypeSection_Sections_SectionId",
+                        column: x => x.SectionId,
+                        principalTable: "Sections",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "SectionAbouts",
                 columns: table => new
                 {
@@ -534,6 +577,7 @@ namespace Persistence.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StudentId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -552,55 +596,27 @@ namespace Persistence.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "StudentClassRooms",
+                name: "StudentClassRoom",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
                     ClassRoomId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    StudentId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_StudentClassRooms", x => x.Id);
+                    table.PrimaryKey("PK_StudentClassRoom", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_StudentClassRooms_ClassRooms_ClassRoomId",
+                        name: "FK_StudentClassRoom_ClassRooms_ClassRoomId",
                         column: x => x.ClassRoomId,
                         principalTable: "ClassRooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StudentClassRooms_Students_StudentId",
-                        column: x => x.StudentId,
-                        principalTable: "Students",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "StudentSections",
-                columns: table => new
-                {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    SectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    StudentId = table.Column<int>(type: "int", nullable: false),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    DeletedDate = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_StudentSections", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_StudentSections_Sections_SectionId",
-                        column: x => x.SectionId,
-                        principalTable: "Sections",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_StudentSections_Students_StudentId",
+                        name: "FK_StudentClassRoom_Students_StudentId",
                         column: x => x.StudentId,
                         principalTable: "Students",
                         principalColumn: "Id",
@@ -800,13 +816,25 @@ namespace Persistence.Migrations
                     { 130, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Surveys.Write", null },
                     { 131, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Surveys.Add", null },
                     { 132, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Surveys.Update", null },
-                    { 133, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Surveys.Delete", null }
+                    { 133, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "Surveys.Delete", null },
+                    { 134, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypes.Admin", null },
+                    { 135, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypes.Read", null },
+                    { 136, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypes.Write", null },
+                    { 137, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypes.Add", null },
+                    { 138, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypes.Update", null },
+                    { 139, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypes.Delete", null },
+                    { 140, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypeSections.Admin", null },
+                    { 141, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypeSections.Read", null },
+                    { 142, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypeSections.Write", null },
+                    { 143, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypeSections.Add", null },
+                    { 144, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypeSections.Update", null },
+                    { 145, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "ClassRoomTypeSections.Delete", null }
                 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "AuthenticatorType", "CreatedDate", "DeletedDate", "Email", "FirstName", "LastName", "PasswordHash", "PasswordSalt", "Status", "UpdatedDate" },
-                values: new object[] { 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@admin.com", "Admin", "NArchitecture", new byte[] { 103, 108, 19, 201, 211, 5, 104, 188, 28, 197, 227, 80, 109, 138, 98, 129, 222, 137, 17, 226, 125, 13, 39, 19, 17, 167, 164, 34, 58, 228, 22, 92, 183, 180, 230, 127, 67, 144, 78, 186, 141, 120, 144, 130, 226, 109, 181, 158, 49, 211, 79, 214, 222, 107, 181, 204, 172, 32, 92, 135, 167, 108, 1, 239 }, new byte[] { 165, 210, 39, 107, 227, 94, 165, 113, 18, 64, 215, 198, 248, 17, 247, 209, 241, 189, 107, 223, 21, 244, 74, 169, 121, 84, 77, 15, 68, 94, 253, 24, 107, 99, 177, 107, 53, 36, 146, 81, 103, 222, 86, 67, 182, 201, 87, 231, 186, 52, 196, 65, 114, 156, 183, 143, 43, 230, 216, 144, 252, 213, 133, 116, 101, 0, 139, 215, 2, 74, 137, 51, 82, 39, 253, 30, 250, 89, 208, 244, 230, 99, 71, 211, 25, 254, 26, 136, 237, 185, 75, 4, 54, 30, 198, 52, 67, 76, 132, 146, 206, 132, 209, 13, 249, 68, 173, 192, 52, 171, 18, 162, 192, 74, 100, 66, 108, 241, 128, 246, 48, 62, 1, 7, 79, 172, 108, 44 }, true, null });
+                values: new object[] { 1, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, "admin@admin.com", "Admin", "NArchitecture", new byte[] { 34, 174, 142, 193, 184, 150, 141, 142, 127, 244, 198, 3, 15, 212, 180, 182, 116, 215, 174, 21, 207, 165, 219, 15, 150, 213, 250, 206, 33, 76, 4, 200, 243, 237, 119, 209, 111, 35, 107, 242, 57, 57, 78, 76, 108, 120, 84, 79, 6, 112, 144, 149, 134, 184, 108, 234, 175, 227, 231, 38, 24, 2, 191, 18 }, new byte[] { 165, 193, 252, 175, 208, 161, 79, 172, 247, 69, 208, 15, 193, 182, 203, 84, 185, 146, 154, 86, 83, 128, 245, 7, 28, 111, 75, 204, 227, 40, 200, 163, 95, 112, 182, 209, 70, 26, 87, 55, 163, 218, 59, 82, 64, 91, 50, 41, 240, 219, 35, 142, 82, 140, 236, 58, 118, 8, 108, 138, 2, 174, 189, 23, 220, 99, 157, 14, 154, 97, 64, 66, 68, 5, 80, 41, 193, 159, 242, 55, 97, 125, 25, 6, 159, 241, 210, 32, 182, 108, 190, 56, 106, 148, 116, 53, 42, 160, 221, 231, 111, 137, 171, 35, 29, 58, 196, 147, 191, 200, 61, 121, 1, 126, 171, 254, 225, 105, 32, 165, 69, 107, 255, 178, 37, 157, 213, 249 }, true, null });
 
             migrationBuilder.InsertData(
                 table: "UserOperationClaims",
@@ -817,6 +845,21 @@ namespace Persistence.Migrations
                 name: "IX_Certificates_StudentId",
                 table: "Certificates",
                 column: "StudentId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClassRooms_ClassRoomTypeId",
+                table: "ClassRooms",
+                column: "ClassRoomTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClassRoomTypeSection_ClassRoomTypeId",
+                table: "ClassRoomTypeSection",
+                column: "ClassRoomTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ClassRoomTypeSection_SectionId",
+                table: "ClassRoomTypeSection",
+                column: "SectionId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_EmailAuthenticators_UserId",
@@ -837,11 +880,6 @@ namespace Persistence.Migrations
                 name: "IX_Lessons_LanguageId",
                 table: "Lessons",
                 column: "LanguageId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Lessons_ProducerCompanyId",
-                table: "Lessons",
-                column: "ProducerCompanyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_OtpAuthenticators_UserId",
@@ -890,29 +928,19 @@ namespace Persistence.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentClassRooms_ClassRoomId",
-                table: "StudentClassRooms",
+                name: "IX_StudentClassRoom_ClassRoomId",
+                table: "StudentClassRoom",
                 column: "ClassRoomId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StudentClassRooms_StudentId",
-                table: "StudentClassRooms",
+                name: "IX_StudentClassRoom_StudentId",
+                table: "StudentClassRoom",
                 column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Students_UserId",
                 table: "Students",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentSections_SectionId",
-                table: "StudentSections",
-                column: "SectionId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StudentSections_StudentId",
-                table: "StudentSections",
-                column: "StudentId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_StudentSkills_SkillId",
@@ -958,6 +986,9 @@ namespace Persistence.Migrations
                 name: "Certificates");
 
             migrationBuilder.DropTable(
+                name: "ClassRoomTypeSection");
+
+            migrationBuilder.DropTable(
                 name: "EmailAuthenticators");
 
             migrationBuilder.DropTable(
@@ -982,10 +1013,7 @@ namespace Persistence.Migrations
                 name: "SectionInstructors");
 
             migrationBuilder.DropTable(
-                name: "StudentClassRooms");
-
-            migrationBuilder.DropTable(
-                name: "StudentSections");
+                name: "StudentClassRoom");
 
             migrationBuilder.DropTable(
                 name: "StudentSkills");
@@ -1009,10 +1037,10 @@ namespace Persistence.Migrations
                 name: "Instructors");
 
             migrationBuilder.DropTable(
-                name: "ClassRooms");
+                name: "Sections");
 
             migrationBuilder.DropTable(
-                name: "Sections");
+                name: "ClassRooms");
 
             migrationBuilder.DropTable(
                 name: "Skills");
@@ -1028,6 +1056,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Categories");
+
+            migrationBuilder.DropTable(
+                name: "ClassRoomTypes");
 
             migrationBuilder.DropTable(
                 name: "Users");

@@ -11,7 +11,8 @@ public class ClassRoomConfiguration : IEntityTypeConfiguration<ClassRoom>
         builder.ToTable("ClassRooms").HasKey(cr => cr.Id);
 
         builder.Property(cr => cr.Id).HasColumnName("Id").IsRequired();
-        builder.Property(cr => cr.Name).HasColumnName("Name");
+        builder.Property(cr => cr.Branch).HasColumnName("Branch");
+        builder.Property(cr => cr.ClassRoomTypeId).HasColumnName("ClassRoomTypeId");
         builder.Property(cr => cr.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(cr => cr.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(cr => cr.DeletedDate).HasColumnName("DeletedDate");

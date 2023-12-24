@@ -5,7 +5,7 @@ using Persistence.Contexts;
 
 namespace Persistence.Repositories;
 
-public class StudentClassRoomRepository : EfRepositoryBase<StudentClassRoom, Guid, BaseDbContext>, IStudentClassRoomRepository
+public class StudentClassRoomRepository : EfRepositoryBase<ClassRoomTypeSection, Guid, BaseDbContext>, IStudentClassRoomRepository
 {
     public StudentClassRoomRepository(BaseDbContext context) : base(context)
     {

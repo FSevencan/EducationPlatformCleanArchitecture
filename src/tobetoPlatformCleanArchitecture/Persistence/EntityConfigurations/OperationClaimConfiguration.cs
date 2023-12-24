@@ -210,6 +210,22 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "Surveys.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Surveys.Delete" });
         #endregion
+        #region ClassRoomTypes
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypes.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypes.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypes.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypes.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypes.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypes.Delete" });
+        #endregion
+        #region ClassRoomTypeSections
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Delete" });
+        #endregion
         return seeds;
     }
 }

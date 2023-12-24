@@ -11,7 +11,6 @@ public class LessonConfiguration : IEntityTypeConfiguration<Lesson>
         builder.ToTable("Lessons").HasKey(l => l.Id);
 
         builder.Property(l => l.Id).HasColumnName("Id").IsRequired();
-        builder.Property(l => l.ProducerCompanyId).HasColumnName("ProducerCompanyId");
         builder.Property(l => l.CourseId).HasColumnName("CourseId");
         builder.Property(l => l.LanguageId).HasColumnName("LanguageId");
         builder.Property(l => l.Name).HasColumnName("Name");
