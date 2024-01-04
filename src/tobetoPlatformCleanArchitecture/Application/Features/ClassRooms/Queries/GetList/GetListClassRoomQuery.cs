@@ -9,6 +9,7 @@ using Core.Application.Responses;
 using Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.ClassRooms.Constants.ClassRoomsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.ClassRooms.Queries.GetList;
 
@@ -37,6 +38,7 @@ public class GetListClassRoomQuery : IRequest<GetListResponse<GetListClassRoomLi
         public async Task<GetListResponse<GetListClassRoomListItemDto>> Handle(GetListClassRoomQuery request, CancellationToken cancellationToken)
         {
             IPaginate<ClassRoom> classRooms = await _classRoomRepository.GetListAsync(
+                include: c => c.Include(ct => ct.ClassRoomType),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken

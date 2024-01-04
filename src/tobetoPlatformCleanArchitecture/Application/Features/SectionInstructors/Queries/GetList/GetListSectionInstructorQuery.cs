@@ -45,7 +45,9 @@ public class GetListSectionInstructorQuery : IRequest<GetListResponse<GetListSec
         }
 
         public async Task<GetListResponse<GetListSectionInstructorListItemDto>> Handle(GetListSectionInstructorQuery request, CancellationToken cancellationToken)
-        {   
+        {
+
+
            
 
             var sectionInstructors = await _sectionInstructorRepository.GetListAsync(
