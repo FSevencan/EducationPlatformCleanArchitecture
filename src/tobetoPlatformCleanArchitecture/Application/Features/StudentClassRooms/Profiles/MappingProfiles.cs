@@ -14,14 +14,14 @@ public class MappingProfiles : Profile
 {
     public MappingProfiles()
     {
-        CreateMap<ClassRoomTypeSection, CreateStudentClassRoomCommand>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, CreatedStudentClassRoomResponse>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, UpdateStudentClassRoomCommand>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, UpdatedStudentClassRoomResponse>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, DeleteStudentClassRoomCommand>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, DeletedStudentClassRoomResponse>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, GetByIdStudentClassRoomResponse>().ReverseMap();
-        CreateMap<ClassRoomTypeSection, GetListStudentClassRoomListItemDto>().ReverseMap();
-        CreateMap<IPaginate<ClassRoomTypeSection>, GetListResponse<GetListStudentClassRoomListItemDto>>().ReverseMap();
+        CreateMap<StudentClassRoom, CreateStudentClassRoomCommand>().ReverseMap();
+        CreateMap<StudentClassRoom, CreatedStudentClassRoomResponse>().ReverseMap();
+        CreateMap<StudentClassRoom, UpdateStudentClassRoomCommand>().ReverseMap();
+        CreateMap<StudentClassRoom, UpdatedStudentClassRoomResponse>().ReverseMap();
+        CreateMap<StudentClassRoom, DeleteStudentClassRoomCommand>().ReverseMap();
+        CreateMap<StudentClassRoom, DeletedStudentClassRoomResponse>().ReverseMap();
+        CreateMap<StudentClassRoom, GetByIdStudentClassRoomResponse>().ReverseMap();
+        CreateMap<StudentClassRoom, GetListStudentClassRoomListItemDto>().ReverseMap();
+        CreateMap<IPaginate<StudentClassRoom>, GetListResponse<GetListStudentClassRoomListItemDto>>().ReverseMap();
     }
 }

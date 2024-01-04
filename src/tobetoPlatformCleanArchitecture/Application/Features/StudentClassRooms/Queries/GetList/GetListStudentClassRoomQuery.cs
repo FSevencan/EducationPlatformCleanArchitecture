@@ -12,7 +12,7 @@ using static Application.Features.StudentClassRooms.Constants.StudentClassRoomsO
 
 namespace Application.Features.StudentClassRooms.Queries.GetList;
 
-public class GetListStudentClassRoomQuery : IRequest<GetListResponse<GetListStudentClassRoomListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListStudentClassRoomQuery : IRequest<GetListResponse<GetListStudentClassRoomListItemDto>>/*, ISecuredRequest*/, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
@@ -36,7 +36,7 @@ public class GetListStudentClassRoomQuery : IRequest<GetListResponse<GetListStud
 
         public async Task<GetListResponse<GetListStudentClassRoomListItemDto>> Handle(GetListStudentClassRoomQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<ClassRoomTypeSection> studentClassRooms = await _studentClassRoomRepository.GetListAsync(
+            IPaginate<StudentClassRoom> studentClassRooms = await _studentClassRoomRepository.GetListAsync(
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken

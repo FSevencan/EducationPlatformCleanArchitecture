@@ -56,11 +56,13 @@ public class MappingProfiles : Profile
 
 
         CreateMap<Instructor, GetListInstructorListItemDto>()
-       .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName ))
-       .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName ))
+       .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
+       .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
        .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
 
+        CreateMap<Instructor, GetListInstructorDto>()
+       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
 
-    }
+    } 
 }

@@ -45,10 +45,11 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
                                .ThenInclude(course => course.Course)
                                .Include(section => section.SectionInstructors)
                                .ThenInclude(sectionInstructor => sectionInstructor.Instructor)
+                               .ThenInclude(a=> a.User)
                                .Include(sabout => sabout.SectionAbout)
                                .ThenInclude(producer => producer.ProducerCompany),
 
-                //predicate: section => section.DeletedDate == null,
+                
 
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,

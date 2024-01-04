@@ -39,7 +39,7 @@ public class DeleteStudentClassRoomCommand : IRequest<DeletedStudentClassRoomRes
 
         public async Task<DeletedStudentClassRoomResponse> Handle(DeleteStudentClassRoomCommand request, CancellationToken cancellationToken)
         {
-            ClassRoomTypeSection? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate: scr => scr.Id == request.Id, cancellationToken: cancellationToken);
+            StudentClassRoom? studentClassRoom = await _studentClassRoomRepository.GetAsync(predicate: scr => scr.Id == request.Id, cancellationToken: cancellationToken);
             await _studentClassRoomBusinessRules.StudentClassRoomShouldExistWhenSelected(studentClassRoom);
 
             await _studentClassRoomRepository.DeleteAsync(studentClassRoom!);

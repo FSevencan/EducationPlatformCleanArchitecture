@@ -15,7 +15,7 @@ public class StudentClassRoomBusinessRules : BaseBusinessRules
         _studentClassRoomRepository = studentClassRoomRepository;
     }
 
-    public Task StudentClassRoomShouldExistWhenSelected(ClassRoomTypeSection? studentClassRoom)
+    public Task StudentClassRoomShouldExistWhenSelected(StudentClassRoom? studentClassRoom)
     {
         if (studentClassRoom == null)
             throw new BusinessException(StudentClassRoomsBusinessMessages.StudentClassRoomNotExists);
@@ -24,7 +24,7 @@ public class StudentClassRoomBusinessRules : BaseBusinessRules
 
     public async Task StudentClassRoomIdShouldExistWhenSelected(Guid id, CancellationToken cancellationToken)
     {
-        ClassRoomTypeSection? studentClassRoom = await _studentClassRoomRepository.GetAsync(
+        StudentClassRoom? studentClassRoom = await _studentClassRoomRepository.GetAsync(
             predicate: scr => scr.Id == id,
             enableTracking: false,
             cancellationToken: cancellationToken

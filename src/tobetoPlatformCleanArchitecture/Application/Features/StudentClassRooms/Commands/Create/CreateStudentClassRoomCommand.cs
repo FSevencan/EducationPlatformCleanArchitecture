@@ -15,7 +15,7 @@ namespace Application.Features.StudentClassRooms.Commands.Create;
 public class CreateStudentClassRoomCommand : IRequest<CreatedStudentClassRoomResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public int StudentId { get; set; }
-    public int ClassRoomId { get; set; }
+    public Guid ClassRoomId { get; set; }
     
 
     public string[] Roles => new[] { Admin, Write, StudentClassRoomsOperationClaims.Create };
@@ -40,7 +40,7 @@ public class CreateStudentClassRoomCommand : IRequest<CreatedStudentClassRoomRes
 
         public async Task<CreatedStudentClassRoomResponse> Handle(CreateStudentClassRoomCommand request, CancellationToken cancellationToken)
         {
-            ClassRoomTypeSection studentClassRoom = _mapper.Map<ClassRoomTypeSection>(request);
+            StudentClassRoom studentClassRoom = _mapper.Map<StudentClassRoom>(request);
 
             await _studentClassRoomRepository.AddAsync(studentClassRoom);
 

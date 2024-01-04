@@ -5,8 +5,8 @@ namespace Application.Features.StudentClassRooms.Commands.Create;
 
 public class CreatedStudentClassRoomResponse : IResponse
 {
-    public Guid Id { get; set; }
+   
     public int StudentId { get; set; }
-    public int ClassRoomId { get; set; }
+    public Guid ClassRoomId { get; set; }
    
 }
