@@ -20,6 +20,8 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
     public string Description { get; set; }
 
     public ICollection<int>? InstructorIds { get; set; }
+    public ICollection<Guid>? CourseIds { get; set; }
+    public ICollection<Guid>? ClassRoomTypeIds { get; set; }
 
 
     public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Create };
@@ -45,11 +47,26 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
         public async Task<CreatedSectionResponse> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
         {
             Section section = _mapper.Map<Section>(request);
+
             section.SectionInstructors = request.InstructorIds.Select(instructorId => new SectionInstructor
             {
                 InstructorId = instructorId,
                 CreatedDate = DateTime.Now,
             }).ToList();
+
+            section.ClassRoomTypeSection = request.ClassRoomTypeIds.Select(classRoomTypeId => new ClassRoomTypeSection
+            {
+                ClassRoomTypeId = classRoomTypeId,
+                CreatedDate = DateTime.Now,
+            }).ToList();
+
+            section.SectionCourses = request.CourseIds.Select(courseId => new SectionCourse
+            {
+                CourseId = courseId,
+                CreatedDate = DateTime.Now,
+            }).ToList();
+
+
             await _sectionRepository.AddAsync(section);
 
             CreatedSectionResponse response = _mapper.Map<CreatedSectionResponse>(section);
