@@ -24,7 +24,7 @@ public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequ
     public string? CacheKey { get; }
     public string CacheGroupKey => "GetCourses";
 
-    public ICollection<Guid> SectionIds { get; set; }
+    public ICollection<Guid> SectionIds { get; set; } // burasý null olabilir düþünülür.
 
     public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, CreatedCourseResponse>
     {
