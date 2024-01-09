@@ -375,8 +375,8 @@ healthchecksdb
 MigrationBackup/
 
 # ASP.NET Core
-appsettings.json
-appsettings.Development.json
+*.json
+
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
