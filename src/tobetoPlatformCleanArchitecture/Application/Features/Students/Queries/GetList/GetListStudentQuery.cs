@@ -37,8 +37,9 @@ public class GetListStudentQuery : IRequest<GetListResponse<GetListStudentListIt
 
         public async Task<GetListResponse<GetListStudentListItemDto>> Handle(GetListStudentQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Student> students = await _studentRepository.GetListAsync(
-                include: s=> s.Include( user=> user.User),
+            IPaginate<Student> students = await _studentRepository.GetListAsync( 
+                include: s => s.Include(user => user.User),   //.Include(c=>c.Certificates), ihtiyaca yönelik ekleriz çünkü burasý admin için geçerli
+                //include: s => s.Include( user=> user.User).Include(skils => skils.StudentSkills).ThenInclude(skil => skil.SkillId), guid convert hatasý
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize, 
                 cancellationToken: cancellationToken

@@ -9,6 +9,7 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Skills.Constants.SkillsOperationClaims;
+using static System.Collections.Specialized.BitVector32;
 
 namespace Application.Features.Skills.Commands.Create;
 
@@ -16,6 +17,8 @@ public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredReques
 {
     public string Name { get; set; }
     public int Level { get; set; }
+
+    public ICollection<int>? StudentIds { get; set; } // bu gereksiz olabilir konuþuruz
 
     public string[] Roles => new[] { Admin, Write, SkillsOperationClaims.Create };
 
@@ -41,10 +44,17 @@ public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredReques
         {
             Skill skill = _mapper.Map<Skill>(request);
 
+            skill.StudentSkills = request.StudentIds.Select(studentIds => new StudentSkill
+            {
+                StudentId = studentIds,
+                CreatedDate = DateTime.Now,
+            }).ToList(); // bu gereksiz olabilir konuþuruz
+
+
             await _skillRepository.AddAsync(skill);
 
             CreatedSkillResponse response = _mapper.Map<CreatedSkillResponse>(skill);
             return response;
         }
-    }
+    } // safak id:1  skil: .net              StudentSkills 1 1 
 }

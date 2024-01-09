@@ -19,6 +19,9 @@ public class CreateSurveyCommand : IRequest<CreatedSurveyResponse>, ISecuredRequ
     public DateTime StartDate { get; set; }
     public DateTime FinishDate { get; set; }
 
+    public ICollection<int>? StudentIds { get; set; }
+
+
     public string[] Roles => new[] { Admin, Write, SurveysOperationClaims.Create };
 
     public bool BypassCache { get; }
@@ -42,6 +45,13 @@ public class CreateSurveyCommand : IRequest<CreatedSurveyResponse>, ISecuredRequ
         public async Task<CreatedSurveyResponse> Handle(CreateSurveyCommand request, CancellationToken cancellationToken)
         {
             Survey survey = _mapper.Map<Survey>(request);
+
+            survey.StudentSurveys = request.StudentIds.Select(studentIds => new StudentSurvey
+            {
+                StudentId = studentIds,
+                CreatedDate = DateTime.Now,
+            }).ToList(); // tartýþýlýr ama olmasý gerekebilir  classromtype göre yapsak daha iyi olur örneðin .Net 1A gibi
+
 
             await _surveyRepository.AddAsync(survey);
 
