@@ -1,5 +1,6 @@
 using Core.Application.Responses;
 using Core.Security.Entities;
+using Domain.Entities;
 
 namespace Application.Features.Instructors.Queries.GetById;
 
@@ -13,7 +14,8 @@ public class GetByIdInstructorResponse : IResponse
     public string Email { get; set; }
     public DateTime BirthDate { get; set; }
     public string PhoneNumber { get; set; }
-    public string About { get; set; }
+    //public string About { get; set; } // tabloda yok mu? Kontrol et !
     public string Title { get; set; }
-    public User User { get; set; }
+
+    public User User { get; set; } // bu alaný dönmemize gerek var Mý ?
 }

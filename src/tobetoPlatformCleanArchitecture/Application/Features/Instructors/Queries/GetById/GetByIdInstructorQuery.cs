@@ -6,10 +6,11 @@ using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Instructors.Constants.InstructorsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Instructors.Queries.GetById;
 
-public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>, ISecuredRequest
+public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISecuredRequest*/
 {
     public int Id { get; set; }
 
@@ -30,7 +31,13 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>, ISecu
 
         public async Task<GetByIdInstructorResponse> Handle(GetByIdInstructorQuery request, CancellationToken cancellationToken)
         {
-            Instructor? instructor = await _instructorRepository.GetAsync(predicate: i => i.Id == request.Id, cancellationToken: cancellationToken);
+            Instructor? instructor = await _instructorRepository.GetAsync(
+                predicate: i => i.Id == request.Id,
+                include: i=> i.Include(user => user.User)
+                .Include(section => section.SectionInstructors)
+                .ThenInclude(si=>si.Section),
+                cancellationToken: cancellationToken);
+
             await _instructorBusinessRules.InstructorShouldExistWhenSelected(instructor);
 
             GetByIdInstructorResponse response = _mapper.Map<GetByIdInstructorResponse>(instructor);
