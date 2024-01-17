@@ -16,6 +16,7 @@ public class UpdateCategoryCommand : IRequest<UpdatedCategoryResponse>, ISecured
 {
     public Guid Id { get; set; }
     public string Name { get; set; }
+    public string? ImageUrl { get; set; }
 
     public string[] Roles => new[] { Admin, Write, CategoriesOperationClaims.Update };
 

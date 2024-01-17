@@ -95,6 +95,7 @@ public static class ApplicationServiceRegistration
       services.AddScoped<IClassRoomsService, ClassRoomsManager>();
       services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
       services.AddScoped<IClassRoomTypeSectionsService, ClassRoomTypeSectionsManager>();
+      services.AddScoped<ICategoriesService, CategoriesManager>();
         return services;
     }
 

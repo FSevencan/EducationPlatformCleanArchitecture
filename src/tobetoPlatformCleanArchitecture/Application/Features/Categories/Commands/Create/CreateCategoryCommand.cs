@@ -15,6 +15,7 @@ namespace Application.Features.Categories.Commands.Create;
 public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Name { get; set; }
+    public string ImageUrl { get; set; }
 
     public string[] Roles => new[] { Admin, Write, CategoriesOperationClaims.Create };
 

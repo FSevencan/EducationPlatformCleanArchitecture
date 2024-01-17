@@ -5,7 +5,6 @@ using Application.Features.Categories.Queries.GetById;
 using Application.Features.Categories.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
-using Core.Security.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -17,7 +16,6 @@ public class CategoriesController : BaseController
     [HttpPost]
     public async Task<IActionResult> Add([FromBody] CreateCategoryCommand createCategoryCommand)
     {
-       
         CreatedCategoryResponse response = await Mediator.Send(createCategoryCommand);
 
         return Created(uri: "", response);

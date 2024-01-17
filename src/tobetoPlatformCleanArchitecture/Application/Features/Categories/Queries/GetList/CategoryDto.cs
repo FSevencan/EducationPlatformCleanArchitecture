@@ -9,4 +9,5 @@ namespace Application.Features.Categories.Queries.GetList;
 public class CategoryDto:IDto
 {
     public string Name { get; set; }
+    public string ImageUrl { get; set; }
 }

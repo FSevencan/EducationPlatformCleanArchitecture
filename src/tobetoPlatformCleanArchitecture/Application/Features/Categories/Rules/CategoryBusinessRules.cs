@@ -32,6 +32,7 @@ public class CategoryBusinessRules : BaseBusinessRules
         );
         await CategoryShouldExistWhenSelected(category);
     }
+
     public async Task CheckCategoryNameForUniqueness(string name)
     {
         IPaginate<Category> result = await _categoryRepository.GetListAsync(c => c.Name == name);
