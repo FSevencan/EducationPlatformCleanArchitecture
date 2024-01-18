@@ -1,3 +1,4 @@
+using Application.Features.Sections.Queries.GetList;
 using Core.Application.Responses;
 using Core.Security.Entities;
 using Domain.Entities;
@@ -17,5 +18,7 @@ public class GetByIdInstructorResponse : IResponse
     //public string About { get; set; } // tabloda yok mu? Kontrol et !
     public string Title { get; set; }
 
-    public User User { get; set; } // bu alaný dönmemize gerek var Mý ?
+    public ICollection<GetListInstructorsSectionListDto> Sections { get; set; }
+
+
 }

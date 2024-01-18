@@ -75,6 +75,7 @@ public class MappingProfiles : Profile
         .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
         .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
         //.ForMember(dest => dest.About, opt => opt.MapFrom(src => src.About))
-        .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title));
+        .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+        .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
     } 
 }

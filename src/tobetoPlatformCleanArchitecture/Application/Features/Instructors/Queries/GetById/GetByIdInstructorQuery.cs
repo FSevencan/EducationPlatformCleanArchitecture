@@ -33,9 +33,8 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISe
         {
             Instructor? instructor = await _instructorRepository.GetAsync(
                 predicate: i => i.Id == request.Id,
-                include: i=> i.Include(user => user.User)
-                .Include(section => section.SectionInstructors)
-                .ThenInclude(si=>si.Section),
+                include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section)
+               .Include(user => user.User),
                 cancellationToken: cancellationToken);
 
             await _instructorBusinessRules.InstructorShouldExistWhenSelected(instructor);
