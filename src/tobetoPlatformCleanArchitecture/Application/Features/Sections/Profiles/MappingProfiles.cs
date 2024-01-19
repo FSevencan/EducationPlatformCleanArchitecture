@@ -10,6 +10,7 @@ using Core.Persistence.Paging;
 using Application.Features.Categories.Queries.GetList;
 using Application.Features.Instructors.Queries.GetList;
 using Application.Features.Courses.Queries.GetList;
+using Application.Features.Students.Queries.GetById.Dtos;
 
 namespace Application.Features.Sections.Profiles;
 
@@ -38,6 +39,7 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.SectionAbout, opt => opt.MapFrom(src => src.SectionAbout))
             .ForMember(dest => dest.ProducerCompany, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
 
-
+        CreateMap<Section, GetStudentSectionListDto>().ReverseMap();
+       
     }
 }

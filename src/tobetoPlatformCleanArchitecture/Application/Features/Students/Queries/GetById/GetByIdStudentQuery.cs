@@ -6,10 +6,11 @@ using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Students.Constants.StudentsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Students.Queries.GetById;
 
-public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>, ISecuredRequest
+public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredRequest*/
 {
     public int Id { get; set; }
 
@@ -30,10 +31,27 @@ public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>, ISecuredReq
 
         public async Task<GetByIdStudentResponse> Handle(GetByIdStudentQuery request, CancellationToken cancellationToken)
         {
-            Student? student = await _studentRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);
+            
+            Student? student = await _studentRepository.GetAsync(
+                predicate: s => s.Id == request.Id,
+                include: s => s.Include(st => st.User)
+                              . Include(st => st.StudentSurveys)
+                                    .ThenInclude(st=> st.Survey)
+                               .Include(st => st.StudentSkills)
+                                    .ThenInclude(st => st.Skill)
+                               .Include(st => st.Certificates)
+                               .Include(st => st.StudentClassRooms)
+                                   .ThenInclude(sc => sc.ClassRoom)
+                                       .ThenInclude(c => c.ClassRoomType)
+                                           .ThenInclude(ct => ct.ClassRoomTypeSection)
+                                               .ThenInclude(cts => cts.Section),
+                               
+                cancellationToken: cancellationToken);
+
             await _studentBusinessRules.StudentShouldExistWhenSelected(student);
 
             GetByIdStudentResponse response = _mapper.Map<GetByIdStudentResponse>(student);
+           
             return response;
         }
     }

@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Students.Queries.GetById.Dtos;
 
 namespace Application.Features.StudentSkills.Profiles;
 
@@ -22,6 +23,11 @@ public class MappingProfiles : Profile
         CreateMap<StudentSkill, DeletedStudentSkillResponse>().ReverseMap();
         CreateMap<StudentSkill, GetByIdStudentSkillResponse>().ReverseMap();
         CreateMap<StudentSkill, GetListStudentSkillListItemDto>().ReverseMap();
+
+        CreateMap<StudentSkill, GetStudentSkillListDto>()
+        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Skill.Name))
+        .ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.Skill.Level));
+       
         CreateMap<IPaginate<StudentSkill>, GetListResponse<GetListStudentSkillListItemDto>>().ReverseMap();
     }
 }

@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Students.Queries.GetById.Dtos;
 
 namespace Application.Features.Certificates.Profiles;
 
@@ -22,6 +23,9 @@ public class MappingProfiles : Profile
         CreateMap<Certificate, DeletedCertificateResponse>().ReverseMap();
         CreateMap<Certificate, GetByIdCertificateResponse>().ReverseMap();
         CreateMap<Certificate, GetListCertificateListItemDto>().ReverseMap();
+
+        CreateMap<Certificate, GetStudentCertificateListDto>().ReverseMap();
+
         CreateMap<IPaginate<Certificate>, GetListResponse<GetListCertificateListItemDto>>().ReverseMap();
     }
 }

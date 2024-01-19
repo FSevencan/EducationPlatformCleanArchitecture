@@ -7,6 +7,8 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Students.Queries.GetById;
+using Application.Features.Students.Queries.GetById.Dtos;
 
 namespace Application.Features.StudentSurveys.Profiles;
 
@@ -22,6 +24,13 @@ public class MappingProfiles : Profile
         CreateMap<StudentSurvey, DeletedStudentSurveyResponse>().ReverseMap();
         CreateMap<StudentSurvey, GetByIdStudentSurveyResponse>().ReverseMap();
         CreateMap<StudentSurvey, GetListStudentSurveyListItemDto>().ReverseMap();
+
+        CreateMap<StudentSurvey, GetStudentSurveyListDto>()
+       .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Survey.Name))
+       .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Survey.Description))
+       .ForMember(dest => dest.StartDate, opt => opt.MapFrom(src => src.Survey.StartDate))
+       .ForMember(dest => dest.EndDate, opt => opt.MapFrom(src => src.Survey.EndDate));
+
         CreateMap<IPaginate<StudentSurvey>, GetListResponse<GetListStudentSurveyListItemDto>>().ReverseMap();
     }
 }
