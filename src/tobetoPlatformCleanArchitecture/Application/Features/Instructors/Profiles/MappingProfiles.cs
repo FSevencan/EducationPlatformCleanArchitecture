@@ -41,7 +41,7 @@ public class MappingProfiles : Profile
        .ReverseMap();
 
         CreateMap<UpdateInstructorDto, User>()
-       .ForMember(dest => dest.Id, opt => opt.Ignore()) // Id alanýný dýþarýda býrak
+       .ForMember(dest => dest.Id, opt => opt.Ignore()) // Id alanini disarida birak
        .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
        .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))
@@ -74,7 +74,6 @@ public class MappingProfiles : Profile
         .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
         .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
         .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
-        //.ForMember(dest => dest.About, opt => opt.MapFrom(src => src.About))
         .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
         .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
     } 
