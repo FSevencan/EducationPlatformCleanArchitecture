@@ -12,7 +12,7 @@ namespace Application.Features.Students.Queries.GetById;
 
 public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredRequest*/
 {
-    public int Id { get; set; }
+    public int UserId { get; set; }
 
     public string[] Roles => new[] { Admin, Read };
 
@@ -31,12 +31,11 @@ public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredR
 
         public async Task<GetByIdStudentResponse> Handle(GetByIdStudentQuery request, CancellationToken cancellationToken)
         {
-            
             Student? student = await _studentRepository.GetAsync(
-                predicate: s => s.Id == request.Id,
-                include: s => s.Include(st => st.User)
-                              . Include(st => st.StudentSurveys)
-                                    .ThenInclude(st=> st.Survey)
+               predicate: s => s.User.Id == request.UserId,
+               include: s => s.Include(st => st.User)
+                               .Include(st => st.StudentSurveys)
+                                    .ThenInclude(st => st.Survey)
                                .Include(st => st.StudentSkills)
                                     .ThenInclude(st => st.Skill)
                                .Include(st => st.Certificates)
@@ -45,13 +44,13 @@ public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredR
                                        .ThenInclude(c => c.ClassRoomType)
                                            .ThenInclude(ct => ct.ClassRoomTypeSection)
                                                .ThenInclude(cts => cts.Section),
-                               
+
                 cancellationToken: cancellationToken);
 
             await _studentBusinessRules.StudentShouldExistWhenSelected(student);
 
             GetByIdStudentResponse response = _mapper.Map<GetByIdStudentResponse>(student);
-           
+
             return response;
         }
     }

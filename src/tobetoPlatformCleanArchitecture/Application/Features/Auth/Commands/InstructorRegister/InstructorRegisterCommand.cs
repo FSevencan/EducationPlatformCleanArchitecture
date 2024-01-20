@@ -37,13 +37,17 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly IInstructorsService _instructorsService;
+        private readonly IOperationClaimRepository _operationClaimRepository;
+        private readonly IUserOperationClaimRepository _userOperationClaimRepository;
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
 
-        public InstructorRegisterCommandHandler(IUserRepository userRepository, IInstructorsService instructorsService, IAuthService authService, AuthBusinessRules authBusinessRules)
+        public InstructorRegisterCommandHandler(IUserRepository userRepository, IInstructorsService instructorsService, IOperationClaimRepository operationClaimRepository, IUserOperationClaimRepository userOperationClaimRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
         {
             _userRepository = userRepository;
             _instructorsService = instructorsService;
+            _operationClaimRepository = operationClaimRepository;
+            _userOperationClaimRepository = userOperationClaimRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
         }
@@ -80,6 +84,19 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
             var createdInstructor = await _instructorsService.AddAsync(newInstructor);
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
+
+            // Student yetkisini bulma
+            OperationClaim instructorClaim = await _operationClaimRepository.GetAsync(c => c.Name == "Instructor");
+
+            // Eğer Student yetkisi bulunamazsa bir hata fırlat
+            if (instructorClaim == null)
+            {
+                throw new Exception("instructor yetkisi bulunamadı.");
+            }
+
+            // UserOperationClaim nesnesini oluştur ve veritabanına kaydet
+            UserOperationClaim userOperationClaim = new UserOperationClaim(createdUser.Id, instructorClaim.Id);
+            await _userOperationClaimRepository.AddAsync(userOperationClaim);
 
             Core.Security.Entities.RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
             Core.Security.Entities.RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);

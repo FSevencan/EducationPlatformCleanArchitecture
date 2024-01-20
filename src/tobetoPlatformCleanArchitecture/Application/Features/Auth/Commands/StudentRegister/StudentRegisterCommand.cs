@@ -34,56 +34,84 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
     {
         private readonly IUserRepository _userRepository;
         private readonly IStudentsService _studentsService;
+        private readonly IOperationClaimRepository _operationClaimRepository;
+        private readonly IUserOperationClaimRepository _userOperationClaimRepository;
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
 
-        public StudentRegisterCommandHandler(IUserRepository userRepository, IStudentsService studentsService, IAuthService authService, AuthBusinessRules authBusinessRules)
+        public StudentRegisterCommandHandler(IUserRepository userRepository, IStudentsService studentsService, IOperationClaimRepository operationClaimRepository, IUserOperationClaimRepository userOperationClaimRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
         {
             _userRepository = userRepository;
             _studentsService = studentsService;
+            _operationClaimRepository = operationClaimRepository;
+            _userOperationClaimRepository = userOperationClaimRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
         }
 
         public async Task<StudentRegisteredResponse> Handle(StudentRegisterCommand request, CancellationToken cancellationToken)
         {
-
+            // Öğrenci e-postası kontrolü
             await _authBusinessRules.StudentEmailShouldBeNotExists(request.StudentForRegisterDto.Email);
 
+            // Şifre hashleme işlemi
             HashingHelper.CreatePasswordHash(
                 request.StudentForRegisterDto.Password,
-                passwordHash: out byte[] passwordHash,
-                passwordSalt: out byte[] passwordSalt
+                out byte[] passwordHash,
+                out byte[] passwordSalt
             );
-            User newUser =
-                new()
-                {
-                   
-                    Email = request.StudentForRegisterDto.Email,
-                    FirstName = request.StudentForRegisterDto.FirstName,
-                    LastName = request.StudentForRegisterDto.LastName,
-                    PasswordHash = passwordHash,
-                    PasswordSalt = passwordSalt,
-                    Status = true
-                };
 
+            // Yeni kullanıcı nesnesi oluşturma
+            User newUser = new User
+            {
+                Email = request.StudentForRegisterDto.Email,
+                FirstName = request.StudentForRegisterDto.FirstName,
+                LastName = request.StudentForRegisterDto.LastName,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                Status = true
+            };
+
+            // Kullanıcıyı veritabanına ekleme
             User createdUser = await _userRepository.AddAsync(newUser);
 
-            Student newStudent =
-               new()
-               {
-                   UserId = createdUser.Id
-               };
+            // Yeni öğrenci nesnesi oluşturma
+            Student newStudent = new Student
+            {
+                UserId = createdUser.Id
+            };
 
-          
-            var createdStudent = await _studentsService.AddAsync(newStudent);
+            // Öğrenciyi veritabanına ekleme
+            await _studentsService.AddAsync(newStudent);
 
+            // Kullanıcı için AccessToken oluşturma
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
-            Core.Security.Entities.RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
-            Core.Security.Entities.RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
+            // Kullanıcı için RefreshToken oluşturma
+            var createdRefreshToken = await _authService.CreateRefreshToken(createdUser, request.IpAddress);
+            var addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
 
-            StudentRegisteredResponse studentRegisteredResponse = new() { AccessToken = createdAccessToken, RefreshToken = addedRefreshToken };
+            // Student yetkisini bulma
+            OperationClaim studentClaim = await _operationClaimRepository.GetAsync(c => c.Name == "Student");
+
+            // Eğer Student yetkisi bulunamazsa bir hata fırlat
+            if (studentClaim == null)
+            {
+                throw new Exception("Student yetkisi bulunamadı.");
+            }
+
+            // UserOperationClaim nesnesini oluştur ve veritabanına kaydet
+            UserOperationClaim userOperationClaim = new UserOperationClaim(createdUser.Id, studentClaim.Id);
+            await _userOperationClaimRepository.AddAsync(userOperationClaim);
+
+
+            // Yanıt nesnesini oluşturma ve dönme
+            StudentRegisteredResponse studentRegisteredResponse = new StudentRegisteredResponse
+            {
+                AccessToken = createdAccessToken,
+                RefreshToken = addedRefreshToken
+            };
+
             return studentRegisteredResponse;
         }
 
