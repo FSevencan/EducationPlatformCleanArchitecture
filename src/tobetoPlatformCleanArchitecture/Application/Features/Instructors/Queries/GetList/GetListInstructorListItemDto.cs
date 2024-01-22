@@ -20,6 +20,5 @@ public class GetListInstructorListItemDto : IDto
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
     public string? TwitterUrl { get; set; }
-    public ICollection<GetListInstructorsSectionListDto> Sections { get; set; }
 
 }
