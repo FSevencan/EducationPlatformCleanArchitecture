@@ -33,7 +33,7 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISe
         {
             Instructor? instructor = await _instructorRepository.GetAsync(
                 predicate: i => i.Id == request.Id,
-                include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section)
+                include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section).ThenInclude(x=> x.Category)
                .Include(user => user.User),
                 cancellationToken: cancellationToken);
 

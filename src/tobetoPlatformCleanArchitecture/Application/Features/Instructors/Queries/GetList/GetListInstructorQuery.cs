@@ -38,7 +38,7 @@ public class GetListInstructorQuery : IRequest<GetListResponse<GetListInstructor
         public async Task<GetListResponse<GetListInstructorListItemDto>> Handle(GetListInstructorQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Instructor> instructors = await _instructorRepository.GetListAsync(
-               include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section)
+               include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section).ThenInclude(x=> x.Category)
                .Include(user=> user.User),
                index: request.PageRequest.PageIndex,
                size: request.PageRequest.PageSize,
