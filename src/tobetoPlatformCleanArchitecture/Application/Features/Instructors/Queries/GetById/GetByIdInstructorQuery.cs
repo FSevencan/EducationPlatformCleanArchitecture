@@ -12,7 +12,7 @@ namespace Application.Features.Instructors.Queries.GetById;
 
 public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISecuredRequest*/
 {
-    public int Id { get; set; }
+    public int UserId { get; set; }
 
     public string[] Roles => new[] { Admin, Read };
 
@@ -32,7 +32,7 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISe
         public async Task<GetByIdInstructorResponse> Handle(GetByIdInstructorQuery request, CancellationToken cancellationToken)
         {
             Instructor? instructor = await _instructorRepository.GetAsync(
-                predicate: i => i.Id == request.Id,
+                predicate: s => s.User.Id == request.UserId,
                 include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section).ThenInclude(x=> x.Category)
                .Include(user => user.User),
                 cancellationToken: cancellationToken);
