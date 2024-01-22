@@ -37,10 +37,11 @@ public class InstructorsController : BaseController
         return Ok(response);
     }
 
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetById([FromRoute] int id)
+
+    [HttpGet("by-instructor/{userId}")]
+    public async Task<IActionResult> GetById([FromRoute] int userId)
     {
-        GetByIdInstructorResponse response = await Mediator.Send(new GetByIdInstructorQuery { UserId = id });
+        GetByIdInstructorResponse response = await Mediator.Send(new GetByIdInstructorQuery { UserId = userId });
         return Ok(response);
     }
 
