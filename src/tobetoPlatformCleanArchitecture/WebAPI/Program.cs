@@ -1,4 +1,5 @@
 using Application;
+using Application.Services.Middleware;
 using Core.CrossCuttingConcerns.Exceptions.Extensions;
 using Core.Security;
 using Core.Security.Encryption;
@@ -74,22 +75,24 @@ builder.Services.AddSwaggerGen(opt =>
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI(opt =>
-    {
-        opt.DocExpansion(DocExpansion.None);
-    });
+app.UseSwaggerUI(opt =>
+{
+    opt.DocExpansion(DocExpansion.None);
+});
 }
-
-
 
 app.UseHttpsRedirection();
 
+
+
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseMiddleware<RateLimitingMiddleware>();
 
 app.MapControllers();
 
@@ -100,4 +103,3 @@ app.UseCors(policy =>
     .AllowCredentials());
 
 app.Run();
-

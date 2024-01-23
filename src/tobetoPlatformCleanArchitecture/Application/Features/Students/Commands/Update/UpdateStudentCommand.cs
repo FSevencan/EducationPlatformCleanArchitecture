@@ -17,9 +17,9 @@ using Core.Security.Hashing;
 
 namespace Application.Features.Students.Commands.Update;
 
-public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public UpdateStudentDto UpdateStudentDto { get; set; }
+    public UpdateStudentDto? UpdateStudentDto { get; set; }
 
 
     public string[] Roles => new[] { Admin, Write, StudentsOperationClaims.Update };

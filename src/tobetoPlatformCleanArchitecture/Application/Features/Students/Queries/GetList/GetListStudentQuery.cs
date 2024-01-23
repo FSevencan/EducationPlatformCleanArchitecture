@@ -13,7 +13,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Students.Queries.GetList;
 
-public class GetListStudentQuery : IRequest<GetListResponse<GetListStudentListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListStudentQuery : IRequest<GetListResponse<GetListStudentListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 

@@ -39,6 +39,7 @@ using Application.Services.ClassRoomTypeSections;
 using Application.Services.StudentSkills;
 using Application.Services.StudentSurveys;
 using Application.Services.Surveys;
+using Application.Services.Middleware;
 
 
 namespace Application;
@@ -69,7 +70,6 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IAuthService, AuthManager>();
         services.AddScoped<IAuthenticatorService, AuthenticatorManager>();
         services.AddScoped<IUserService, UserManager>();
-
         services.AddScoped<IAnnouncementsService, AnnouncementsManager>();
         services.AddScoped<IApplicationEducationsService, ApplicationEducationsManager>();
         services.AddScoped<ICategoriesService, CategoriesManager>();
@@ -88,14 +88,14 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISkillsService, SkillsManager>();
         services.AddScoped<IStudentsService, StudentsManager>();
         services.AddScoped<IStudentClassRoomsService, StudentClassRoomsManager>();
-      
+        services.AddSingleton<RateLimitingService>();
         services.AddScoped<IStudentSkillsService, StudentSkillsManager>();
         services.AddScoped<IStudentSurveysService, StudentSurveysManager>();
         services.AddScoped<ISurveysService, SurveysManager>();
-      services.AddScoped<IClassRoomsService, ClassRoomsManager>();
-      services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
-      services.AddScoped<IClassRoomTypeSectionsService, ClassRoomTypeSectionsManager>();
-      services.AddScoped<ICategoriesService, CategoriesManager>();
+        services.AddScoped<IClassRoomsService, ClassRoomsManager>();
+        services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
+        services.AddScoped<IClassRoomTypeSectionsService, ClassRoomTypeSectionsManager>();
+        services.AddScoped<ICategoriesService, CategoriesManager>();
         return services;
     }
 

@@ -43,8 +43,9 @@ public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredR
                                    .ThenInclude(sc => sc.ClassRoom)
                                        .ThenInclude(c => c.ClassRoomType)
                                            .ThenInclude(ct => ct.ClassRoomTypeSection)
-                                               .ThenInclude(cts => cts.Section),
-
+                                               .ThenInclude(cts => cts.Section)
+                                               .ThenInclude(cts=> cts.Category),
+                                                
                 cancellationToken: cancellationToken);
 
             await _studentBusinessRules.StudentShouldExistWhenSelected(student);
