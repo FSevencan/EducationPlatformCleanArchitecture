@@ -29,19 +29,17 @@ public class InstructorsController : BaseController
         return Ok(response);
     }
 
-    [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete([FromRoute] int id)
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetInstructorById([FromRoute] int id)
     {
-        DeletedInstructorResponse response = await Mediator.Send(new DeleteInstructorCommand { Id = id });
-
+        GetByIdInstructorResponse response = await Mediator.Send(new GetInstructorByIdQuery { Id = id });
         return Ok(response);
     }
 
-
     [HttpGet("by-instructor/{userId}")]
-    public async Task<IActionResult> GetById([FromRoute] int userId)
+    public async Task<IActionResult> GetInstructorByUserId([FromRoute] int userId)
     {
-        GetByIdInstructorResponse response = await Mediator.Send(new GetByIdInstructorQuery { UserId = userId });
+        GetByIdInstructorResponse response = await Mediator.Send(new GetByInstructorUserIdQuery { UserId = userId });
         return Ok(response);
     }
 

@@ -1,4 +1,4 @@
-using Application.Features.Instructors.Constants;
+﻿using Application.Features.Instructors.Constants;
 using Application.Features.Instructors.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -10,13 +10,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Instructors.Queries.GetById;
 
-public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISecuredRequest*/
+public class GetInstructorByIdQuery : IRequest<GetByIdInstructorResponse>/*, ISecuredRequest*/
 {
-    public int UserId { get; set; }
+    public int Id { get; set; }
 
     public string[] Roles => new[] { Admin, Read };
 
-    public class GetByIdInstructorQueryHandler : IRequestHandler<GetByIdInstructorQuery, GetByIdInstructorResponse>
+    public class GetByIdInstructorQueryHandler : IRequestHandler<GetInstructorByIdQuery, GetByIdInstructorResponse>
     {
         private readonly IMapper _mapper;
         private readonly IInstructorRepository _instructorRepository;
@@ -29,11 +29,12 @@ public class GetByIdInstructorQuery : IRequest<GetByIdInstructorResponse>/*, ISe
             _instructorBusinessRules = instructorBusinessRules;
         }
 
-        public async Task<GetByIdInstructorResponse> Handle(GetByIdInstructorQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdInstructorResponse> Handle(GetInstructorByIdQuery request, CancellationToken cancellationToken)
         {
             Instructor? instructor = await _instructorRepository.GetAsync(
-                predicate: s => s.User.Id == request.UserId,
-                include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section).ThenInclude(x=> x.Category)
+
+               predicate: s => s.Id == request.Id,
+                include: i => i.Include(section => section.SectionInstructors).ThenInclude(x => x.Section).ThenInclude(x => x.Category)
                .Include(user => user.User),
                 cancellationToken: cancellationToken);
 
