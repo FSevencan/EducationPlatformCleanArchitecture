@@ -35,11 +35,14 @@ using Application.Services.Students;
 using Application.Services.StudentClassRooms;
 using Application.Services.ClassRoomTypes;
 using Application.Services.ClassRoomTypeSections;
+using Application.Services.MentorshipSessions;
+using Application.Services.CampusEncounters;
 
 using Application.Services.StudentSkills;
 using Application.Services.StudentSurveys;
 using Application.Services.Surveys;
-using Application.Services.Middleware;
+
+
 
 
 namespace Application;
@@ -88,7 +91,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<ISkillsService, SkillsManager>();
         services.AddScoped<IStudentsService, StudentsManager>();
         services.AddScoped<IStudentClassRoomsService, StudentClassRoomsManager>();
-        services.AddSingleton<RateLimitingService>();
+     
         services.AddScoped<IStudentSkillsService, StudentSkillsManager>();
         services.AddScoped<IStudentSurveysService, StudentSurveysManager>();
         services.AddScoped<ISurveysService, SurveysManager>();
@@ -96,6 +99,8 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
         services.AddScoped<IClassRoomTypeSectionsService, ClassRoomTypeSectionsManager>();
         services.AddScoped<ICategoriesService, CategoriesManager>();
+     services.AddScoped<IMentorshipSessionsService, MentorshipSessionsManager>();
+     services.AddScoped<ICampusEncountersService, CampusEncountersManager>();
         return services;
     }
 

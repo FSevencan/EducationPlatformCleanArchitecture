@@ -38,6 +38,9 @@ public class BaseDbContext : DbContext
     public DbSet<ClassRoom> ClassRooms { get; set; }
     public DbSet<ClassRoomTypeSection> ClassRoomTypeSections { get; set; }
     public DbSet<ClassRoomType> ClassRoomTypes { get; set; }
+    public DbSet<MentorshipSession> MentorshipSessions { get; set; }
+    public DbSet<CampusEncounter> CampusEncounters { get; set; }
+
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

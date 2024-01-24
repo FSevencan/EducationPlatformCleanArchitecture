@@ -226,6 +226,22 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "ClassRoomTypeSections.Delete" });
         #endregion
+        #region MentorshipSessions
+        seeds.Add(new OperationClaim { Id = ++id, Name = "MentorshipSessions.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "MentorshipSessions.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "MentorshipSessions.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "MentorshipSessions.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "MentorshipSessions.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "MentorshipSessions.Delete" });
+        #endregion
+        #region CampusEncounters
+        seeds.Add(new OperationClaim { Id = ++id, Name = "CampusEncounters.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "CampusEncounters.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "CampusEncounters.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "CampusEncounters.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "CampusEncounters.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "CampusEncounters.Delete" });
+        #endregion
         return seeds;
     }
 }

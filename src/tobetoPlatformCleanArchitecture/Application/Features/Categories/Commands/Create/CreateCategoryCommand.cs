@@ -9,7 +9,7 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Categories.Constants.CategoriesOperationClaims;
-using Application.Services.Middleware;
+
 
 namespace Application.Features.Categories.Commands.Create;
 
