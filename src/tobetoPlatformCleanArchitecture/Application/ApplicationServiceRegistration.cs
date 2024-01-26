@@ -39,7 +39,7 @@ using Application.Services.MentorshipSessions;
 using Application.Services.CampusEncounters;
 
 using Application.Services.StudentSkills;
-using Application.Services.StudentSurveys;
+
 using Application.Services.Surveys;
 
 
@@ -93,7 +93,7 @@ public static class ApplicationServiceRegistration
         services.AddScoped<IStudentClassRoomsService, StudentClassRoomsManager>();
      
         services.AddScoped<IStudentSkillsService, StudentSkillsManager>();
-        services.AddScoped<IStudentSurveysService, StudentSurveysManager>();
+  
         services.AddScoped<ISurveysService, SurveysManager>();
         services.AddScoped<IClassRoomsService, ClassRoomsManager>();
         services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();

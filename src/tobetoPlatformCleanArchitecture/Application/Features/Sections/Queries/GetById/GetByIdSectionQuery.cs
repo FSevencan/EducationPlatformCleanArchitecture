@@ -6,10 +6,11 @@ using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
 using MediatR;
 using static Application.Features.Sections.Constants.SectionsOperationClaims;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Sections.Queries.GetById;
 
-public class GetByIdSectionQuery : IRequest<GetByIdSectionResponse>, ISecuredRequest
+public class GetByIdSectionQuery : IRequest<GetByIdSectionResponse>
 {
     public Guid Id { get; set; }
 
@@ -30,7 +31,10 @@ public class GetByIdSectionQuery : IRequest<GetByIdSectionResponse>, ISecuredReq
 
         public async Task<GetByIdSectionResponse> Handle(GetByIdSectionQuery request, CancellationToken cancellationToken)
         {
-            Section? section = await _sectionRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);
+            Section? section = await _sectionRepository.GetAsync(predicate: s => s.Id == request.Id,
+                include: sc=> sc.Include(sc=> sc.Category).Include(sc=> sc.SectionAbout).Include(sc=> sc.SectionCourses).ThenInclude(c=> c.Course).ThenInclude(l=> l.Lessons),
+                cancellationToken: cancellationToken);
+
             await _sectionBusinessRules.SectionShouldExistWhenSelected(section);
 
             GetByIdSectionResponse response = _mapper.Map<GetByIdSectionResponse>(section);

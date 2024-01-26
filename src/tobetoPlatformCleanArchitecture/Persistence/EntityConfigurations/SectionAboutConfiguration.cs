@@ -14,8 +14,6 @@ public class SectionAboutConfiguration : IEntityTypeConfiguration<SectionAbout>
         builder.Property(sa => sa.ProducerCompanyId).HasColumnName("ProducerCompanyId");
         builder.Property(sa => sa.SectionId).HasColumnName("SectionId");
         builder.Property(sa => sa.Text).HasColumnName("Text");
-        builder.Property(sa => sa.StartDate).HasColumnName("StartDate");
-        builder.Property(sa => sa.EndDate).HasColumnName("EndDate");
         builder.Property(sa => sa.EstimatedDuration).HasColumnName("EstimatedDuration");
         builder.Property(sa => sa.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(sa => sa.UpdatedDate).HasColumnName("UpdatedDate");

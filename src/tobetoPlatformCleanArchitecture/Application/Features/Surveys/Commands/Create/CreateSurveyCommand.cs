@@ -46,13 +46,6 @@ public class CreateSurveyCommand : IRequest<CreatedSurveyResponse>, ISecuredRequ
         {
             Survey survey = _mapper.Map<Survey>(request);
 
-            survey.StudentSurveys = request.StudentIds.Select(studentIds => new StudentSurvey
-            {
-                StudentId = studentIds,
-                CreatedDate = DateTime.Now,
-            }).ToList(); // tartýþýlýr ama olmasý gerekebilir  classromtype göre yapsak daha iyi olur örneðin .Net 1A gibi
-
-
             await _surveyRepository.AddAsync(survey);
 
             CreatedSurveyResponse response = _mapper.Map<CreatedSurveyResponse>(survey);

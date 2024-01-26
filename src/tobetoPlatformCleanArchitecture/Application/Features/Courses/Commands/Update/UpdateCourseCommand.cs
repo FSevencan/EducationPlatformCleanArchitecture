@@ -17,7 +17,7 @@ public class UpdateCourseCommand : IRequest<UpdatedCourseResponse>, ISecuredRequ
     public Guid Id { get; set; }
     public double TotalTime { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
+
 
     public ICollection<Guid> SectionIds { get; set; }
     public string[] Roles => new[] { Admin, Write, CoursesOperationClaims.Update };

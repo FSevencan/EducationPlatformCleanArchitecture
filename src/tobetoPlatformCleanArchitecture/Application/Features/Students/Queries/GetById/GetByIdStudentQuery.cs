@@ -34,8 +34,6 @@ public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredR
             Student? student = await _studentRepository.GetAsync(
                predicate: s => s.User.Id == request.UserId,
                include: s => s.Include(st => st.User)
-                               .Include(st => st.StudentSurveys)
-                                    .ThenInclude(st => st.Survey)
                                .Include(st => st.StudentSkills)
                                     .ThenInclude(st => st.Skill)
                                .Include(st => st.Certificates)

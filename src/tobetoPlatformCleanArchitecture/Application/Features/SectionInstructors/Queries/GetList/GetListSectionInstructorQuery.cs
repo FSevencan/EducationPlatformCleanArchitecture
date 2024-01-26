@@ -47,7 +47,9 @@ public class GetListSectionInstructorQuery : IRequest<GetListResponse<GetListSec
         public async Task<GetListResponse<GetListSectionInstructorListItemDto>> Handle(GetListSectionInstructorQuery request, CancellationToken cancellationToken)
         {
 
-            
+            int? userId = _httpContextAccessor.HttpContext?.User.GetUserId();
+            Instructor? instructor = await _instructorRepository.GetAsync(u => u.UserId == userId);
+            int? instructorId = instructor.Id;
 
             var sectionInstructors = await _sectionInstructorRepository.GetListAsync(
                 instructor => instructor.InstructorId == instructorId,

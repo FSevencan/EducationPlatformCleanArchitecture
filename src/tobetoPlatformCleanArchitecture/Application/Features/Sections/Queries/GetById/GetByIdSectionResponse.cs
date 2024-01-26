@@ -1,3 +1,6 @@
+using Application.Features.Courses.Queries.GetById;
+using Application.Features.Courses.Queries.GetList;
+using Application.Features.SectionAbouts.Queries.GetList;
 using Core.Application.Responses;
 using Domain.Entities;
 
@@ -10,6 +13,8 @@ public class GetByIdSectionResponse : IResponse
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
-    public SectionAbout SectionAbout { get; set; }
-    public Category? Category { get; set; }
+
+    public GetListSectionAboutListItemDto? SectionAbout { get; set; }
+    public ICollection<GetListCourseDto> Courses { get; set; }
+    public ICollection<GetListCourseDto> Lessons { get; set; }
 }

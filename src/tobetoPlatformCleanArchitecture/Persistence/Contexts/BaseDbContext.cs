@@ -30,7 +30,7 @@ public class BaseDbContext : DbContext
     public DbSet<ProducerCompany> ProducerCompanies { get; set; }
     public DbSet<Survey> Surveys { get; set; }
     public DbSet<StudentClassRoom> StudentClassRooms { get; set; }
-    public DbSet<StudentSurvey> StudentSurveys { get; set; }
+
     public DbSet<Student> Students { get; set; }
     public DbSet<Skill> Skills { get; set; }
     public DbSet<StudentSkill> StudentSkills { get; set; }

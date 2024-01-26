@@ -14,7 +14,6 @@ public class Student : Entity<int>
     public string? LinkedinUrl { get; set; }
 
     public User User { get; set; }
-    public ICollection<StudentSurvey> StudentSurveys { get; set; }
     public ICollection<StudentSkill> StudentSkills { get; set; }
     public ICollection<StudentClassRoom> StudentClassRooms { get; set; }
     public ICollection<Certificate> Certificates { get; set; }

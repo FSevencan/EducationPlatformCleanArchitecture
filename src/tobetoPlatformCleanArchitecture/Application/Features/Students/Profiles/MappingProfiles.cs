@@ -60,7 +60,6 @@ public class MappingProfiles : Profile
        .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
 
-       .ForMember(dest => dest.Surveys, opt => opt.MapFrom(src => src.StudentSurveys))
        .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.StudentSkills))
        .ForMember(dest => dest.Certificates, opt => opt.MapFrom(src => src.Certificates))
    

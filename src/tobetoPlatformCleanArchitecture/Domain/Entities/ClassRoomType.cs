@@ -10,4 +10,5 @@ public class ClassRoomType: Entity<Guid>
 {
     public string Name { get; set; } // Örnek: ".NET Full Stack"
     public ICollection<ClassRoomTypeSection> ClassRoomTypeSection { get; set; } 
+    public ICollection<Exam> Exams { get; set; } 
 }

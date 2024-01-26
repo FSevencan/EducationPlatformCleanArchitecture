@@ -85,7 +85,7 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
 
             AccessToken createdAccessToken = await _authService.CreateAccessToken(createdUser);
 
-            // Student yetkisini bulma
+            // Instructor yetkisini bulma
             OperationClaim instructorClaim = await _operationClaimRepository.GetAsync(c => c.Name == "Instructor");
 
             // Eğer Student yetkisi bulunamazsa bir hata fırlat

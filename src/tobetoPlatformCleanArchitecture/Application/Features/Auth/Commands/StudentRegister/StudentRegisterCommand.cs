@@ -3,12 +3,12 @@ using Application.Features.Auth.Rules;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Application.Services.Students;
-using Core.Application.Dtos;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Core.Security.JWT;
 using Domain.Entities;
 using MediatR;
+
 
 namespace Application.Features.Auth.Commands.StudentRegister;
 public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
@@ -78,7 +78,8 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
             // Yeni öğrenci nesnesi oluşturma
             Student newStudent = new Student
             {
-                UserId = createdUser.Id
+                UserId = createdUser.Id,
+               ImageUrl = "https://i.imgur.com/6pI4RCr.png"
             };
 
             // Öğrenciyi veritabanına ekleme
