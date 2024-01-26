@@ -21,7 +21,7 @@ public class InstructorsController : BaseController
         return Created(uri: "", response);
     }
 
-    [HttpPut]
+    [HttpPut("Update")]
     public async Task<IActionResult> Update([FromBody] UpdateInstructorCommand updateInstructorCommand)
     {
         UpdatedInstructorResponse response = await Mediator.Send(updateInstructorCommand);
