@@ -7,15 +7,9 @@ public class UpdateInstructorCommandValidator : AbstractValidator<UpdateInstruct
     public UpdateInstructorCommandValidator()
     {
         RuleFor(c => c.UpdateInstructorDto.Id).NotEmpty();
-  
         RuleFor(c => c.UpdateInstructorDto.FirstName).NotEmpty();
         RuleFor(c => c.UpdateInstructorDto.LastName).NotEmpty();
-        RuleFor(c => c.UpdateInstructorDto.ImageUrl).NotEmpty();
         RuleFor(c => c.UpdateInstructorDto.Email).NotEmpty();
-        RuleFor(c => c.UpdateInstructorDto.BirthDate).NotEmpty();
-        RuleFor(c => c.UpdateInstructorDto.PhoneNumber).NotEmpty();
-        RuleFor(c => c.UpdateInstructorDto.Biography).NotEmpty();
-        RuleFor(c => c.UpdateInstructorDto.Title).NotEmpty();
        
     }
 }
