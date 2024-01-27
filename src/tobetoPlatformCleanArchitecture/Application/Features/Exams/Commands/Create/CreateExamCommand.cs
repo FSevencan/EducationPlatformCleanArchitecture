@@ -14,6 +14,7 @@ namespace Application.Features.Exams.Commands.Create;
 
 public class CreateExamCommand : IRequest<CreatedExamResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
+    public Guid ClassRoomTypeId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
     public int Duration { get; set; }
@@ -21,6 +22,7 @@ public class CreateExamCommand : IRequest<CreatedExamResponse>, ISecuredRequest,
     public string QuestionType { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, ExamsOperationClaims.Create };
 

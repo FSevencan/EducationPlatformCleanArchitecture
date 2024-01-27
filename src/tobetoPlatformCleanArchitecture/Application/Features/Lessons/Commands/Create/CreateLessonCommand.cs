@@ -14,14 +14,10 @@ namespace Application.Features.Lessons.Commands.Create;
 
 public class CreateLessonCommand : IRequest<CreatedLessonResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public Guid ProducerCompanyId { get; set; }
     public Guid CourseId { get; set; }
-    public Guid LanguageId { get; set; }
     public string Name { get; set; }
     public double Time { get; set; }
-    public string? ImageUrl { get; set; }
-    public string? Description { get; set; }
-   
+  
 
     public string[] Roles => new[] { Admin, Write, LessonsOperationClaims.Create };
 

@@ -8,10 +8,9 @@ public class CreateSectionAboutCommandValidator : AbstractValidator<CreateSectio
     {
         RuleFor(c => c.ProducerCompanyId).NotEmpty();
         RuleFor(c => c.SectionId).NotEmpty();
+        RuleFor(c => c.LanguageId).NotEmpty();
         RuleFor(c => c.Text).NotEmpty();
-        RuleFor(c => c.StartDate).NotEmpty();
-        RuleFor(c => c.EndDate).NotEmpty();
         RuleFor(c => c.EstimatedDuration).NotEmpty();
-       
+     
     }
 }
