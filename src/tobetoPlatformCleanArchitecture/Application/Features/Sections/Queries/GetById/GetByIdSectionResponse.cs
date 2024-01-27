@@ -1,6 +1,9 @@
 using Application.Features.Courses.Queries.GetById;
 using Application.Features.Courses.Queries.GetList;
+using Application.Features.Lessons.Queries.GetList;
 using Application.Features.SectionAbouts.Queries.GetList;
+using Application.Features.Sections.Queries.GetById.Dtos;
+using Core.Application.Dtos;
 using Core.Application.Responses;
 using Domain.Entities;
 
@@ -15,6 +18,6 @@ public class GetByIdSectionResponse : IResponse
     public string Description { get; set; }
 
     public GetListSectionAboutListItemDto? SectionAbout { get; set; }
-    public ICollection<GetListCourseDto> Courses { get; set; }
-    public ICollection<GetListCourseDto> Lessons { get; set; }
+    public ICollection<GetCourseLessonListDto> Courses { get; set; }
+   
 }

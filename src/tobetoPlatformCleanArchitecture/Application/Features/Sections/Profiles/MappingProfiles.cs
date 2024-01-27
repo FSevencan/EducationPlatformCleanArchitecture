@@ -11,6 +11,7 @@ using Application.Features.Categories.Queries.GetList;
 using Application.Features.Instructors.Queries.GetList;
 using Application.Features.Courses.Queries.GetList;
 using Application.Features.Students.Queries.GetById.Dtos;
+using Application.Features.Sections.Queries.GetById.Dtos;
 
 namespace Application.Features.Sections.Profiles;
 
@@ -24,8 +25,8 @@ public class MappingProfiles : Profile
         CreateMap<Section, UpdatedSectionResponse>().ReverseMap();
         CreateMap<Section, DeleteSectionCommand>().ReverseMap();
         CreateMap<Section, DeletedSectionResponse>().ReverseMap();
-        CreateMap<Section, GetByIdSectionResponse>().ReverseMap();
-
+        CreateMap<Section, GetByIdSectionResponse>()
+        .ForMember(dest => dest.Courses, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course)));
 
         CreateMap<Section, GetListCategorySectionsDto>().ReverseMap();
         CreateMap<Section, GetListInstructorsSectionListDto>().ReverseMap();
@@ -38,6 +39,9 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
             .ForMember(dest => dest.SectionAbout, opt => opt.MapFrom(src => src.SectionAbout))
             .ForMember(dest => dest.ProducerCompany, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
+
+
+        
 
         CreateMap<Section, GetStudentSectionListDto>().ReverseMap();
        

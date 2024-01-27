@@ -32,7 +32,8 @@ public class GetByIdSectionQuery : IRequest<GetByIdSectionResponse>
         public async Task<GetByIdSectionResponse> Handle(GetByIdSectionQuery request, CancellationToken cancellationToken)
         {
             Section? section = await _sectionRepository.GetAsync(predicate: s => s.Id == request.Id,
-                include: sc=> sc.Include(sc=> sc.Category).Include(sc=> sc.SectionAbout).Include(sc=> sc.SectionCourses).ThenInclude(c=> c.Course).ThenInclude(l=> l.Lessons),
+                include: sc=> sc.Include(sc=> sc.Category).Include(sc=> sc.SectionAbout)
+                .Include(sc=> sc.SectionCourses).ThenInclude(c=> c.Course).ThenInclude(l=> l.Lessons),
                 cancellationToken: cancellationToken);
 
             await _sectionBusinessRules.SectionShouldExistWhenSelected(section);

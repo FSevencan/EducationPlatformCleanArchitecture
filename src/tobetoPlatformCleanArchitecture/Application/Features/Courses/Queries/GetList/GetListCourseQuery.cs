@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace Application.Features.Courses.Queries.GetList;
 
-public class GetListCourseQuery : IRequest<GetListResponse<GetListCourseListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListCourseQuery : IRequest<GetListResponse<GetListCourseListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 

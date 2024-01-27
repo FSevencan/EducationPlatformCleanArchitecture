@@ -49,8 +49,6 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
                                .Include(sabout => sabout.SectionAbout)
                                .ThenInclude(producer => producer.ProducerCompany),
 
-                
-
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken
