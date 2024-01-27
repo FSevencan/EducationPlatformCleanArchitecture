@@ -8,6 +8,7 @@ public class CreateLessonCommandValidator : AbstractValidator<CreateLessonComman
     {
         RuleFor(c => c.CourseId).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.VideoUrl).NotEmpty();
         RuleFor(c => c.Time).NotEmpty();
      
     }

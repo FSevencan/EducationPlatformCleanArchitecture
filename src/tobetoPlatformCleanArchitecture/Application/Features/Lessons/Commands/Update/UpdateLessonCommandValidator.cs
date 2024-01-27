@@ -9,7 +9,8 @@ public class UpdateLessonCommandValidator : AbstractValidator<UpdateLessonComman
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.CourseId).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.VideoUrl).NotEmpty();
         RuleFor(c => c.Time).NotEmpty();
-      
+    
     }
 }

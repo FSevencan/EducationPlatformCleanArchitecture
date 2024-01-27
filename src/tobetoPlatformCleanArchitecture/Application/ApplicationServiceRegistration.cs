@@ -104,6 +104,7 @@ public static class ApplicationServiceRegistration
   services.AddScoped<ILessonsService, LessonsManager>();
   services.AddScoped<IExamsService, ExamsManager>();
   services.AddScoped<ISectionAboutsService, SectionAboutsManager>();
+  services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
         return services;
     }
 

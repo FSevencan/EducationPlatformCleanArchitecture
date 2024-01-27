@@ -17,8 +17,9 @@ public class UpdateLessonCommand : IRequest<UpdatedLessonResponse>, ISecuredRequ
     public Guid Id { get; set; }
     public Guid CourseId { get; set; }
     public string Name { get; set; }
+    public string VideoUrl { get; set; }
     public double Time { get; set; }
-  
+    
 
     public string[] Roles => new[] { Admin, Write, LessonsOperationClaims.Update };
 

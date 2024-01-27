@@ -15,8 +15,6 @@ namespace Application.Features.ClassRoomTypes.Commands.Create;
 public class CreateClassRoomTypeCommand : IRequest<CreatedClassRoomTypeResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Name { get; set; }
-    public ICollection<Guid> SectionIds { get; set; }
-
 
     public string[] Roles => new[] { Admin, Write, ClassRoomTypesOperationClaims.Create };
 
@@ -41,13 +39,6 @@ public class CreateClassRoomTypeCommand : IRequest<CreatedClassRoomTypeResponse>
         public async Task<CreatedClassRoomTypeResponse> Handle(CreateClassRoomTypeCommand request, CancellationToken cancellationToken)
         {
             ClassRoomType classRoomType = _mapper.Map<ClassRoomType>(request);
-
-            classRoomType.ClassRoomTypeSection = request.SectionIds.Select
-                (sectionId => new ClassRoomTypeSection
-                {
-                    SectionId = sectionId,
-                    CreatedDate = DateTime.Now
-                }).ToList();
 
             await _classRoomTypeRepository.AddAsync(classRoomType);
 

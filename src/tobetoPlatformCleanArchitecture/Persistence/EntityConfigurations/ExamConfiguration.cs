@@ -19,7 +19,6 @@ public class ExamConfiguration : IEntityTypeConfiguration<Exam>
         builder.Property(e => e.QuestionType).HasColumnName("QuestionType");
         builder.Property(e => e.StartDate).HasColumnName("StartDate");
         builder.Property(e => e.EndDate).HasColumnName("EndDate");
-        builder.Property(e => e.ClassRoomType).HasColumnName("ClassRoomType");
         builder.Property(e => e.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(e => e.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(e => e.DeletedDate).HasColumnName("DeletedDate");
