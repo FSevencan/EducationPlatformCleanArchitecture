@@ -15,6 +15,8 @@ namespace Application.Features.Sections.Queries.GetList;
 
 public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListItemDto>>, /*ISecuredRequest*/ ICachableRequest
 {
+    public Guid CategoryId { get; set; } // eklenen
+
     public PageRequest PageRequest { get; set; }
 
     public string[] Roles => new[] { Admin, Read };
@@ -38,21 +40,44 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
 
         public async Task<GetListResponse<GetListSectionListItemDto>> Handle(GetListSectionQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Section> sections = await _sectionRepository.GetListAsync(
-                include: section => section
-                               .Include(category => category.Category)
-                               .Include(section => section.SectionCourses)
-                               .ThenInclude(course => course.Course)
-                               .Include(section => section.SectionInstructors)
-                               .ThenInclude(sectionInstructor => sectionInstructor.Instructor)
-                               .ThenInclude(a=> a.User)
-                               .Include(sabout => sabout.SectionAbout)
-                               .ThenInclude(producer => producer.ProducerCompany),
+            IPaginate<Section> sections;
 
-                index: request.PageRequest.PageIndex,
-                size: request.PageRequest.PageSize,
-                cancellationToken: cancellationToken
-            );
+            if (request.CategoryId != Guid.Empty)
+            {
+                sections = await _sectionRepository.GetListAsync(
+                    include: section => section
+                                    .Include(category => category.Category)
+                                    .Include(section => section.SectionCourses)
+                                    .ThenInclude(course => course.Course)
+                                    .Include(section => section.SectionInstructors)
+                                    .ThenInclude(sectionInstructor => sectionInstructor.Instructor)
+                                    .ThenInclude(a => a.User)
+                                    .Include(sabout => sabout.SectionAbout)
+                                    .ThenInclude(producer => producer.ProducerCompany),
+
+                    predicate: s => s.CategoryId == request.CategoryId,
+                    index: request.PageRequest.PageIndex,
+                    size: request.PageRequest.PageSize,
+                    cancellationToken: cancellationToken
+                );
+            }
+            else
+            {
+                sections = await _sectionRepository.GetListAsync(
+                    include: section => section
+                                    .Include(category => category.Category)
+                                    .Include(section => section.SectionCourses)
+                                    .ThenInclude(course => course.Course)
+                                    .Include(section => section.SectionInstructors)
+                                    .ThenInclude(sectionInstructor => sectionInstructor.Instructor)
+                                    .ThenInclude(a => a.User)
+                                    .Include(sabout => sabout.SectionAbout)
+                                    .ThenInclude(producer => producer.ProducerCompany),
+                    index: request.PageRequest.PageIndex,
+                    size: request.PageRequest.PageSize,
+                    cancellationToken: cancellationToken
+                );
+            }
 
             GetListResponse<GetListSectionListItemDto> response = _mapper.Map<GetListResponse<GetListSectionListItemDto>>(sections);
             return response;
