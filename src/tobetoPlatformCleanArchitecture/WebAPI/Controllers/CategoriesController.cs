@@ -52,7 +52,7 @@ public class CategoriesController : BaseController
         GetListResponse<GetListCategoryListItemDto> response = await Mediator.Send(getListCategoryQuery);
         return Ok(response);
     }
-    // categoriye göre section'lar
+    
     [HttpGet("{categoryId}/sections")]
     public async Task<IActionResult> GetListCategorySections([FromRoute] Guid categoryId, [FromQuery] PageRequest pageRequest)
     {

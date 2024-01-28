@@ -15,15 +15,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Application.Features.Categories.Queries.GetListCategorySections;
-public class GetListCategorySectionsQuery : IRequest<GetListResponse<GetListCategorySectionsListItemDto>>, ICachableRequest
+public class GetListCategorySectionsQuery : IRequest<GetListResponse<GetListCategorySectionsListItemDto>>
 {
     public Guid CategoryId { get; set; }
 
     public PageRequest PageRequest { get; set; }
-
     public bool BypassCache { get; }
-    public string CacheKey => $"GetListCategorySections({PageRequest.PageIndex},{PageRequest.PageSize})";
-    public string CacheGroupKey => "GetCategorySections";
     public TimeSpan? SlidingExpiration { get; }
 
     public class GetListCategorySectionsQueryHandler: IRequestHandler<GetListCategorySectionsQuery, GetListResponse<GetListCategorySectionsListItemDto>>
