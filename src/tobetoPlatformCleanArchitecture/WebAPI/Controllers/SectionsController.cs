@@ -51,4 +51,12 @@ public class SectionsController : BaseController
         GetListResponse<GetListSectionListItemDto> response = await Mediator.Send(getListSectionQuery);
         return Ok(response);
     }
+
+    [HttpGet("by-category/{categoryId}")] // eklendi
+    public async Task<IActionResult> GetListByCategory([FromRoute] Guid categoryId, [FromQuery] PageRequest pageRequest)
+    {
+        GetListSectionQuery getListSectionQuery = new() { PageRequest = pageRequest, CategoryId = categoryId };
+        GetListResponse<GetListSectionListItemDto> response = await Mediator.Send(getListSectionQuery);
+        return Ok(response);
+    }
 }
