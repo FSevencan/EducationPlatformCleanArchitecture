@@ -42,6 +42,7 @@ public class GetListSectionQuery : IRequest<GetListResponse<GetListSectionListIt
         {
             IPaginate<Section> sections;
 
+
             if (request.CategoryId != Guid.Empty)
             {
                 sections = await _sectionRepository.GetListAsync(
