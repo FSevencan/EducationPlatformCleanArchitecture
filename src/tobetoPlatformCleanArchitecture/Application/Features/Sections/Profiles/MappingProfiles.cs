@@ -40,8 +40,14 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.SectionAbout, opt => opt.MapFrom(src => src.SectionAbout))
             .ForMember(dest => dest.ProducerCompany, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
 
+        CreateMap<Section, GetByIdSectionResponse>()
+            .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))
+            .ForMember(dest => dest.Courses, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course).ToList()))
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.SectionAbout, opt => opt.MapFrom(src => src.SectionAbout))
+            .ForMember(dest => dest.LanguageName, opt => opt.MapFrom(src => src.SectionAbout.Language.Name))
+            .ForMember(dest => dest.ProducerCompanyName, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
 
-        
 
         CreateMap<Section, GetStudentSectionListDto>().ReverseMap();
        
