@@ -17,8 +17,6 @@ public class GetListSectionListItemDto : IDto
     public string Description { get; set; }
     public string ProducerCompany { get; set; }
 
-    public GetListSectionAboutListItemDto SectionAbout { get; set; }
-    public ICollection<GetListCourseDto> Courses { get; set; }
     public ICollection<GetListInstructorDto> Instructors { get; set; }
 
 }

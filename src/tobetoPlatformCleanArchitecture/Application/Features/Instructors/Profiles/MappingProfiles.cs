@@ -30,6 +30,8 @@ public class MappingProfiles : Profile
 
         CreateMap<IPaginate<Instructor>, GetListResponse<GetListInstructorListItemDto>>().ReverseMap();
 
+        CreateMap<IPaginate<Instructor>, GetListResponse<GetListInstructorDto>>().ReverseMap();
+
 
         CreateMap<UpdateInstructorDto, Instructor>()
        .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
@@ -58,23 +60,23 @@ public class MappingProfiles : Profile
        .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
        .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email));
-    
-       
+
+
 
         CreateMap<Instructor, GetListInstructorDto>()
        .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
-        
+
         //GetById
-         CreateMap<Instructor, GetByIdInstructorResponse>()
-        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-        .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
-        .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
-        .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
-        .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
-        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
-        .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
-        .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
-        .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
-        .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
-    } 
+        CreateMap<Instructor, GetByIdInstructorResponse>()
+       .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+       .ForMember(dest => dest.UserId, opt => opt.MapFrom(src => src.UserId))
+       .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
+       .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
+       .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.ImageUrl))
+       .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
+       .ForMember(dest => dest.BirthDate, opt => opt.MapFrom(src => src.BirthDate))
+       .ForMember(dest => dest.PhoneNumber, opt => opt.MapFrom(src => src.PhoneNumber))
+       .ForMember(dest => dest.Title, opt => opt.MapFrom(src => src.Title))
+       .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
+    }
 }
