@@ -17,9 +17,9 @@ public class CreateSurveyCommand : IRequest<CreatedSurveyResponse>, ISecuredRequ
     public string Name { get; set; }
     public string Description { get; set; }
     public DateTime StartDate { get; set; }
-    public DateTime FinishDate { get; set; }
+    public DateTime EndDate { get; set; }
+    public string? FormUrl { get; set; }
 
-    public ICollection<int>? StudentIds { get; set; }
 
 
     public string[] Roles => new[] { Admin, Write, SurveysOperationClaims.Create };

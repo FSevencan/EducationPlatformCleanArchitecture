@@ -12,7 +12,7 @@ using static Application.Features.Surveys.Constants.SurveysOperationClaims;
 
 namespace Application.Features.Surveys.Queries.GetList;
 
-public class GetListSurveyQuery : IRequest<GetListResponse<GetListSurveyListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListSurveyQuery : IRequest<GetListResponse<GetListSurveyListItemDto>>, /*ISecuredRequest,*/ ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
