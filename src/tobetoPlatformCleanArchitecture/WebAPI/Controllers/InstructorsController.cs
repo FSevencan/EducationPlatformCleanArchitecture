@@ -3,6 +3,7 @@ using Application.Features.Instructors.Commands.Delete;
 using Application.Features.Instructors.Commands.Update;
 using Application.Features.Instructors.Queries.GetById;
 using Application.Features.Instructors.Queries.GetList;
+using Application.Features.Students.Queries.GetById;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +43,14 @@ public class InstructorsController : BaseController
         GetByIdInstructorResponse response = await Mediator.Send(new GetByInstructorUserIdQuery { UserId = userId });
         return Ok(response);
     }
+    [HttpGet("instructorlock/{userId}")]
+    public async Task<IActionResult> GetBySectionIdForUserId([FromRoute] int userId)
+    {
+
+        GetByIdInstructorLockResponse response = await Mediator.Send(new GetByInstructorLockUserIdQuery { UserId = userId });
+        return Ok(response);
+    }
+    
 
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)

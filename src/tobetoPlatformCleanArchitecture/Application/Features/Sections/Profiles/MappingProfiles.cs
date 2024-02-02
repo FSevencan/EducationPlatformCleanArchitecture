@@ -42,13 +42,16 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))
             .ForMember(dest => dest.Courses, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course).ToList()))
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.CategoryId, opt => opt.MapFrom(src => src.Category.Id))
             .ForMember(dest => dest.SectionAbout, opt => opt.MapFrom(src => src.SectionAbout))
             .ForMember(dest => dest.LanguageName, opt => opt.MapFrom(src => src.SectionAbout.Language.Name))
-            .ForMember(dest => dest.ProducerCompanyName, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
+            .ForMember(dest => dest.ProducerCompanyName, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name))
+            .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate));
 
 
 
 
         CreateMap<Section, GetStudentSectionListDto>().ReverseMap();
+        CreateMap<Section, GetLockDto>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
     }
 }

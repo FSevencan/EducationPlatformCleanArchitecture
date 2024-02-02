@@ -43,6 +43,12 @@ public class StudentsController : BaseController
         GetByIdStudentResponse response = await Mediator.Send(new GetByIdStudentQuery { UserId = userId });
         return Ok(response);
     }
+    [HttpGet("studentlock/{userId}")]
+    public async Task<IActionResult> GetBySectionIdForUserId([FromRoute] int userId)
+    {
+        GetByUserIdStudentLockResponse response = await Mediator.Send(new GetByUserIdStudentLockQuery { UserId = userId });
+        return Ok(response);
+    }
 
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)

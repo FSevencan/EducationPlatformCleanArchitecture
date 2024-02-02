@@ -8,6 +8,7 @@ using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
+using Application.Features.Students.Queries.GetById.Dtos;
 
 namespace Application.Features.Students.Profiles;
 
@@ -62,7 +63,7 @@ public class MappingProfiles : Profile
 
        .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.StudentSkills))
        .ForMember(dest => dest.Certificates, opt => opt.MapFrom(src => src.Certificates))
-   
+
 
        .ForMember(dest => dest.ClassRoomNames, opt => opt.MapFrom(src => src.StudentClassRooms
                                                                        .Select(sc => sc.ClassRoom.Name)))
@@ -73,6 +74,19 @@ public class MappingProfiles : Profile
                                                                 .ClassRoomTypeSection
                                                                 .Select(cts => cts.Section))))
        .ReverseMap();
+
+
+
+        CreateMap<Student, GetByUserIdStudentLockResponse>()
+            .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.StudentClassRooms
+                                                                .SelectMany(sc => sc.ClassRoom
+                                                                .ClassRoomType
+                                                                .ClassRoomTypeSection
+                                                                .Select(cts => cts.Section))))
+       .ReverseMap();
+
+        CreateMap<Section, GetLockDto>()
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
 
 
 
