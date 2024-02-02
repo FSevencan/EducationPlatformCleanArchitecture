@@ -7,8 +7,6 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
-using Application.Features.Students.Queries.GetById;
-using Application.Features.Students.Queries.GetById.Dtos;
 
 namespace Application.Features.Surveys.Profiles;
 
@@ -24,7 +22,6 @@ public class MappingProfiles : Profile
         CreateMap<Survey, DeletedSurveyResponse>().ReverseMap();
         CreateMap<Survey, GetByIdSurveyResponse>().ReverseMap();
         CreateMap<Survey, GetListSurveyListItemDto>().ReverseMap();
-       
         CreateMap<IPaginate<Survey>, GetListResponse<GetListSurveyListItemDto>>().ReverseMap();
     }
 }

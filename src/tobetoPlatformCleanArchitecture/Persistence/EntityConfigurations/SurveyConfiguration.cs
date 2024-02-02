@@ -15,7 +15,7 @@ public class SurveyConfiguration : IEntityTypeConfiguration<Survey>
         builder.Property(s => s.Description).HasColumnName("Description");
         builder.Property(s => s.StartDate).HasColumnName("StartDate");
         builder.Property(s => s.EndDate).HasColumnName("EndDate");
-        builder.Property(s => s.EndDate).HasColumnName("FormUrl");
+        builder.Property(s => s.FormUrl).HasColumnName("FormUrl");
         builder.Property(s => s.CreatedDate).HasColumnName("CreatedDate").IsRequired();
         builder.Property(s => s.UpdatedDate).HasColumnName("UpdatedDate");
         builder.Property(s => s.DeletedDate).HasColumnName("DeletedDate");

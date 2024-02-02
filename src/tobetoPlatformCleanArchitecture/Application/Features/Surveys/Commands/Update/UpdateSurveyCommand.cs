@@ -21,7 +21,6 @@ public class UpdateSurveyCommand : IRequest<UpdatedSurveyResponse>, ISecuredRequ
     public DateTime EndDate { get; set; }
     public string FormUrl { get; set; }
 
-
     public string[] Roles => new[] { Admin, Write, SurveysOperationClaims.Update };
 
     public bool BypassCache { get; }
