@@ -1,3 +1,4 @@
+using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Users.Commands.Create;
 using Application.Features.Users.Commands.Delete;
 using Application.Features.Users.Commands.Update;
@@ -26,5 +27,13 @@ public class MappingProfiles : Profile
         CreateMap<User, GetByIdUserResponse>().ReverseMap();
         CreateMap<User, GetListUserListItemDto>().ReverseMap();
         CreateMap<IPaginate<User>, GetListResponse<GetListUserListItemDto>>().ReverseMap();
+
+
+        CreateMap<User, UpdateStudentAuthResponse>()
+           .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+           .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+           .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+           .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
+          
     }
 }

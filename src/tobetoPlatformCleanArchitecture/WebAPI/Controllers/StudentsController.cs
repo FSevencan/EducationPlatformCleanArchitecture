@@ -1,6 +1,7 @@
 using Application.Features.Students.Commands.Create;
 using Application.Features.Students.Commands.Delete;
 using Application.Features.Students.Commands.Update;
+using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Students.Queries.GetById;
 using Application.Features.Students.Queries.GetList;
 using Core.Application.Requests;
@@ -21,7 +22,7 @@ public class StudentsController : BaseController
         return Created(uri: "", response);
     }
 
-    [HttpPut ("Update")]
+    [HttpPut("Update")]
     public async Task<IActionResult> Update([FromBody] UpdateStudentCommand updateStudentCommand)
     {
         UpdatedStudentResponse response = await Mediator.Send(updateStudentCommand);
@@ -57,4 +58,13 @@ public class StudentsController : BaseController
         GetListResponse<GetListStudentListItemDto> response = await Mediator.Send(getListStudentQuery);
         return Ok(response);
     }
+
+    [HttpPost("update-password")]
+    public async Task<IActionResult> UpdatePassword([FromBody] UpdateStudentAuthDto updateStudentAuthDto)
+    {
+        var updateStudentAuthCommand = new UpdateStudentAuthCommand { UpdateStudentAuthDto = updateStudentAuthDto };
+        var response = await Mediator.Send(updateStudentAuthCommand);
+        return Ok(response);
+    }
+
 }

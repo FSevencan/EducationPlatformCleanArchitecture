@@ -7,6 +7,5 @@ public class Lesson : Entity<Guid>
     public string Name { get; set; }
     public string VideoUrl { get; set; }
     public double Time { get; set; }
-    public Course Course { get; set; } 
-   
+    public Course Course { get; set; }  
 }
