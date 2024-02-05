@@ -78,7 +78,8 @@ public class InstructorRegisterCommand : IRequest<InstructorRegisteredResponse>
             Instructor newInstructor =
                new()
                {
-                   UserId = createdUser.Id
+                   UserId = createdUser.Id,
+                   ImageUrl = "https://i.imgur.com/6pI4RCr.png"
                };
 
             var createdInstructor = await _instructorsService.AddAsync(newInstructor);
