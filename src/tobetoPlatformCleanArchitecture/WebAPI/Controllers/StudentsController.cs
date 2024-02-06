@@ -3,6 +3,7 @@ using Application.Features.Students.Commands.Delete;
 using Application.Features.Students.Commands.Update;
 using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Students.Queries.GetById;
+using Application.Features.Students.Queries.GetBySection;
 using Application.Features.Students.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
@@ -42,6 +43,12 @@ public class StudentsController : BaseController
     public async Task<IActionResult> GetById([FromRoute] int userId)
     {
         GetByIdStudentResponse response = await Mediator.Send(new GetByIdStudentQuery { UserId = userId });
+        return Ok(response);
+    }
+    [HttpGet("studentsections/{userId}")]
+    public async Task<IActionResult> GetBySection([FromRoute] int userId)
+    {
+        GetBySectionStudentResponse response = await Mediator.Send(new GetBySectionStudentQuery { UserId = userId });
         return Ok(response);
     }
     [HttpGet("studentlock/{userId}")]

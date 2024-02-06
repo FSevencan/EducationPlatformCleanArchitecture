@@ -9,6 +9,7 @@ using Domain.Entities;
 using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Application.Features.Students.Queries.GetById.Dtos;
+using Application.Features.Students.Queries.GetBySection;
 
 namespace Application.Features.Students.Profiles;
 
@@ -75,7 +76,20 @@ public class MappingProfiles : Profile
                                                                 .Select(cts => cts.Section))))
        .ReverseMap();
 
+        CreateMap<Section, SectionStudentDto>()
+       .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+       .ForMember(dest => dest.Instructor, opt => opt.MapFrom(src => src.SectionInstructors.Select(s => s.Instructor)))
+       .ReverseMap();
+        CreateMap<Instructor, SectionInstructorDto>()
+            .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
 
+        CreateMap<Student, GetBySectionStudentResponse>()
+            .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.StudentClassRooms
+                                                                .SelectMany(sc => sc.ClassRoom
+                                                                .ClassRoomType
+                                                                .ClassRoomTypeSection
+                                                                .Select(cts => cts.Section))))
+            .ReverseMap();
 
         CreateMap<Student, GetByUserIdStudentLockResponse>()
             .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.StudentClassRooms

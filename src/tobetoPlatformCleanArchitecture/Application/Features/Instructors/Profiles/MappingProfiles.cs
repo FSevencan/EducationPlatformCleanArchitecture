@@ -61,7 +61,7 @@ public class MappingProfiles : Profile
        .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
        .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.User.LastName))
        .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.User.Email))
-       .ForMember(dest => dest.SectionCount, opt=> opt.MapFrom(src=>src.SectionInstructors.Select(s=>s.Section).Count()));
+       .ForMember(dest => dest.SectionCount, opt => opt.MapFrom(src => src.SectionInstructors.Select(s => s.Section).Count()));
 
 
 
@@ -83,6 +83,8 @@ public class MappingProfiles : Profile
 
         CreateMap<Instructor, GetByIdInstructorLockResponse>()
             .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
+
+
 
         CreateMap<Section, GetLockDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();

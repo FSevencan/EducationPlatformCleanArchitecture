@@ -29,7 +29,12 @@ public class MappingProfiles : Profile
         .ForMember(dest => dest.Courses, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course)));
 
         CreateMap<Section, GetListCategorySectionsDto>().ReverseMap();
-        CreateMap<Section, GetListInstructorsSectionListDto>().ReverseMap();
+        CreateMap<Section, GetListInstructorsSectionListDto>()
+            .ForMember(dest => dest.CourseCount, opt => opt.MapFrom(s => s.SectionCourses.Select(c => c.Course).Count()))
+            .ReverseMap();
+
+
+
         CreateMap<IPaginate<Section>, GetListResponse<GetListSectionListItemDto>>().ReverseMap();
         CreateMap<IPaginate<Section>, GetListResponse<GetListInstructorsSectionListDto>>().ReverseMap();
 
@@ -48,10 +53,10 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.ProducerCompanyName, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name))
             .ForMember(dest => dest.CreatedDate, opt => opt.MapFrom(src => src.CreatedDate));
 
+        CreateMap<Section, GetStudentSectionListDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
 
 
-
-        CreateMap<Section, GetStudentSectionListDto>().ReverseMap();
         CreateMap<Section, GetLockDto>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
     }
 }
