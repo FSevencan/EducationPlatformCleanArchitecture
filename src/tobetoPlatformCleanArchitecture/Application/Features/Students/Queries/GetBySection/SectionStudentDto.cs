@@ -13,6 +13,7 @@ public class SectionStudentDto:IDto
     public string ImageUrl { get; set; }
     public Guid CategoryId { get; set; }
     public string CategoryName { get; set; }
+    public string CourseCount { get; set; }
     public ICollection<SectionInstructorDto> Instructor {  get; set; }
     
     

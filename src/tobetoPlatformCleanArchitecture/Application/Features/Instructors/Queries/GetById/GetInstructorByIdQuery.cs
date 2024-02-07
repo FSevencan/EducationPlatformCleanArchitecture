@@ -34,13 +34,15 @@ public class GetInstructorByIdQuery : IRequest<GetByIdInstructorResponse>/*, ISe
             Instructor? instructor = await _instructorRepository.GetAsync(
 
                predicate: s => s.Id == request.Id,
-                include: i => i
+                include: i => i.Include(user => user.User)
                 .Include(section => section.SectionInstructors)
                 .ThenInclude(x => x.Section)
+                .ThenInclude(s => s.SectionCourses)
+                .ThenInclude(sc => sc.Course)
+                .ThenInclude(s => s.SectionCourses)
+                .ThenInclude(x => x.Section)
                 .ThenInclude(x => x.Category)
-                .Include(section => section.SectionInstructors)
-                .ThenInclude(x => x.Section).ThenInclude(s => s.SectionCourses).ThenInclude(sc => sc.Course)
-               .Include(user => user.User),
+               ,
                 cancellationToken: cancellationToken);
 
             await _instructorBusinessRules.InstructorShouldExistWhenSelected(instructor);

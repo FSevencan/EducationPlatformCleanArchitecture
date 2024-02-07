@@ -39,10 +39,15 @@ public class GetBySectionStudentQuery : IRequest<GetBySectionStudentResponse>/*,
                                        .ThenInclude(c => c.ClassRoomType)
                                            .ThenInclude(ct => ct.ClassRoomTypeSection)
                                                .ThenInclude(cts => cts.Section)
+                                               .ThenInclude(s=>s.SectionCourses)
+                                               .ThenInclude(sc=>sc.Course)
+                                               .ThenInclude(c=>c.SectionCourses)
+                                               .ThenInclude(sc=>sc.Section)
                                                 .ThenInclude(cts=> cts.Category)
                                                 .ThenInclude(cts => cts.Sections)
                                                 .ThenInclude(s => s.SectionInstructors)
-                                                .ThenInclude(si => si.Instructor).ThenInclude(si=>si.User)
+                                                .ThenInclude(si => si.Instructor)
+                                                .ThenInclude(si=>si.User)
                                                ,
                                                 
                 cancellationToken: cancellationToken);

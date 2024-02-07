@@ -29,14 +29,15 @@ public class MappingProfiles : Profile
         .ForMember(dest => dest.Courses, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course)));
 
         CreateMap<Section, GetListCategorySectionsDto>().ReverseMap();
+
         CreateMap<Section, GetListInstructorsSectionListDto>()
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
             .ForMember(dest => dest.CourseCount, opt => opt.MapFrom(s => s.SectionCourses.Select(c => c.Course).Count()))
             .ReverseMap();
 
 
 
         CreateMap<IPaginate<Section>, GetListResponse<GetListSectionListItemDto>>().ReverseMap();
-        CreateMap<IPaginate<Section>, GetListResponse<GetListInstructorsSectionListDto>>().ReverseMap();
 
         CreateMap<Section, GetListSectionListItemDto>()
             .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))

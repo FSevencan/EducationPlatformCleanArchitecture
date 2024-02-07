@@ -79,7 +79,9 @@ public class MappingProfiles : Profile
         CreateMap<Section, SectionStudentDto>()
        .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
        .ForMember(dest => dest.Instructor, opt => opt.MapFrom(src => src.SectionInstructors.Select(s => s.Instructor)))
+       .ForMember(dest=>dest.CourseCount, opt=>opt.MapFrom(src=>src.SectionCourses.Select(s=>s.Section).Count()))
        .ReverseMap();
+
         CreateMap<Instructor, SectionInstructorDto>()
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
 
