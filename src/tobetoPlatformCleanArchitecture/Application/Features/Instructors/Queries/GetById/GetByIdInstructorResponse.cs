@@ -20,6 +20,7 @@ public class GetByIdInstructorResponse : IResponse
     public string? LinkedinUrl { get; set; }
     public string? TwitterUrl { get; set; }
     public string Title { get; set; }
+    public DateTime? CreatedDate { get; set; } // eklendi
 
 
     public ICollection<GetListInstructorsSectionListDto> Sections { get; set; }
