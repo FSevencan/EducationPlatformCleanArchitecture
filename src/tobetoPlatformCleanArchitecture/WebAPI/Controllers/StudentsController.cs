@@ -5,6 +5,7 @@ using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Students.Queries.GetById;
 using Application.Features.Students.Queries.GetBySection;
 using Application.Features.Students.Queries.GetList;
+using Application.Features.Students.Queries.GetListSkillByUserId;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -55,6 +56,14 @@ public class StudentsController : BaseController
     public async Task<IActionResult> GetBySectionIdForUserId([FromRoute] int userId)
     {
         GetByUserIdStudentLockResponse response = await Mediator.Send(new GetByUserIdStudentLockQuery { UserId = userId });
+        return Ok(response);
+    }
+
+    //up-1
+    [HttpGet("skills/{userId}")]
+    public async Task<IActionResult> GetSkillsByUserId([FromRoute] int userId)
+    {
+        GetListSkillByUserIdResponse response = await Mediator.Send(new GetListSkillByUserIdQuery { UserId = userId });
         return Ok(response);
     }
 

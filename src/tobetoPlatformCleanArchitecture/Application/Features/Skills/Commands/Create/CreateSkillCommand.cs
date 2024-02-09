@@ -13,7 +13,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace Application.Features.Skills.Commands.Create;
 
-public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateSkillCommand : IRequest<CreatedSkillResponse>/*, ISecuredRequest*/, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Name { get; set; }
     public int Level { get; set; }
@@ -44,11 +44,11 @@ public class CreateSkillCommand : IRequest<CreatedSkillResponse>, ISecuredReques
         {
             Skill skill = _mapper.Map<Skill>(request);
 
-            skill.StudentSkills = request.StudentIds.Select(studentIds => new StudentSkill
-            {
-                StudentId = studentIds,
-                CreatedDate = DateTime.Now,
-            }).ToList(); // bu gereksiz olabilir konuþuruz
+            //skill.StudentSkills = request.StudentIds.Select(studentIds => new StudentSkill
+            //{
+            //    StudentId = studentIds,
+            //    CreatedDate = DateTime.Now,
+            //}).ToList(); // bu gereksiz olabilir konuþuruz
 
 
             await _skillRepository.AddAsync(skill);
