@@ -10,13 +10,14 @@ using Core.Persistence.Paging;
 using Core.Security.Entities;
 using Application.Features.Students.Queries.GetById.Dtos;
 using Application.Features.Students.Queries.GetBySection;
+using Application.Features.Students.Queries.GetListSkillByUserId;
 
 namespace Application.Features.Students.Profiles;
 
 public class MappingProfiles : Profile
 {
     public MappingProfiles()
-    {
+    {    
         CreateMap<Student, CreateStudentCommand>().ReverseMap();
         CreateMap<Student, CreatedStudentResponse>().ReverseMap();
         CreateMap<Student, UpdateStudentCommand>().ReverseMap();
@@ -28,6 +29,12 @@ public class MappingProfiles : Profile
         CreateMap<Student, UpdateStudentDto>().ReverseMap();
 
         CreateMap<IPaginate<Student>, GetListResponse<GetListStudentListItemDto>>().ReverseMap();
+
+        // up-1
+        CreateMap<Student, GetListSkillByUserIdResponse>().ReverseMap();
+        CreateMap<Student, GetListSkillByUserIdResponse>()
+            .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.StudentSkills.Select(ss => ss.Skill))).ReverseMap();
+
 
         CreateMap<Student, GetListStudentListItemDto>()
        .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.User.FirstName))
