@@ -12,7 +12,7 @@ using static Application.Features.Skills.Constants.SkillsOperationClaims;
 
 namespace Application.Features.Skills.Queries.GetList;
 
-public class GetListSkillQuery : IRequest<GetListResponse<GetListSkillListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListSkillQuery : IRequest<GetListResponse<GetListSkillListItemDto>>/*, ISecuredRequest*/, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 

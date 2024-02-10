@@ -18,7 +18,7 @@ public class CreateSkillCommand : IRequest<CreatedSkillResponse>/*, ISecuredRequ
     public string Name { get; set; }
     public int Level { get; set; }
 
-    public ICollection<int>? StudentIds { get; set; } // bu gereksiz olabilir konuþuruz
+    //public ICollection<int>? StudentIds { get; set; } // bu gereksiz olabilir konuþuruz
 
     public string[] Roles => new[] { Admin, Write, SkillsOperationClaims.Create };
 
@@ -42,19 +42,12 @@ public class CreateSkillCommand : IRequest<CreatedSkillResponse>/*, ISecuredRequ
 
         public async Task<CreatedSkillResponse> Handle(CreateSkillCommand request, CancellationToken cancellationToken)
         {
-            Skill skill = _mapper.Map<Skill>(request);
-
-            //skill.StudentSkills = request.StudentIds.Select(studentIds => new StudentSkill
-            //{
-            //    StudentId = studentIds,
-            //    CreatedDate = DateTime.Now,
-            //}).ToList(); // bu gereksiz olabilir konuþuruz
-
+            Skill skill = _mapper.Map<Skill>(request);           
 
             await _skillRepository.AddAsync(skill);
 
             CreatedSkillResponse response = _mapper.Map<CreatedSkillResponse>(skill);
             return response;
         }
-    } // safak id:1  skil: .net              StudentSkills 1 1 
+    } 
 }
