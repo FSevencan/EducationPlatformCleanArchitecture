@@ -3,6 +3,7 @@ using Application.Features.Sections.Commands.Delete;
 using Application.Features.Sections.Commands.Update;
 using Application.Features.Sections.Queries.GetById;
 using Application.Features.Sections.Queries.GetList;
+using Application.Features.Sections.Queries.GetSearchSections;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -50,5 +51,18 @@ public class SectionsController : BaseController
         GetListSectionQuery getListSectionQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListSectionListItemDto> response = await Mediator.Send(getListSectionQuery);
         return Ok(response);
-    } 
+    }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> Search([FromQuery] PageRequest pageRequest, [FromQuery] string searchTerm)
+    {
+        GetSearchSectionsQuery getSearchArticlesQuery = new()
+        {
+            PageRequest = pageRequest,
+            SearchTerm = searchTerm
+        };
+        GetListResponse<GetSearchSectionListDto> response = await Mediator.Send(getSearchArticlesQuery);
+        return Ok(response);
+    }
+
 }

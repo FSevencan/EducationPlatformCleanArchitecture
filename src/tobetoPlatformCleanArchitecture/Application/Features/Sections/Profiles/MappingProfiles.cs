@@ -12,6 +12,7 @@ using Application.Features.Instructors.Queries.GetList;
 using Application.Features.Courses.Queries.GetList;
 using Application.Features.Students.Queries.GetById.Dtos;
 using Application.Features.Sections.Queries.GetById.Dtos;
+using Application.Features.Sections.Queries.GetSearchSections;
 
 namespace Application.Features.Sections.Profiles;
 
@@ -59,5 +60,12 @@ public class MappingProfiles : Profile
 
 
         CreateMap<Section, GetLockDto>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
+
+
+        CreateMap<IPaginate<Section>, GetListResponse<GetSearchSectionListDto>>().ReverseMap();
+        CreateMap<Section, GetSearchSectionListDto>()
+            .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
+
     }
 }

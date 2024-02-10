@@ -12,6 +12,7 @@ using Core.Application.Dtos;
 using Application.Features.Students.Commands.Update;
 using Core.Security.Entities;
 using Application.Features.Students.Queries.GetById.Dtos;
+using Application.Features.Sections.Queries.GetSearchSections;
 
 namespace Application.Features.Instructors.Profiles;
 
@@ -86,7 +87,8 @@ public class MappingProfiles : Profile
         CreateMap<Instructor, GetByIdInstructorLockResponse>()
             .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Section)));
 
-
+        CreateMap<Instructor, GetSearchInstructorDto>()
+      .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
 
         CreateMap<Section, GetLockDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
