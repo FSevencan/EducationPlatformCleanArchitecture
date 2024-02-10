@@ -9,14 +9,14 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.StudentSkills.Constants.StudentSkillsOperationClaims;
+using Application.Services.Students;
 
 namespace Application.Features.StudentSkills.Commands.Create;
 
-public class CreateStudentSkillCommand : IRequest<CreatedStudentSkillResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateStudentSkillCommand : IRequest<CreatedStudentSkillResponse>/*, ISecuredRequest*/, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public int StudentId { get; set; }
-    public Guid SkillId { get; set; }
-   
+    public int UserId { get; set; }
+    public ICollection<Guid> Skills { get; set; }
 
     public string[] Roles => new[] { Admin, Write, StudentSkillsOperationClaims.Create };
 
@@ -25,26 +25,38 @@ public class CreateStudentSkillCommand : IRequest<CreatedStudentSkillResponse>, 
     public string CacheGroupKey => "GetStudentSkills";
 
     public class CreateStudentSkillCommandHandler : IRequestHandler<CreateStudentSkillCommand, CreatedStudentSkillResponse>
-    {
-        private readonly IMapper _mapper;
+    {      
         private readonly IStudentSkillRepository _studentSkillRepository;
+        private readonly IStudentsService _studentsService;
         private readonly StudentSkillBusinessRules _studentSkillBusinessRules;
 
-        public CreateStudentSkillCommandHandler(IMapper mapper, IStudentSkillRepository studentSkillRepository,
-                                         StudentSkillBusinessRules studentSkillBusinessRules)
-        {
-            _mapper = mapper;
+        public CreateStudentSkillCommandHandler(IMapper mapper, IStudentSkillRepository studentSkillRepository, IStudentsService studentsService, StudentSkillBusinessRules studentSkillBusinessRules)
+        {         
             _studentSkillRepository = studentSkillRepository;
             _studentSkillBusinessRules = studentSkillBusinessRules;
+            _studentsService = studentsService;
         }
 
         public async Task<CreatedStudentSkillResponse> Handle(CreateStudentSkillCommand request, CancellationToken cancellationToken)
-        {
-            StudentSkill studentSkill = _mapper.Map<StudentSkill>(request);
+        {            
+            var student = await _studentsService.GetAsync(x => x.UserId == request.UserId);
 
-            await _studentSkillRepository.AddAsync(studentSkill);
+            if (student != null)
+            {
+                var studentSkills = request.Skills.Select(skillId => new StudentSkill
+                {
+                    StudentId = student.Id,
+                    SkillId = skillId
+                }).ToList();
 
-            CreatedStudentSkillResponse response = _mapper.Map<CreatedStudentSkillResponse>(studentSkill);
+                await _studentSkillRepository.AddRangeAsync(studentSkills);
+            }
+           
+            CreatedStudentSkillResponse response = new CreatedStudentSkillResponse
+            {
+                StudentId = student.Id,
+                Skills = request.Skills
+            };
             return response;
         }
     }
