@@ -17,7 +17,7 @@ namespace Application.Features.Students.Profiles;
 public class MappingProfiles : Profile
 {
     public MappingProfiles()
-    {    
+    {
         CreateMap<Student, CreateStudentCommand>().ReverseMap();
         CreateMap<Student, CreatedStudentResponse>().ReverseMap();
         CreateMap<Student, UpdateStudentCommand>().ReverseMap();
@@ -30,10 +30,10 @@ public class MappingProfiles : Profile
 
         CreateMap<IPaginate<Student>, GetListResponse<GetListStudentListItemDto>>().ReverseMap();
 
-        // up-1
-        CreateMap<Student, GetListSkillByUserIdResponse>().ReverseMap();
+
         CreateMap<Student, GetListSkillByUserIdResponse>()
-            .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.StudentSkills.Select(ss => ss.Skill))).ReverseMap();
+            .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.StudentSkills))
+            .ReverseMap();
 
 
         CreateMap<Student, GetListStudentListItemDto>()
@@ -86,7 +86,7 @@ public class MappingProfiles : Profile
         CreateMap<Section, SectionStudentDto>()
        .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
        .ForMember(dest => dest.Instructor, opt => opt.MapFrom(src => src.SectionInstructors.Select(s => s.Instructor)))
-       .ForMember(dest=>dest.CourseCount, opt=>opt.MapFrom(src=>src.SectionCourses.Select(s=>s.Section).Count()))
+       .ForMember(dest => dest.CourseCount, opt => opt.MapFrom(src => src.SectionCourses.Select(s => s.Section).Count()))
        .ReverseMap();
 
         CreateMap<Instructor, SectionInstructorDto>()
@@ -110,9 +110,6 @@ public class MappingProfiles : Profile
 
         CreateMap<Section, GetLockDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
-
-
-
 
 
     }

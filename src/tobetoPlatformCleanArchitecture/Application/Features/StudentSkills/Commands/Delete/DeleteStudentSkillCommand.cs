@@ -13,7 +13,7 @@ using static Application.Features.StudentSkills.Constants.StudentSkillsOperation
 
 namespace Application.Features.StudentSkills.Commands.Delete;
 
-public class DeleteStudentSkillCommand : IRequest<DeletedStudentSkillResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class DeleteStudentSkillCommand : IRequest<DeletedStudentSkillResponse>, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
 

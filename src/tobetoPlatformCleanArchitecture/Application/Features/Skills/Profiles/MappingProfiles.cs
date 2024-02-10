@@ -26,9 +26,10 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<Skill>, GetListResponse<GetListSkillListItemDto>>().ReverseMap();
 
         // up-1
-        CreateMap<Skill, GetListSkillByUserIdDto>()
-            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-            .ForMember(dest => dest.Level, opt => opt.MapFrom(src => src.Level))
+        CreateMap<StudentSkill, GetListSkillByUserIdDto>()
+            .ForMember(dest => dest.SSId, opt => opt.MapFrom(src => src.Id))
+            .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Skill.Id))
+            .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Skill.Name))
             .ReverseMap();
     }
 }
