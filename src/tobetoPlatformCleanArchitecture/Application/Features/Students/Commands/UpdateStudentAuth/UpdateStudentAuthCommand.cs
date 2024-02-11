@@ -65,7 +65,6 @@ public class UpdateStudentAuthCommandHandler : IRequestHandler<UpdateStudentAuth
         var accessToken = await _authService.CreateAccessToken(user);
 
         var response = _mapper.Map<UpdateStudentAuthResponse>(user);
-        response.AccessToken = accessToken;
 
         return response;
     }
