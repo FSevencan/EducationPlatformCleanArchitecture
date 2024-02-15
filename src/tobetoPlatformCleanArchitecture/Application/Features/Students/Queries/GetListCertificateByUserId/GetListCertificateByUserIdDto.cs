@@ -10,6 +10,5 @@ public class GetListCertificateByUserIdDto : IDto
 {
     public Guid Id { get; set; }
     public string? Image { get; set; }
-    public int StudentId { get; set; }
     public DateTime? CreatedDate { get; set; }
 }

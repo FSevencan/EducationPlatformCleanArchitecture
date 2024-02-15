@@ -45,7 +45,6 @@ public class MappingProfiles : Profile
 
         CreateMap<Student, GetListCertificateByUserIdDto>()
         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-        .ForMember(dest => dest.StudentId, opt => opt.MapFrom(src => src.Id))
         .ReverseMap();
 
 
