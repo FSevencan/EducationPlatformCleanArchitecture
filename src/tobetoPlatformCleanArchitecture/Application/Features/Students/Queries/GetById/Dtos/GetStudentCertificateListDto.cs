@@ -10,4 +10,5 @@ public class GetStudentCertificateListDto : IDto
 {
     public Guid Id { get; set; }
     public string? Image { get; set; }
+    public DateTime? CreatedDate { get; set; }
 }

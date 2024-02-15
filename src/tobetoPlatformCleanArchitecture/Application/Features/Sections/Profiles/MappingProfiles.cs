@@ -43,7 +43,8 @@ public class MappingProfiles : Profile
         CreateMap<Section, GetListSectionListItemDto>()
             .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))
             .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
-            .ForMember(dest => dest.ProducerCompany, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name));
+            .ForMember(dest => dest.ProducerCompany, opt => opt.MapFrom(src => src.SectionAbout.ProducerCompany.Name))
+            .ForMember(dest=>dest.CourseCount, opt=>opt.MapFrom(src=>src.SectionCourses.Select(sc=>sc.Course).Count()));
 
         CreateMap<Section, GetByIdSectionResponse>()
             .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))

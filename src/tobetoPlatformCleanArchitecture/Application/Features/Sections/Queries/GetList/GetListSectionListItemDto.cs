@@ -15,6 +15,7 @@ public class GetListSectionListItemDto : IDto
     public string CategoryName { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
+    public string CourseCount { get; set; }
     public string Description { get; set; }
     public string ProducerCompany { get; set; }
 
