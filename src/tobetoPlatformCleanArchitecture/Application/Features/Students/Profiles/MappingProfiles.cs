@@ -11,6 +11,7 @@ using Core.Security.Entities;
 using Application.Features.Students.Queries.GetById.Dtos;
 using Application.Features.Students.Queries.GetBySection;
 using Application.Features.Students.Queries.GetListSkillByUserId;
+using Application.Features.Students.Queries.GetListCertificateByUserId;
 
 namespace Application.Features.Students.Profiles;
 
@@ -34,6 +35,18 @@ public class MappingProfiles : Profile
         CreateMap<Student, GetListSkillByUserIdResponse>()
             .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => src.StudentSkills))
             .ReverseMap();
+
+
+
+        CreateMap<Student, GetListCertificateByUserIdResponse>()
+            .ForMember(dest => dest.Certificates, opt => opt.MapFrom(src => src.Certificates))
+            .ReverseMap();
+
+
+        CreateMap<Student, GetListCertificateByUserIdDto>()
+        .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+        .ForMember(dest => dest.StudentId, opt => opt.MapFrom(src => src.Id))
+        .ReverseMap();
 
 
         CreateMap<Student, GetListStudentListItemDto>()

@@ -5,6 +5,7 @@ using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Students.Queries.GetById;
 using Application.Features.Students.Queries.GetBySection;
 using Application.Features.Students.Queries.GetList;
+using Application.Features.Students.Queries.GetListCertificateByUserId;
 using Application.Features.Students.Queries.GetListSkillByUserId;
 using Core.Application.Requests;
 using Core.Application.Responses;
@@ -66,6 +67,16 @@ public class StudentsController : BaseController
         GetListSkillByUserIdResponse response = await Mediator.Send(new GetListSkillByUserIdQuery { UserId = userId });
         return Ok(response);
     }
+
+
+
+    [HttpGet("certificates/{userId}")]
+    public async Task<IActionResult> GetCertificatesByUserId([FromRoute] int userId)
+    {
+        GetListCertificateByUserIdResponse response = await Mediator.Send(new GetListCertificateByUserIdQuery { UserId = userId });
+        return Ok(response);
+    }
+
 
     [HttpGet]
     public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)

@@ -8,6 +8,8 @@ using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
 using Application.Features.Students.Queries.GetById.Dtos;
+using Application.Features.Students.Queries.GetListSkillByUserId;
+using Application.Features.Students.Queries.GetListCertificateByUserId;
 
 namespace Application.Features.Certificates.Profiles;
 
@@ -27,5 +29,12 @@ public class MappingProfiles : Profile
         CreateMap<Certificate, GetStudentCertificateListDto>().ReverseMap();
 
         CreateMap<IPaginate<Certificate>, GetListResponse<GetListCertificateListItemDto>>().ReverseMap();
+
+        // up-1
+
+        CreateMap<Certificate, GetListCertificateByUserIdDto>();
+
+
+    ;
     }
 }
