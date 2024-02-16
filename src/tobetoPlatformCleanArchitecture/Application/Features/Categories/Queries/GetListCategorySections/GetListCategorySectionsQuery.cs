@@ -37,11 +37,15 @@ public class GetListCategorySectionsQuery : IRequest<GetListResponse<GetListCate
         {
             IPaginate<Category> categories = await _categoryRepository.GetListAsync(
                 predicate: c=>c.Id == request.CategoryId,
-                include: c => c
-                .Include(section => section.Sections)                                                                 
-                .ThenInclude(s=>s.SectionInstructors)
-                .ThenInclude(si=>si.Instructor)
-                .ThenInclude(i=>i.User),            
+                include:
+            c => c
+                .Include(section => section.Sections)
+                .ThenInclude(s => s.SectionInstructors)
+                .ThenInclude(si => si.Instructor)
+                .ThenInclude(i => i.User)
+                .Include(section => section.Sections)
+                .ThenInclude(s => s.SectionCourses)
+                .ThenInclude(course => course.Course),
                 //predicate: c => c.DeletedDate == null,
                 //withDeleted: true,
                 index: request.PageRequest.PageIndex,
@@ -51,6 +55,9 @@ public class GetListCategorySectionsQuery : IRequest<GetListResponse<GetListCate
 
             GetListResponse<GetListCategorySectionsListItemDto> response = _mapper.Map<GetListResponse<GetListCategorySectionsListItemDto>>(categories);
             return response;
+
+        
+
         }
     }
 }
