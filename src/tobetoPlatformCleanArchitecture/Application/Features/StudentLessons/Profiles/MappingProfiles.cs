@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.StudentLessons.Queries.GetCompletedLessonsByStudent;
 
 namespace Application.Features.StudentLessons.Profiles;
 
@@ -23,5 +24,9 @@ public class MappingProfiles : Profile
         CreateMap<StudentLesson, GetByIdStudentLessonResponse>().ReverseMap();
         CreateMap<StudentLesson, GetListStudentLessonListItemDto>().ReverseMap();
         CreateMap<IPaginate<StudentLesson>, GetListResponse<GetListStudentLessonListItemDto>>().ReverseMap();
+
+        CreateMap<StudentLesson, GetCompletedLessonDto>()
+      .ForMember(dest => dest.LessonId, opt => opt.MapFrom(src => src.LessonId))
+      .ForMember(dest => dest.IsCompleted, opt => opt.MapFrom(src => src.IsCompleted));
     }
 }
