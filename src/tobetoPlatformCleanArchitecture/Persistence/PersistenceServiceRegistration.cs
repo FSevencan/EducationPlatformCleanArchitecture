@@ -46,6 +46,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IClassRoomTypeSectionRepository, ClassRoomTypeSectionRepository>();
         services.AddScoped<IMentorshipSessionRepository, MentorshipSessionRepository>();
         services.AddScoped<ICampusEncounterRepository, CampusEncounterRepository>();
+        services.AddScoped<IStudentLessonRepository, StudentLessonRepository>();
         return services;
     }
 }

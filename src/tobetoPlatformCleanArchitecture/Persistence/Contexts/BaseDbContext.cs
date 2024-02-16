@@ -40,7 +40,7 @@ public class BaseDbContext : DbContext
     public DbSet<ClassRoomType> ClassRoomTypes { get; set; }
     public DbSet<MentorshipSession> MentorshipSessions { get; set; }
     public DbSet<CampusEncounter> CampusEncounters { get; set; }
-
+    public DbSet<StudentLesson> StudentLessons { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

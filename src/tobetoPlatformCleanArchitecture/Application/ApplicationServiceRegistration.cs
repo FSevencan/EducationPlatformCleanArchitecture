@@ -37,6 +37,7 @@ using Application.Services.ClassRoomTypes;
 using Application.Services.ClassRoomTypeSections;
 using Application.Services.MentorshipSessions;
 using Application.Services.CampusEncounters;
+using Application.Services.StudentLessons;
 
 using Application.Services.StudentSkills;
 
@@ -106,6 +107,7 @@ public static class ApplicationServiceRegistration
   services.AddScoped<ISectionAboutsService, SectionAboutsManager>();
   services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
   services.AddScoped<ISurveysService, SurveysManager>();
+  services.AddScoped<IStudentLessonsService, StudentLessonsManager>();
         return services;
     }
 

@@ -2,6 +2,7 @@
 using Amazon.Runtime;
 using Amazon.S3;
 using Application.Services.ImageService;
+using Infrastructure.Adapters.ImageService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
