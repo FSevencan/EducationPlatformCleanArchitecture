@@ -1,8 +1,10 @@
 using Application.Features.Instructors.Commands.Create;
 using Application.Features.Instructors.Commands.Delete;
 using Application.Features.Instructors.Commands.Update;
+using Application.Features.Instructors.Commands.UpdateInstructorAuth;
 using Application.Features.Instructors.Queries.GetById;
 using Application.Features.Instructors.Queries.GetList;
+using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Students.Queries.GetById;
 using Core.Application.Requests;
 using Core.Application.Responses;
@@ -57,6 +59,14 @@ public class InstructorsController : BaseController
     {
         GetListInstructorQuery getListInstructorQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListInstructorListItemDto> response = await Mediator.Send(getListInstructorQuery);
+        return Ok(response);
+    }
+
+    [HttpPost("update-password")]
+    public async Task<IActionResult> UpdatePassword([FromBody] UpdateInstructorAuthDto updateInstructorAuthDto )
+    {
+        var updateInstructorAuthCommand = new UpdateInstructorAuthCommand { UpdateInstructorAuthDto = updateInstructorAuthDto };
+        var response = await Mediator.Send(updateInstructorAuthCommand);
         return Ok(response);
     }
 }

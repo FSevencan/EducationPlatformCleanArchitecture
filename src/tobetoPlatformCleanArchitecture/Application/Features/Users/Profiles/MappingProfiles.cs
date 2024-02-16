@@ -1,3 +1,4 @@
+using Application.Features.Instructors.Commands.UpdateInstructorAuth;
 using Application.Features.Students.Commands.UpdateStudentAuth;
 using Application.Features.Users.Commands.Create;
 using Application.Features.Users.Commands.Delete;
@@ -34,6 +35,12 @@ public class MappingProfiles : Profile
            .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
            .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
            .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
-          
+
+        CreateMap<User, UpdateInstructorAuthResponse>()
+           .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+           .ForMember(dest => dest.FirstName, opt => opt.MapFrom(src => src.FirstName))
+           .ForMember(dest => dest.LastName, opt => opt.MapFrom(src => src.LastName))
+           .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email));
+
     }
 }
