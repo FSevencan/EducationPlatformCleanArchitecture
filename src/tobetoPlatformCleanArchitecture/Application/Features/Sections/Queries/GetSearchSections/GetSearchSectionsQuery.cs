@@ -47,6 +47,8 @@ public class GetSearchSectionsQuery : IRequest<GetListResponse<GetSearchSectionL
                                 a.Category.Name.Contains(request.SearchTerm),   
                     include: section => section
                                     .Include(category => category.Category)
+                                    .Include(section => section.SectionCourses)
+                                    .ThenInclude(course => course.Course)
                                      .Include(section => section.SectionInstructors)
                                     .ThenInclude(sectionInstructor => sectionInstructor.Instructor)
                                     .ThenInclude(a => a.User),    

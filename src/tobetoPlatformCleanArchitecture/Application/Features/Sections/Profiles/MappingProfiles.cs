@@ -13,6 +13,7 @@ using Application.Features.Courses.Queries.GetList;
 using Application.Features.Students.Queries.GetById.Dtos;
 using Application.Features.Sections.Queries.GetById.Dtos;
 using Application.Features.Sections.Queries.GetSearchSections;
+using OtpNet;
 
 namespace Application.Features.Sections.Profiles;
 
@@ -66,7 +67,7 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<Section>, GetListResponse<GetSearchSectionListDto>>().ReverseMap();
         CreateMap<Section, GetSearchSectionListDto>()
             .ForMember(dest => dest.Instructors, opt => opt.MapFrom(src => src.SectionInstructors.Select(si => si.Instructor).ToList()))
-            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name));
-
+            .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
+            .ForMember(dest => dest.CourseCount, opt => opt.MapFrom(src => src.SectionCourses.Select(sc => sc.Course).Count()));
     }
 }
