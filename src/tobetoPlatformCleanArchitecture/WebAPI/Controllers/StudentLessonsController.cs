@@ -2,6 +2,7 @@ using Application.Features.StudentLessons.Commands.Create;
 using Application.Features.StudentLessons.Commands.Delete;
 using Application.Features.StudentLessons.Commands.Update;
 using Application.Features.StudentLessons.Queries.GetById;
+using Application.Features.StudentLessons.Queries.GetCompletedLessonsByStudent;
 using Application.Features.StudentLessons.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
@@ -51,4 +52,15 @@ public class StudentLessonsController : BaseController
         GetListResponse<GetListStudentLessonListItemDto> response = await Mediator.Send(getListStudentLessonQuery);
         return Ok(response);
     }
+
+    [HttpGet("GetCompletedLessons")]
+    public async Task<IActionResult> GetCompletedLessonsByStudentId([FromQuery] int userId)
+    {
+        
+        GetCompletedLessonsByStudentIdQuery query = new GetCompletedLessonsByStudentIdQuery { UserId = userId };
+
+        List<GetCompletedLessonDto> response = await Mediator.Send(query);
+        return Ok(response);
+    }
+
 }
