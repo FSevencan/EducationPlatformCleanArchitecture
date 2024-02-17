@@ -19,7 +19,7 @@ namespace Application.Features.Students.Commands.Update;
 
 public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public UpdateStudentDto? UpdateStudentDto { get; set; }
+    public UpdateStudentDto UpdateStudentDto { get; set; }
 
 
     public string[] Roles => new[] { Admin, Write, StudentsOperationClaims.Update };
