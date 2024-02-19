@@ -15,16 +15,13 @@ using System.Linq;
 
 namespace Application.Features.Courses.Queries.GetList;
 
-public class GetListCourseQuery : IRequest<GetListResponse<GetListCourseListItemDto>>, ICachableRequest
+public class GetListCourseQuery : IRequest<GetListResponse<GetListCourseListItemDto>>
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
+   
 
-    public bool BypassCache { get; }
-    public string CacheKey => $"GetListCourses({PageRequest.PageIndex},{PageRequest.PageSize})";
-    public string CacheGroupKey => "GetCourses";
-    public TimeSpan? SlidingExpiration { get; }
+  
 
     public class GetListCourseQueryHandler : IRequestHandler<GetListCourseQuery, GetListResponse<GetListCourseListItemDto>>
     {

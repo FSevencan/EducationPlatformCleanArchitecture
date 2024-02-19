@@ -9,11 +9,11 @@ using static Application.Features.ClassRoomTypes.Constants.ClassRoomTypesOperati
 
 namespace Application.Features.ClassRoomTypes.Queries.GetById;
 
-public class GetByIdClassRoomTypeQuery : IRequest<GetByIdClassRoomTypeResponse>, ISecuredRequest
+public class GetByIdClassRoomTypeQuery : IRequest<GetByIdClassRoomTypeResponse>
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
+  
 
     public class GetByIdClassRoomTypeQueryHandler : IRequestHandler<GetByIdClassRoomTypeQuery, GetByIdClassRoomTypeResponse>
     {

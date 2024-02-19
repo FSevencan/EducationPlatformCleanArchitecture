@@ -37,13 +37,12 @@ public class GetCompletedLessonsByStudentIdQuery : IRequest<List<GetCompletedLes
             Student student = await _studentLessonBusinessRules.CheckIfStudentExists(request.UserId, cancellationToken);
 
             // Öğrencinin tamamladığı dersleri al
-            var completedLessons = await _studentLessonRepository.GetListAsync(
-                lesson => lesson.StudentId == student.Id && lesson.IsCompleted,
-                cancellationToken: cancellationToken
+            var completedLessons = await _studentLessonRepository.GetAll(
+                lesson => lesson.StudentId == student.Id && lesson.IsCompleted
             );
 
             // Elde edilen dersleri DTO'ya dönüştür ve listeyi döndür
-            List<GetCompletedLessonDto> response = completedLessons.Items
+            List<GetCompletedLessonDto> response = completedLessons
                 .Select(lesson => _mapper.Map<GetCompletedLessonDto>(lesson))
                 .ToList();
 

@@ -24,7 +24,7 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
     public ICollection<Guid>? ClassRoomTypeIds { get; set; }
 
 
-    public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Create };
+    public string[] Roles => new[] { Admin, instructor, Write, SectionsOperationClaims.Create };
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

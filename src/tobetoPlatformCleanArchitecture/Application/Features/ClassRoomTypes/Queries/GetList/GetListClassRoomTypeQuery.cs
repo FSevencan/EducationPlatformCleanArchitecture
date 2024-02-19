@@ -12,16 +12,10 @@ using static Application.Features.ClassRoomTypes.Constants.ClassRoomTypesOperati
 
 namespace Application.Features.ClassRoomTypes.Queries.GetList;
 
-public class GetListClassRoomTypeQuery : IRequest<GetListResponse<GetListClassRoomTypeListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListClassRoomTypeQuery : IRequest<GetListResponse<GetListClassRoomTypeListItemDto>> 
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
-
-    public bool BypassCache { get; }
-    public string CacheKey => $"GetListClassRoomTypes({PageRequest.PageIndex},{PageRequest.PageSize})";
-    public string CacheGroupKey => "GetClassRoomTypes";
-    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListClassRoomTypeQueryHandler : IRequestHandler<GetListClassRoomTypeQuery, GetListResponse<GetListClassRoomTypeListItemDto>>
     {

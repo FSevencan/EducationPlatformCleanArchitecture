@@ -14,7 +14,6 @@ public class GetByIdSectionQuery : IRequest<GetByIdSectionResponse>
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
 
     public class GetByIdSectionQueryHandler : IRequestHandler<GetByIdSectionQuery, GetByIdSectionResponse>
     {
