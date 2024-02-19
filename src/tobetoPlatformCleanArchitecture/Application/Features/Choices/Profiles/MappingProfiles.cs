@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.Questions.Queries.GetListByExamId;
 
 namespace Application.Features.Choices.Profiles;
 
@@ -23,5 +24,7 @@ public class MappingProfiles : Profile
         CreateMap<Choice, GetByIdChoiceResponse>().ReverseMap();
         CreateMap<Choice, GetListChoiceListItemDto>().ReverseMap();
         CreateMap<IPaginate<Choice>, GetListResponse<GetListChoiceListItemDto>>().ReverseMap();
+
+        CreateMap<Choice, GetListChoiceDto>().ReverseMap();
     }
 }

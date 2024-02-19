@@ -3,6 +3,8 @@ using Application.Features.Questions.Commands.Delete;
 using Application.Features.Questions.Commands.Update;
 using Application.Features.Questions.Queries.GetById;
 using Application.Features.Questions.Queries.GetList;
+using Application.Features.Questions.Queries.GetListByExamId;
+using Application.Features.Students.Queries.GetListSkillByUserId;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +51,14 @@ public class QuestionsController : BaseController
     {
         GetListQuestionQuery getListQuestionQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListQuestionListItemDto> response = await Mediator.Send(getListQuestionQuery);
+        return Ok(response);
+    }
+
+    [HttpGet("questions/{examId}")]
+    public async Task<IActionResult> GetListByExamId([FromQuery] PageRequest pageRequest, [FromRoute] Guid examId)
+    {
+        GetListQuestionByExamIdQuery getListQuestionQuery = new() { PageRequest = pageRequest,ExamId = examId };
+        GetListResponse<GetListQuestionByExamIdDto> response = await Mediator.Send(getListQuestionQuery);
         return Ok(response);
     }
 }
