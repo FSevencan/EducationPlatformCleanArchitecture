@@ -242,7 +242,32 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "StudentLessons.Add" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "StudentLessons.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "StudentLessons.Delete" });
+        #endregion
+        #region Choices
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Choices.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Choices.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Choices.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Choices.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Choices.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Choices.Delete" });
+        #endregion
+        #region Questions
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Questions.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Questions.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Questions.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Questions.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Questions.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Questions.Delete" });
+        #endregion
+        #region UserAnswers
+        seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Delete" });
         return seeds;
         #endregion
+
     }
 }

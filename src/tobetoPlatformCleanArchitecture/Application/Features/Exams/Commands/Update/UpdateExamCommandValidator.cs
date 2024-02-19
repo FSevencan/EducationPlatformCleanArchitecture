@@ -15,6 +15,6 @@ public class UpdateExamCommandValidator : AbstractValidator<UpdateExamCommand>
         RuleFor(c => c.QuestionType).NotEmpty();
         RuleFor(c => c.StartDate).NotEmpty();
         RuleFor(c => c.EndDate).NotEmpty();
-      
+     
     }
 }

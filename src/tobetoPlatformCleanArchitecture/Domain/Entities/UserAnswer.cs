@@ -1,0 +1,22 @@
+﻿using Core.Persistence.Repositories;
+using Core.Security.Entities;
+
+namespace Domain.Entities;
+
+public class UserAnswer : Entity<Guid>
+{
+    public int UserId { get; set; }
+    public Guid ChoiceId { get; set; }  
+    public Guid QuestionId { get; set; }
+
+    public string AnswerText { get; set; }    
+
+    public Question Question { get; set; }
+    public User User { get; set; }
+    public Choice Choice { get; set; }
+}
+
+
+
+
+

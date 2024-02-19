@@ -998,6 +998,150 @@ namespace Persistence.Migrations
                             Id = 151,
                             CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Name = "CampusEncounters.Delete"
+                        },
+                        new
+                        {
+                            Id = 152,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "StudentLessons.Admin"
+                        },
+                        new
+                        {
+                            Id = 153,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "StudentLessons.Read"
+                        },
+                        new
+                        {
+                            Id = 154,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "StudentLessons.Write"
+                        },
+                        new
+                        {
+                            Id = 155,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "StudentLessons.Add"
+                        },
+                        new
+                        {
+                            Id = 156,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "StudentLessons.Update"
+                        },
+                        new
+                        {
+                            Id = 157,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "StudentLessons.Delete"
+                        },
+                        new
+                        {
+                            Id = 158,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Choices.Admin"
+                        },
+                        new
+                        {
+                            Id = 159,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Choices.Read"
+                        },
+                        new
+                        {
+                            Id = 160,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Choices.Write"
+                        },
+                        new
+                        {
+                            Id = 161,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Choices.Add"
+                        },
+                        new
+                        {
+                            Id = 162,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Choices.Update"
+                        },
+                        new
+                        {
+                            Id = 163,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Choices.Delete"
+                        },
+                        new
+                        {
+                            Id = 164,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Questions.Admin"
+                        },
+                        new
+                        {
+                            Id = 165,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Questions.Read"
+                        },
+                        new
+                        {
+                            Id = 166,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Questions.Write"
+                        },
+                        new
+                        {
+                            Id = 167,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Questions.Add"
+                        },
+                        new
+                        {
+                            Id = 168,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Questions.Update"
+                        },
+                        new
+                        {
+                            Id = 169,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "Questions.Delete"
+                        },
+                        new
+                        {
+                            Id = 170,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "UserAnswers.Admin"
+                        },
+                        new
+                        {
+                            Id = 171,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "UserAnswers.Read"
+                        },
+                        new
+                        {
+                            Id = 172,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "UserAnswers.Write"
+                        },
+                        new
+                        {
+                            Id = 173,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "UserAnswers.Add"
+                        },
+                        new
+                        {
+                            Id = 174,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "UserAnswers.Update"
+                        },
+                        new
+                        {
+                            Id = 175,
+                            CreatedDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "UserAnswers.Delete"
                         });
                 });
 
@@ -1173,8 +1317,8 @@ namespace Persistence.Migrations
                             Email = "admin@admin.com",
                             FirstName = "Admin",
                             LastName = "NArchitecture",
-                            PasswordHash = new byte[] { 120, 94, 156, 5, 140, 120, 222, 221, 77, 57, 86, 119, 177, 213, 237, 88, 154, 145, 214, 0, 199, 155, 163, 241, 118, 59, 195, 209, 40, 115, 134, 124, 121, 163, 78, 87, 10, 177, 228, 38, 20, 160, 232, 164, 178, 197, 102, 99, 36, 114, 8, 151, 181, 112, 7, 169, 133, 141, 235, 166, 146, 138, 164, 48 },
-                            PasswordSalt = new byte[] { 21, 216, 200, 34, 141, 191, 126, 119, 188, 209, 94, 52, 210, 186, 177, 226, 158, 17, 238, 49, 133, 116, 127, 150, 132, 137, 92, 28, 224, 185, 55, 205, 79, 84, 197, 97, 129, 186, 224, 142, 162, 58, 98, 251, 45, 140, 149, 139, 60, 132, 141, 31, 62, 110, 71, 159, 172, 133, 236, 207, 47, 111, 193, 17, 184, 221, 4, 136, 240, 64, 84, 8, 32, 76, 236, 118, 58, 219, 227, 166, 118, 49, 212, 51, 210, 249, 138, 93, 38, 39, 158, 27, 114, 72, 222, 185, 42, 246, 229, 76, 168, 116, 53, 146, 2, 246, 173, 136, 32, 77, 118, 244, 103, 178, 63, 202, 230, 125, 10, 149, 42, 32, 4, 187, 50, 86, 46, 116 },
+                            PasswordHash = new byte[] { 104, 55, 141, 54, 150, 68, 146, 6, 2, 61, 97, 78, 166, 243, 149, 200, 59, 112, 187, 136, 195, 53, 222, 10, 71, 242, 217, 143, 130, 124, 112, 229, 45, 42, 154, 236, 214, 239, 152, 197, 234, 6, 130, 150, 76, 175, 51, 54, 165, 176, 112, 66, 217, 85, 181, 253, 169, 78, 143, 2, 24, 38, 32, 65 },
+                            PasswordSalt = new byte[] { 168, 240, 87, 198, 213, 200, 16, 6, 18, 118, 253, 151, 62, 189, 93, 158, 117, 33, 119, 232, 34, 102, 123, 208, 184, 175, 45, 95, 39, 245, 78, 203, 11, 139, 100, 64, 74, 184, 252, 202, 21, 11, 185, 16, 193, 136, 151, 209, 231, 100, 131, 62, 1, 89, 54, 87, 48, 56, 156, 255, 141, 186, 106, 222, 227, 2, 241, 8, 118, 108, 76, 171, 94, 103, 26, 133, 99, 117, 154, 238, 165, 156, 70, 65, 158, 28, 251, 132, 105, 209, 115, 153, 228, 131, 63, 55, 177, 26, 242, 72, 4, 68, 182, 87, 23, 106, 144, 5, 244, 147, 60, 238, 127, 112, 135, 139, 198, 106, 253, 146, 47, 231, 241, 51, 138, 253, 247, 231 },
                             Status = true
                         });
                 });
@@ -1395,6 +1539,45 @@ namespace Persistence.Migrations
                     b.HasIndex("StudentId");
 
                     b.ToTable("Certificates", (string)null);
+                });
+
+            modelBuilder.Entity("Domain.Entities.Choice", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<bool>("IsCorrect")
+                        .HasColumnType("bit")
+                        .HasColumnName("IsCorrect");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("QuestionId");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Text");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Choices", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.ClassRoom", b =>
@@ -1797,6 +1980,41 @@ namespace Persistence.Migrations
                     b.ToTable("ProducerCompanies", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<Guid>("ExamId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ExamId");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("Text");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExamId");
+
+                    b.ToTable("Questions", (string)null);
+                });
+
             modelBuilder.Entity("Domain.Entities.Section", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2094,31 +2312,40 @@ namespace Persistence.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
 
                     b.Property<DateTime?>("DeletedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
 
                     b.Property<DateTime?>("EndTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("EndTime");
 
                     b.Property<bool>("IsCompleted")
-                        .HasColumnType("bit");
+                        .HasColumnType("bit")
+                        .HasColumnName("IsCompleted");
 
                     b.Property<Guid>("LessonId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("LessonId");
 
                     b.Property<DateTime?>("StartTime")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("StartTime");
 
                     b.Property<int>("StudentId")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("StudentId");
 
                     b.Property<DateTime?>("UpdatedDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
 
                     b.HasKey("Id");
 
@@ -2126,7 +2353,7 @@ namespace Persistence.Migrations
 
                     b.HasIndex("StudentId");
 
-                    b.ToTable("StudentLessons");
+                    b.ToTable("StudentLessons", (string)null);
                 });
 
             modelBuilder.Entity("Domain.Entities.StudentSkill", b =>
@@ -2212,6 +2439,53 @@ namespace Persistence.Migrations
                     b.ToTable("Surveys", (string)null);
                 });
 
+            modelBuilder.Entity("Domain.Entities.UserAnswer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("Id");
+
+                    b.Property<string>("AnswerText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("AnswerText");
+
+                    b.Property<Guid>("ChoiceId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ChoiceId");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("CreatedDate");
+
+                    b.Property<DateTime?>("DeletedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("DeletedDate");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("QuestionId");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("UpdatedDate");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int")
+                        .HasColumnName("UserId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChoiceId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserAnswers", (string)null);
+                });
+
             modelBuilder.Entity("Core.Security.Entities.EmailAuthenticator", b =>
                 {
                     b.HasOne("Core.Security.Entities.User", "User")
@@ -2275,6 +2549,17 @@ namespace Persistence.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Choice", b =>
+                {
+                    b.HasOne("Domain.Entities.Question", "Question")
+                        .WithMany("Choices")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Question");
+                });
+
             modelBuilder.Entity("Domain.Entities.ClassRoom", b =>
                 {
                     b.HasOne("Domain.Entities.ClassRoomType", "ClassRoomType")
@@ -2336,6 +2621,17 @@ namespace Persistence.Migrations
                         .IsRequired();
 
                     b.Navigation("Course");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Question", b =>
+                {
+                    b.HasOne("Domain.Entities.Exam", "Exam")
+                        .WithMany("Questions")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
                 });
 
             modelBuilder.Entity("Domain.Entities.Section", b =>
@@ -2482,6 +2778,33 @@ namespace Persistence.Migrations
                     b.Navigation("Student");
                 });
 
+            modelBuilder.Entity("Domain.Entities.UserAnswer", b =>
+                {
+                    b.HasOne("Domain.Entities.Choice", "Choice")
+                        .WithMany()
+                        .HasForeignKey("ChoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Security.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Choice");
+
+                    b.Navigation("Question");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Core.Security.Entities.OperationClaim", b =>
                 {
                     b.Navigation("UserOperationClaims");
@@ -2522,6 +2845,11 @@ namespace Persistence.Migrations
                     b.Navigation("SectionCourses");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Exam", b =>
+                {
+                    b.Navigation("Questions");
+                });
+
             modelBuilder.Entity("Domain.Entities.Instructor", b =>
                 {
                     b.Navigation("SectionInstructors");
@@ -2530,6 +2858,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.ProducerCompany", b =>
                 {
                     b.Navigation("SectionAbouts");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Question", b =>
+                {
+                    b.Navigation("Choices");
                 });
 
             modelBuilder.Entity("Domain.Entities.Section", b =>

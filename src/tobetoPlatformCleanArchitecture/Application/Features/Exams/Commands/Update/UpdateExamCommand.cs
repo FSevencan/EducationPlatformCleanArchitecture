@@ -12,7 +12,7 @@ using static Application.Features.Exams.Constants.ExamsOperationClaims;
 
 namespace Application.Features.Exams.Commands.Update;
 
-public class UpdateExamCommand : IRequest<UpdatedExamResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class UpdateExamCommand : IRequest<UpdatedExamResponse>/*, ISecuredRequest*/, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
     public Guid ClassRoomTypeId { get; set; }
@@ -23,7 +23,7 @@ public class UpdateExamCommand : IRequest<UpdatedExamResponse>, ISecuredRequest,
     public string QuestionType { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    
+   
 
     public string[] Roles => new[] { Admin, Write, ExamsOperationClaims.Update };
 

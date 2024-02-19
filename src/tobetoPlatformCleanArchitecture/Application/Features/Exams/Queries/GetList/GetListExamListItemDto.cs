@@ -1,4 +1,5 @@
 using Core.Application.Dtos;
+using Domain.Entities;
 
 namespace Application.Features.Exams.Queries.GetList;
 
@@ -13,5 +14,5 @@ public class GetListExamListItemDto : IDto
     public string QuestionType { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    
+   
 }

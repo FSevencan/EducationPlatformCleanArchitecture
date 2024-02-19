@@ -1,4 +1,5 @@
 using Core.Application.Responses;
+using Domain.Entities;
 
 namespace Application.Features.Exams.Commands.Create;
 
@@ -13,5 +14,5 @@ public class CreatedExamResponse : IResponse
     public string QuestionType { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    
+   
 }

@@ -38,6 +38,9 @@ using Application.Services.ClassRoomTypeSections;
 using Application.Services.MentorshipSessions;
 using Application.Services.CampusEncounters;
 using Application.Services.StudentLessons;
+using Application.Services.Choices;
+using Application.Services.Questions;
+using Application.Services.UserAnswers;
 
 using Application.Services.StudentSkills;
 
@@ -108,6 +111,9 @@ public static class ApplicationServiceRegistration
   services.AddScoped<IClassRoomTypesService, ClassRoomTypesManager>();
   services.AddScoped<ISurveysService, SurveysManager>();
   services.AddScoped<IStudentLessonsService, StudentLessonsManager>();
+  services.AddScoped<IChoicesService, ChoicesManager>();
+  services.AddScoped<IQuestionsService, QuestionsManager>();
+  services.AddScoped<IUserAnswersService, UserAnswersManager>();
         return services;
     }
 

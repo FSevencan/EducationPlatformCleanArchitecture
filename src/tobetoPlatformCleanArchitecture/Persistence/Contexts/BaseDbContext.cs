@@ -41,6 +41,9 @@ public class BaseDbContext : DbContext
     public DbSet<MentorshipSession> MentorshipSessions { get; set; }
     public DbSet<CampusEncounter> CampusEncounters { get; set; }
     public DbSet<StudentLesson> StudentLessons { get; set; }
+    public DbSet<Choice> Choices { get; set; }
+    public DbSet<Question> Questions { get; set; }
+    public DbSet<UserAnswer> UserAnswers { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
