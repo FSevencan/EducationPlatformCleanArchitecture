@@ -12,6 +12,8 @@ public class StudentConfiguration : IEntityTypeConfiguration<Student>
 
         builder.Property(s => s.Id).HasColumnName("Id").IsRequired();
         builder.Property(s => s.UserId).HasColumnName("UserId");
+        builder.Property(s => s.ProvinceId).HasColumnName("ProvinceId");
+        builder.Property(s => s.DistrictId).HasColumnName("DistrictId");
         builder.Property(s => s.ImageUrl).HasColumnName("ImageUrl");
         builder.Property(s => s.BirthDate).HasColumnName("BirthDate");
         builder.Property(s => s.PhoneNumber).HasColumnName("PhoneNumber");

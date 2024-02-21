@@ -44,6 +44,8 @@ public class BaseDbContext : DbContext
     public DbSet<Choice> Choices { get; set; }
     public DbSet<Question> Questions { get; set; }
     public DbSet<UserAnswer> UserAnswers { get; set; }
+    public DbSet<District> Districts { get; set; }
+    public DbSet<Province> Provinces { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

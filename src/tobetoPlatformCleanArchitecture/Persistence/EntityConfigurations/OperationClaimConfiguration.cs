@@ -266,8 +266,24 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Add" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "UserAnswers.Delete" });
+        #endregion
+        #region Districts
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Districts.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Districts.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Districts.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Districts.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Districts.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Districts.Delete" });
+        #endregion
+        #region Provinces
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Provinces.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Provinces.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Provinces.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Provinces.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Provinces.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Provinces.Delete" });
         return seeds;
         #endregion
-
+        
     }
 }

@@ -41,6 +41,8 @@ using Application.Services.StudentLessons;
 using Application.Services.Choices;
 using Application.Services.Questions;
 using Application.Services.UserAnswers;
+using Application.Services.Districts;
+using Application.Services.Provinces;
 
 using Application.Services.StudentSkills;
 
@@ -114,6 +116,8 @@ public static class ApplicationServiceRegistration
   services.AddScoped<IChoicesService, ChoicesManager>();
   services.AddScoped<IQuestionsService, QuestionsManager>();
   services.AddScoped<IUserAnswersService, UserAnswersManager>();
+  services.AddScoped<IDistrictsService, DistrictsManager>();
+  services.AddScoped<IProvincesService, ProvincesManager>();
         return services;
     }
 
