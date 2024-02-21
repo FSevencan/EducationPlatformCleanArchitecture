@@ -1,3 +1,4 @@
+using Application.Features.Exams.Queries.GetByIdForQuestions;
 using Application.Features.Questions.Commands.Create;
 using Application.Features.Questions.Commands.Delete;
 using Application.Features.Questions.Commands.Update;

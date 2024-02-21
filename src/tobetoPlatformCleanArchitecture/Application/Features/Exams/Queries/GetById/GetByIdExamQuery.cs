@@ -9,13 +9,13 @@ using static Application.Features.Exams.Constants.ExamsOperationClaims;
 
 namespace Application.Features.Exams.Queries.GetById;
 
-public class GetByIdExamQuery : IRequest<GetByIdExamResponse>/*, ISecuredRequest*/
+public class GetByIdExamQuestionsQuery : IRequest<GetByIdExamResponse>/*, ISecuredRequest*/
 {
     public Guid Id { get; set; }
 
     public string[] Roles => new[] { Admin, Read };
 
-    public class GetByIdExamQueryHandler : IRequestHandler<GetByIdExamQuery, GetByIdExamResponse>
+    public class GetByIdExamQueryHandler : IRequestHandler<GetByIdExamQuestionsQuery, GetByIdExamResponse>
     {
         private readonly IMapper _mapper;
         private readonly IExamRepository _examRepository;
@@ -28,7 +28,7 @@ public class GetByIdExamQuery : IRequest<GetByIdExamResponse>/*, ISecuredRequest
             _examBusinessRules = examBusinessRules;
         }
 
-        public async Task<GetByIdExamResponse> Handle(GetByIdExamQuery request, CancellationToken cancellationToken)
+        public async Task<GetByIdExamResponse> Handle(GetByIdExamQuestionsQuery request, CancellationToken cancellationToken)
         {
             Exam? exam = await _examRepository.GetAsync(predicate: e => e.Id == request.Id, cancellationToken: cancellationToken);
             await _examBusinessRules.ExamShouldExistWhenSelected(exam);

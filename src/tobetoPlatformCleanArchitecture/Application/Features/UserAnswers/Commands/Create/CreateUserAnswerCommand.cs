@@ -13,13 +13,15 @@ using Core.Security.Entities;
 
 namespace Application.Features.UserAnswers.Commands.Create;
 
-public class CreateUserAnswerCommand : IRequest<CreatedUserAnswerResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateUserAnswerCommand : IRequest<CreatedUserAnswerResponse>/*, ISecuredRequest*/, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public int UserId { get; set; }
-    public Guid ChoiceId { get; set; }
-    public Guid QuestionId { get; set; }
-    public string AnswerText { get; set; }
-   
+    public Guid ExamId { get; set; }
+
+    public int CorrectCount { get; set; }
+    public int WrongCount { get; set; }
+    public int EmptyCount { get; set; }
+    public int? TotalScore { get; set; }
 
     public string[] Roles => new[] { Admin, Write, UserAnswersOperationClaims.Create };
 

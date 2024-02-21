@@ -6,10 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Features.Questions.Queries.GetListByExamId;
-public class GetListChoiceDto: IDto
+namespace Application.Features.Exams.Queries.GetByIdForQuestions;
+public class GetListChoiceDto : IDto
 {
-    public Guid QuestionId { get; set; }
+    public Guid Id { get; set; }    
     public string Text { get; set; }
     public bool IsCorrect { get; set; }
 }

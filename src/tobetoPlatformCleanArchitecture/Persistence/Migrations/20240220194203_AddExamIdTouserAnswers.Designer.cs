@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Persistence.Contexts;
 
@@ -11,9 +12,11 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    partial class BaseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240220194203_AddExamIdTouserAnswers")]
+    partial class AddExamIdTouserAnswers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1317,8 +1320,8 @@ namespace Persistence.Migrations
                             Email = "admin@admin.com",
                             FirstName = "Admin",
                             LastName = "NArchitecture",
-                            PasswordHash = new byte[] { 85, 187, 163, 155, 213, 226, 188, 198, 43, 71, 120, 76, 43, 60, 69, 66, 72, 50, 189, 133, 147, 143, 70, 62, 94, 191, 94, 190, 30, 109, 240, 64, 21, 93, 140, 8, 152, 221, 9, 49, 194, 28, 189, 36, 226, 122, 243, 243, 215, 244, 237, 136, 115, 150, 24, 33, 160, 106, 4, 139, 161, 165, 85, 161 },
-                            PasswordSalt = new byte[] { 85, 57, 41, 246, 176, 5, 121, 60, 5, 181, 232, 156, 10, 199, 189, 202, 197, 36, 29, 102, 126, 211, 191, 192, 213, 116, 15, 196, 234, 139, 26, 29, 73, 139, 244, 103, 188, 181, 254, 186, 237, 70, 100, 168, 59, 205, 77, 186, 103, 219, 27, 18, 145, 62, 176, 100, 80, 30, 12, 233, 98, 239, 146, 96, 56, 215, 14, 58, 243, 115, 241, 99, 117, 181, 45, 24, 85, 195, 147, 156, 74, 29, 137, 165, 195, 196, 212, 162, 154, 181, 213, 155, 182, 151, 122, 187, 59, 99, 36, 103, 83, 210, 116, 24, 33, 93, 176, 142, 150, 26, 75, 141, 145, 14, 39, 38, 25, 88, 34, 210, 104, 35, 133, 52, 112, 114, 166, 109 },
+                            PasswordHash = new byte[] { 140, 175, 9, 189, 154, 89, 222, 17, 201, 246, 162, 75, 80, 162, 153, 142, 72, 59, 59, 66, 174, 205, 102, 133, 207, 186, 168, 43, 105, 253, 152, 218, 92, 7, 132, 20, 10, 208, 130, 78, 152, 244, 162, 22, 223, 208, 197, 192, 81, 169, 246, 190, 181, 209, 244, 18, 67, 35, 159, 20, 156, 232, 29, 246 },
+                            PasswordSalt = new byte[] { 135, 65, 73, 229, 52, 60, 202, 180, 27, 255, 32, 240, 205, 72, 143, 157, 26, 206, 76, 73, 112, 170, 180, 32, 118, 211, 29, 254, 215, 119, 29, 53, 86, 127, 200, 109, 6, 207, 113, 104, 241, 166, 143, 191, 63, 248, 121, 39, 248, 235, 28, 88, 42, 23, 46, 166, 185, 190, 151, 107, 174, 238, 83, 145, 30, 15, 27, 244, 223, 89, 170, 162, 228, 24, 223, 96, 221, 202, 47, 85, 177, 73, 130, 209, 69, 192, 29, 12, 11, 204, 169, 15, 200, 250, 205, 9, 233, 85, 104, 99, 204, 124, 51, 145, 102, 254, 234, 77, 95, 173, 91, 97, 51, 241, 69, 25, 188, 128, 84, 224, 208, 217, 29, 48, 165, 27, 124, 102 },
                             Status = true
                         });
                 });
@@ -2446,9 +2449,14 @@ namespace Persistence.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("Id");
 
-                    b.Property<int>("CorrectCount")
-                        .HasColumnType("int")
-                        .HasColumnName("CorrectCount");
+                    b.Property<string>("AnswerText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("AnswerText");
+
+                    b.Property<Guid>("ChoiceId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("ChoiceId");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2")
@@ -2458,15 +2466,12 @@ namespace Persistence.Migrations
                         .HasColumnType("datetime2")
                         .HasColumnName("DeletedDate");
 
-                    b.Property<int>("EmptyCount")
-                        .HasColumnType("int")
-                        .HasColumnName("EmptyCount");
-
                     b.Property<Guid>("ExamId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int?>("TotalScore")
-                        .HasColumnType("int");
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("QuestionId");
 
                     b.Property<DateTime?>("UpdatedDate")
                         .HasColumnType("datetime2")
@@ -2476,13 +2481,13 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("UserId");
 
-                    b.Property<int>("WrongCount")
-                        .HasColumnType("int")
-                        .HasColumnName("WrongCount");
-
                     b.HasKey("Id");
 
+                    b.HasIndex("ChoiceId");
+
                     b.HasIndex("ExamId");
+
+                    b.HasIndex("QuestionId");
 
                     b.HasIndex("UserId");
 
@@ -2783,9 +2788,21 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.UserAnswer", b =>
                 {
+                    b.HasOne("Domain.Entities.Choice", "Choice")
+                        .WithMany()
+                        .HasForeignKey("ChoiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Exam", "Exam")
                         .WithMany("UserAnswers")
                         .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Question", "Question")
+                        .WithMany()
+                        .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -2795,7 +2812,11 @@ namespace Persistence.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Choice");
+
                     b.Navigation("Exam");
+
+                    b.Navigation("Question");
 
                     b.Navigation("User");
                 });

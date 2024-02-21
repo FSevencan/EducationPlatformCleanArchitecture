@@ -7,7 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
-using Application.Features.Questions.Queries.GetListByExamId;
+using Application.Features.Exams.Queries.GetByIdForQuestions;
 
 namespace Application.Features.Questions.Profiles;
 

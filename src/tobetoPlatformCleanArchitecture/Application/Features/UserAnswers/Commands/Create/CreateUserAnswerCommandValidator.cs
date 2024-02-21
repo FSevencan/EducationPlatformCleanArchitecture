@@ -7,9 +7,10 @@ public class CreateUserAnswerCommandValidator : AbstractValidator<CreateUserAnsw
     public CreateUserAnswerCommandValidator()
     {
         RuleFor(c => c.UserId).NotEmpty();
-        RuleFor(c => c.ChoiceId).NotEmpty();
-        RuleFor(c => c.QuestionId).NotEmpty();
-        RuleFor(c => c.AnswerText).NotEmpty();
-       
+        RuleFor(c => c.CorrectCount).NotEmpty();
+        RuleFor(c => c.WrongCount).NotEmpty();
+        RuleFor(c => c.EmptyCount).NotEmpty();
+        RuleFor(c => c.TotalScore).NotEmpty();
+
     }
 }

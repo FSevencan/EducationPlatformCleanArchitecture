@@ -10,6 +10,7 @@ using Core.Persistence.Paging;
 using MediatR;
 using static Application.Features.Questions.Constants.QuestionsOperationClaims;
 using Microsoft.EntityFrameworkCore;
+using Application.Features.Exams.Queries.GetByIdForQuestions;
 
 namespace Application.Features.Questions.Queries.GetListByExamId;
 
@@ -39,8 +40,8 @@ public class GetListQuestionByExamIdQuery : IRequest<GetListResponse<GetListQues
         public async Task<GetListResponse<GetListQuestionByExamIdDto>> Handle(GetListQuestionByExamIdQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Question> questions = await _questionRepository.GetListAsync(
-                predicate: q=>q.ExamId == request.ExamId,
-                include: q => q.Include(c=>c.Choices),
+                predicate: q => q.ExamId == request.ExamId,
+                include: q => q.Include(c => c.Choices),
                 index: request.PageRequest.PageIndex,
                 size: request.PageRequest.PageSize,
                 cancellationToken: cancellationToken
