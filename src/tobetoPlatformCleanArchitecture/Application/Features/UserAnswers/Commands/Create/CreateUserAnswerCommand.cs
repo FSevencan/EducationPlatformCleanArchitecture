@@ -17,10 +17,9 @@ public class CreateUserAnswerCommand : IRequest<CreatedUserAnswerResponse>/*, IS
 {
     public int UserId { get; set; }
     public Guid ExamId { get; set; }
-
-    public int CorrectCount { get; set; }
-    public int WrongCount { get; set; }
-    public int EmptyCount { get; set; }
+    public int? CorrectCount { get; set; }
+    public int? WrongCount { get; set; }
+    public int? EmptyCount { get; set; }
     public int? TotalScore { get; set; }
 
     public string[] Roles => new[] { Admin, Write, UserAnswersOperationClaims.Create };
