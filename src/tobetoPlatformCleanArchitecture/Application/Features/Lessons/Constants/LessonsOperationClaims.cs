@@ -3,7 +3,7 @@ namespace Application.Features.Lessons.Constants;
 public static class LessonsOperationClaims
 {
     public const string Admin = "Lessons.Admin";
-
+    public const string instructor = "instructor";
     public const string Read = "Lessons.Read";
     public const string Write = "Lessons.Write";
 

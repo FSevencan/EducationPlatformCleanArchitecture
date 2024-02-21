@@ -14,11 +14,11 @@ namespace Application.Features.Courses.Commands.Create;
 
 public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public double TotalTime { get; set; }
+    public double? TotalTime { get; set; }
     public string Name { get; set; }
     
 
-    public string[] Roles => new[] { Admin, Write, CoursesOperationClaims.Create };
+    public string[] Roles => new[] { Admin, instructor, Write, CoursesOperationClaims.Create };
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

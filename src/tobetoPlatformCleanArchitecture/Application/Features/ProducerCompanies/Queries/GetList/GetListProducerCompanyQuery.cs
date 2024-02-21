@@ -12,11 +12,10 @@ using static Application.Features.ProducerCompanies.Constants.ProducerCompaniesO
 
 namespace Application.Features.ProducerCompanies.Queries.GetList;
 
-public class GetListProducerCompanyQuery : IRequest<GetListResponse<GetListProducerCompanyListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListProducerCompanyQuery : IRequest<GetListResponse<GetListProducerCompanyListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
 
     public bool BypassCache { get; }
     public string CacheKey => $"GetListProducerCompanies({PageRequest.PageIndex},{PageRequest.PageSize})";

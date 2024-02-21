@@ -20,7 +20,7 @@ public class CreateLessonCommand : IRequest<CreatedLessonResponse>, ISecuredRequ
     public double Time { get; set; }
  
 
-    public string[] Roles => new[] { Admin, Write, LessonsOperationClaims.Create };
+    public string[] Roles => new[] { Admin, Write, instructor, LessonsOperationClaims.Create };
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }

@@ -20,9 +20,6 @@ public class GetListCourseQuery : IRequest<GetListResponse<GetListCourseListItem
     public PageRequest PageRequest { get; set; }
 
    
-
-  
-
     public class GetListCourseQueryHandler : IRequestHandler<GetListCourseQuery, GetListResponse<GetListCourseListItemDto>>
     {
         private readonly ICourseRepository _courseRepository;

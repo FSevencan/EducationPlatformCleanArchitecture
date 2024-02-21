@@ -6,7 +6,6 @@ public class CreateCourseCommandValidator : AbstractValidator<CreateCourseComman
 {
     public CreateCourseCommandValidator()
     {
-        RuleFor(c => c.TotalTime).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
         
     }

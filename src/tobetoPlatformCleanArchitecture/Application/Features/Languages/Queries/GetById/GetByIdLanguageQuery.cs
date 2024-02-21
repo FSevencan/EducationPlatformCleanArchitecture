@@ -9,11 +9,11 @@ using static Application.Features.Languages.Constants.LanguagesOperationClaims;
 
 namespace Application.Features.Languages.Queries.GetById;
 
-public class GetByIdLanguageQuery : IRequest<GetByIdLanguageResponse>, ISecuredRequest
+public class GetByIdLanguageQuery : IRequest<GetByIdLanguageResponse>
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
+
 
     public class GetByIdLanguageQueryHandler : IRequestHandler<GetByIdLanguageQuery, GetByIdLanguageResponse>
     {
