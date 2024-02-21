@@ -8,6 +8,7 @@ using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
 using Application.Features.Exams.Queries.GetByIdForQuestions;
+using Application.Features.Students.Queries.GetListExamByUserId;
 
 namespace Application.Features.Exams.Profiles;
 
@@ -25,5 +26,10 @@ public class MappingProfiles : Profile
         CreateMap<IPaginate<Exam>, GetListResponse<GetListExamListItemDto>>().ReverseMap();       
         CreateMap<Exam, GetByIdExamForQuestionsResponse>()
             .ForMember(dest => dest.Questions, opt=>opt.MapFrom(src => src.Questions)).ReverseMap();
+
+        CreateMap<Exam, GetListExamByUserIdDto>()
+            .ForMember(dest=>dest.UserAnswers, opt=> opt.MapFrom(src=>src.UserAnswers))
+            .ReverseMap();
+        CreateMap<UserAnswer, GetListUserAnswersDto>().ReverseMap();
     }
 }

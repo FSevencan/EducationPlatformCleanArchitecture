@@ -8,10 +8,9 @@ public class GetListUserAnswerListItemDto : IDto
 {
     public Guid Id { get; set; }
     public int UserId { get; set; }
-    public Guid ChoiceId { get; set; }
-    public Guid QuestionId { get; set; }
-    public string AnswerText { get; set; }
-    public Question Question { get; set; }
-    public User User { get; set; }
-    public Choice Choice { get; set; }
+    public Guid ExamId { get; set; }
+    public int CorrectCount { get; set; }
+    public int WrongCount { get; set; }
+    public int EmptyCount { get; set; }
+    public int? TotalScore { get; set; }
 }

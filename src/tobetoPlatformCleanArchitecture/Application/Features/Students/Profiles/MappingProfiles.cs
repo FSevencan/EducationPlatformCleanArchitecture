@@ -12,6 +12,7 @@ using Application.Features.Students.Queries.GetById.Dtos;
 using Application.Features.Students.Queries.GetBySection;
 using Application.Features.Students.Queries.GetListSkillByUserId;
 using Application.Features.Students.Queries.GetListCertificateByUserId;
+using Application.Features.Students.Queries.GetListExamByUserId;
 
 namespace Application.Features.Students.Profiles;
 
@@ -124,5 +125,9 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
 
 
+        CreateMap<Student, GetListExamByUserIdResponse>()
+            .ForMember(dest => dest.Exams, opt => opt.MapFrom(src => src.StudentClassRooms
+            .SelectMany(sc => sc.ClassRoom.ClassRoomType.Exams))).ReverseMap();
+        
     }
 }

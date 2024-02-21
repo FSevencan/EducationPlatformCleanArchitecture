@@ -6,6 +6,7 @@ using Application.Features.Students.Queries.GetById;
 using Application.Features.Students.Queries.GetBySection;
 using Application.Features.Students.Queries.GetList;
 using Application.Features.Students.Queries.GetListCertificateByUserId;
+using Application.Features.Students.Queries.GetListExamByUserId;
 using Application.Features.Students.Queries.GetListSkillByUserId;
 using Core.Application.Requests;
 using Core.Application.Responses;
@@ -60,15 +61,20 @@ public class StudentsController : BaseController
         return Ok(response);
     }
 
-    //up-1
+   
     [HttpGet("skills/{userId}")]
     public async Task<IActionResult> GetSkillsByUserId([FromRoute] int userId)
     {
         GetListSkillByUserIdResponse response = await Mediator.Send(new GetListSkillByUserIdQuery { UserId = userId });
         return Ok(response);
     }
-
-
+   
+    [HttpGet("exams/{userId}")]
+    public async Task<IActionResult> GetExamsByUserId([FromRoute] int userId)
+    {
+        GetListExamByUserIdResponse response = await Mediator.Send(new GetListExamByUserIdQuery { UserId = userId });
+        return Ok(response);
+    }
 
     [HttpGet("certificates/{userId}")]
     public async Task<IActionResult> GetCertificatesByUserId([FromRoute] int userId)
