@@ -1,6 +1,7 @@
 using Application.Features.Districts.Commands.Create;
 using Application.Features.Districts.Commands.Delete;
 using Application.Features.Districts.Commands.Update;
+using Application.Features.Districts.Queries.GetAllDistrictsByProvince;
 using Application.Features.Districts.Queries.GetById;
 using Application.Features.Districts.Queries.GetList;
 using Core.Application.Requests;
@@ -51,4 +52,13 @@ public class DistrictsController : BaseController
         GetListResponse<GetListDistrictListItemDto> response = await Mediator.Send(getListDistrictQuery);
         return Ok(response);
     }
+
+    [HttpGet("{provinceId}/districts")]
+    public async Task<IActionResult> GetAllDistrictsByProvince([FromQuery] PageRequest pageRequest , int provinceId)
+    {
+        GetAllDistrictsByProvinceQuery getListDistrictQuery = new() { PageRequest = pageRequest , provinceId = provinceId };
+        GetListResponse<GetListDistrictListItemDto> response = await Mediator.Send(getListDistrictQuery);
+        return Ok(response);
+    }
+
 }

@@ -16,7 +16,6 @@ public class GetListProvinceQuery : IRequest<GetListResponse<GetListProvinceList
 {
     public PageRequest PageRequest { get; set; }
 
-    
 
     public class GetListProvinceQueryHandler : IRequestHandler<GetListProvinceQuery, GetListResponse<GetListProvinceListItemDto>>
     {

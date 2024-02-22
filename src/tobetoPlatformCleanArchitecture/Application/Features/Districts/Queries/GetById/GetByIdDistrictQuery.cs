@@ -1,11 +1,8 @@
-using Application.Features.Districts.Constants;
 using Application.Features.Districts.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
-using Core.Application.Pipelines.Authorization;
 using MediatR;
-using static Application.Features.Districts.Constants.DistrictsOperationClaims;
 
 namespace Application.Features.Districts.Queries.GetById;
 

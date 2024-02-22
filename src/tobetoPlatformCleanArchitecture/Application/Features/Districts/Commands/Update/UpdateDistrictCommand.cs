@@ -1,29 +1,17 @@
-using Application.Features.Districts.Constants;
 using Application.Features.Districts.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
-using Core.Application.Pipelines.Authorization;
-using Core.Application.Pipelines.Caching;
-using Core.Application.Pipelines.Logging;
-using Core.Application.Pipelines.Transaction;
 using MediatR;
-using static Application.Features.Districts.Constants.DistrictsOperationClaims;
 
 namespace Application.Features.Districts.Commands.Update;
 
-public class UpdateDistrictCommand : IRequest<UpdatedDistrictResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class UpdateDistrictCommand : IRequest<UpdatedDistrictResponse>
 {
     public int Id { get; set; }
     public int ProvinceId { get; set; }
     public string Name { get; set; }
-    
-
-    public string[] Roles => new[] { Admin, Write, DistrictsOperationClaims.Update };
-
-    public bool BypassCache { get; }
-    public string? CacheKey { get; }
-    public string CacheGroupKey => "GetDistricts";
+    public Province Province { get; set; }
 
     public class UpdateDistrictCommandHandler : IRequestHandler<UpdateDistrictCommand, UpdatedDistrictResponse>
     {

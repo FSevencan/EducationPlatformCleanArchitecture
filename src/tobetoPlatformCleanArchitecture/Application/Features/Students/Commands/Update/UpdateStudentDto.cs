@@ -9,6 +9,8 @@ namespace Application.Features.Students.Commands.Update;
 public class UpdateStudentDto:IDto
 {
     public int Id { get; set; }
+    public int? ProvinceId { get; set; }
+    public int? DistrictId { get; set; }
     public string? FirstName { get; set; }
     public string? LastName { get; set; }
     public string? Email { get; set; }
@@ -18,5 +20,5 @@ public class UpdateStudentDto:IDto
     public string? Biography { get; set; }
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
-    
+  
 }

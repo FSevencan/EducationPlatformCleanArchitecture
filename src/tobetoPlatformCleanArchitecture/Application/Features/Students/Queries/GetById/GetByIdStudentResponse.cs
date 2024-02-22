@@ -23,7 +23,8 @@ public class GetByIdStudentResponse : IResponse
     public string? Biography { get; set; }
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
-
+    public int? ProvinceId { get; set; }
+    public int? DistrictId { get; set; }
     public List<GetStudentSectionListDto>? Sections { get; set; }
     public List<string>? ClassRoomNames { get; set; }
   

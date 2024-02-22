@@ -4,5 +4,5 @@ namespace Application.Features.Districts.Commands.Delete;
 
 public class DeletedDistrictResponse : IResponse
 {
-    public Guid Id { get; set; }
+    public int Id { get; set; }
 }

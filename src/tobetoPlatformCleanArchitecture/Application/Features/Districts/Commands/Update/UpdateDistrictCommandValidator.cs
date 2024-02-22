@@ -9,5 +9,6 @@ public class UpdateDistrictCommandValidator : AbstractValidator<UpdateDistrictCo
         RuleFor(c => c.Id).NotEmpty();
         RuleFor(c => c.ProvinceId).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
+        RuleFor(c => c.Province).NotEmpty();
     }
 }

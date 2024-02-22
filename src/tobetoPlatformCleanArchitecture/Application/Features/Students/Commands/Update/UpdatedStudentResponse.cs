@@ -9,6 +9,8 @@ public class UpdatedStudentResponse : IResponse
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public string? ImageUrl { get; set; }
+    public int? ProvinceId { get; set; }
+    public int? DistrictId { get; set; }
     public string Email { get; set; }
     public DateTime? BirthDate { get; set; }
     public string? PhoneNumber { get; set; }
