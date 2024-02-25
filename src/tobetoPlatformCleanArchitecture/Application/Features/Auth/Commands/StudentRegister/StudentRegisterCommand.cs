@@ -3,11 +3,16 @@ using Application.Features.Auth.Rules;
 using Application.Services.AuthService;
 using Application.Services.Repositories;
 using Application.Services.Students;
+using Core.Mailing;
 using Core.Security.Entities;
 using Core.Security.Hashing;
 using Core.Security.JWT;
 using Domain.Entities;
+using Elasticsearch.Net;
+using MailKit;
 using MediatR;
+using MimeKit;
+using System.Runtime.ConstrainedExecution;
 
 
 namespace Application.Features.Auth.Commands.StudentRegister;
@@ -36,17 +41,21 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
         private readonly IStudentsService _studentsService;
         private readonly IOperationClaimRepository _operationClaimRepository;
         private readonly IUserOperationClaimRepository _userOperationClaimRepository;
+        private readonly IEmailAuthenticatorRepository _emailAuthenticatorRepository;
         private readonly IAuthService _authService;
         private readonly AuthBusinessRules _authBusinessRules;
+        private readonly Core.Mailing.IMailService _mailService;
 
-        public StudentRegisterCommandHandler(IUserRepository userRepository, IStudentsService studentsService, IOperationClaimRepository operationClaimRepository, IUserOperationClaimRepository userOperationClaimRepository, IAuthService authService, AuthBusinessRules authBusinessRules)
+        public StudentRegisterCommandHandler(IUserRepository userRepository, IStudentsService studentsService, IEmailAuthenticatorRepository emailAuthenticatorRepository, IOperationClaimRepository operationClaimRepository, IUserOperationClaimRepository userOperationClaimRepository, IAuthService authService, AuthBusinessRules authBusinessRules , Core.Mailing.IMailService mailService)
         {
             _userRepository = userRepository;
             _studentsService = studentsService;
             _operationClaimRepository = operationClaimRepository;
+            _emailAuthenticatorRepository = emailAuthenticatorRepository;
             _userOperationClaimRepository = userOperationClaimRepository;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
+             _mailService = mailService; 
         }
 
         public async Task<StudentRegisteredResponse> Handle(StudentRegisterCommand request, CancellationToken cancellationToken)
@@ -69,11 +78,19 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
                 LastName = request.StudentForRegisterDto.LastName,
                 PasswordHash = passwordHash,
                 PasswordSalt = passwordSalt,
-                Status = true
+                Status = true,  
             };
 
             // Kullanıcıyı veritabanına ekleme
             User createdUser = await _userRepository.AddAsync(newUser);
+
+            EmailAuthenticator emailAuthenticator = new EmailAuthenticator
+            {
+                UserId = createdUser.Id,
+                ActivationKey = Guid.NewGuid().ToString(),
+                IsVerified = false
+            };
+            await _emailAuthenticatorRepository.AddAsync(emailAuthenticator);
 
             // Yeni öğrenci nesnesi oluşturma
             Student newStudent = new Student
@@ -106,6 +123,23 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
             await _userOperationClaimRepository.AddAsync(userOperationClaim);
 
 
+            var verificationUrl = "http://localhost:3000/email-verified?token=" + emailAuthenticator.ActivationKey;
+            var projectRoot = Directory.GetCurrentDirectory();
+            var emailTemplatePath = Path.Combine(projectRoot, "EmailVerify", "email-template.html");
+            var htmlContent = System.IO.File.ReadAllText(emailTemplatePath);
+            
+            // Placeholder'ı gerçek URL ile değiştir
+            htmlContent = htmlContent.Replace("{verificationUrl}", verificationUrl);
+
+            await _mailService.SendEmailAsync(new Mail
+            {
+                ToList = new List<MailboxAddress> {
+            new MailboxAddress($"{request.StudentForRegisterDto.FirstName} {request.StudentForRegisterDto.LastName}",
+             request.StudentForRegisterDto.Email)
+             },
+                Subject = "E-mail Doğrulama - Tobeto Platform",
+                HtmlBody = htmlContent
+            });
             // Yanıt nesnesini oluşturma ve dönme
             StudentRegisteredResponse studentRegisteredResponse = new StudentRegisteredResponse
             {

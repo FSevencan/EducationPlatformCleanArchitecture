@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-posta Doğrulama - Tobeto Platform</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        .email-container {
+            max-width: 600px;
+            margin: 40px auto;
+            background-color: #ffffff;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+
+        .email-header {
+            background-color: #004aad; 
+            color: #ffffff;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .email-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+            .email-content p {
+                font-size: 18px;
+                margin-top: 30px;
+            }
+
+            .email-content a {
+                margin-top: 36px;
+                text-decoration: none;
+                display: inline-block;
+                background-color: #1a73e8;
+                color: white;
+                padding: 15px 25px;
+                border-radius: 5px;
+                font-weight: bold;
+            }
+
+        .email-button {
+            background-color: #16a34a !important;
+            color: #ffffff;
+            padding: 10px 20px;
+            margin: 20px auto;
+            display: block;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+
+
+        .email-footer {
+            background-color: #f1f1f1;
+            color: #888888;
+            font-size: 12px;
+            text-align: center;
+            padding: 10px 20px;
+        }
+
+        .logo {
+            max-width: 250px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="email-header">
+            <img src="https://i.imgur.com/EJVWuBJ.png" alt="Tobeto Logo" class="logo">
+        </div>
+        <div class="email-content">
+            <p>Lütfen e-mail adresinizi doğrulamak için aşağıdaki butona tıklayın.</p>
+            
+            <a href="{verificationUrl}" class="email-button">E-posta Adresimi Doğrula</a>
+        </div>
+    </div>
+</body>
+</html>
