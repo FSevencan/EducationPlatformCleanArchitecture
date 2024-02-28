@@ -79,27 +79,26 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-app.UseSwaggerUI(opt =>
-{
-    opt.DocExpansion(DocExpansion.None);
-});
+    app.UseSwaggerUI(opt =>
+    {
+        opt.DocExpansion(DocExpansion.None);
+    });
 }
 
 app.UseHttpsRedirection();
 
+app.UseRouting();
 
+
+app.UseCors(policy =>
+    policy.WithOrigins("http://localhost:3000", "https://tobeto-platform.vercel.app")
+    .AllowAnyHeader()
+    .AllowAnyMethod()
+    .AllowCredentials());
 
 app.UseAuthentication();
 app.UseAuthorization();
 
-
-
 app.MapControllers();
-
-app.UseCors(policy =>
-    policy.WithOrigins("http://localhost:3000")
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials());
 
 app.Run();
