@@ -37,7 +37,7 @@ public class GetListExamByUserIdQuery : IRequest<GetListExamByUserIdResponse>
                               .ThenInclude(c=>c.ClassRoom)
                               .ThenInclude(cr=>cr.ClassRoomType)
                               .ThenInclude(ct=>ct.Exams)
-                              .ThenInclude(e=>e.UserAnswers),
+                              .ThenInclude(e=>e.UserAnswers.Where(a=>a.UserId == request.UserId)),
                 cancellationToken: cancellationToken);
 
             GetListExamByUserIdResponse response = _mapper.Map<GetListExamByUserIdResponse>(student);

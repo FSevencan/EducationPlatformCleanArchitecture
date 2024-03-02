@@ -10,9 +10,6 @@ public class UpdateUserAnswerCommandValidator : AbstractValidator<UpdateUserAnsw
         RuleFor(c => c.UserId).NotEmpty();
         RuleFor(c => c.ChoiceId).NotEmpty();
         RuleFor(c => c.QuestionId).NotEmpty();
-        RuleFor(c => c.AnswerText).NotEmpty();
-        RuleFor(c => c.Question).NotEmpty();
-        RuleFor(c => c.User).NotEmpty();
-        RuleFor(c => c.Choice).NotEmpty();
+        RuleFor(c => c.AnswerText).NotEmpty();     
     }
 }

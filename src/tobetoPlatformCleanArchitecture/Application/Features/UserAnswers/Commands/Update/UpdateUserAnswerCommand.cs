@@ -20,9 +20,7 @@ public class UpdateUserAnswerCommand : IRequest<UpdatedUserAnswerResponse>, ISec
     public Guid ChoiceId { get; set; }
     public Guid QuestionId { get; set; }
     public string AnswerText { get; set; }
-    public Question Question { get; set; }
-    public User User { get; set; }
-    public Choice Choice { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, UserAnswersOperationClaims.Update };
 
