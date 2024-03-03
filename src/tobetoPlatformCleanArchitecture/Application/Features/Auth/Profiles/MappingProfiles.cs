@@ -10,7 +10,7 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<RefreshToken, RevokedTokenResponse>().ReverseMap();
-        CreateMap<EmailAuthenticator, UserIDIsVerifiedResponse>();
+   
 
     }
 }

@@ -110,12 +110,7 @@ public class AuthController : BaseController
         await Mediator.Send(verifyEmailAuthenticatorCommand);
         return Ok();
     }
-    [HttpGet("VerifyUserIDActivationKey")]
-    public async Task<IActionResult> ConfirmActivationKey([FromQuery] VerifyUserIDActivationKeyCommand VerifyUserIDActivationKeyCommand)
-    {
-        await Mediator.Send(VerifyUserIDActivationKeyCommand);
-        return Ok();
-    }
+
 
     [HttpPost("VerifyOtpAuthenticator")]
     public async Task<IActionResult> VerifyOtpAuthenticator([FromBody] string authenticatorCode)
