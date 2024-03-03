@@ -52,6 +52,13 @@ public class AuthBusinessRules : BaseBusinessRules
         return Task.CompletedTask;
     }
 
+    public Task AuthenticatorActivationKey(EmailAuthenticator emailAuthenticator)
+    {
+        if (emailAuthenticator.IsVerified==false)
+            throw new BusinessException(AuthMessages.EmailNotVerified);
+        return Task.CompletedTask;
+    }
+    
     public Task UserShouldBeExistsWhenSelected(User? user)
     {
         if (user == null)
