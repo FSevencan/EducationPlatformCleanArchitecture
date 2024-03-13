@@ -123,7 +123,7 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
             await _userOperationClaimRepository.AddAsync(userOperationClaim);
 
 
-            var verificationUrl = "http://localhost:3000/email-verified?token=" + emailAuthenticator.ActivationKey;
+            var verificationUrl = "https://tobeto.fatihsevencan.com/email-verified?token=" + emailAuthenticator.ActivationKey;
             var projectRoot = Directory.GetCurrentDirectory();
             var emailTemplatePath = Path.Combine(projectRoot, "EmailVerify", "email-template.html");
             var htmlContent = System.IO.File.ReadAllText(emailTemplatePath);
@@ -140,6 +140,7 @@ public class StudentRegisterCommand : IRequest<StudentRegisteredResponse>
                 Subject = "E-mail Doğrulama - Tobeto Platform",
                 HtmlBody = htmlContent
             });
+
             // Yanıt nesnesini oluşturma ve dönme
             StudentRegisteredResponse studentRegisteredResponse = new StudentRegisteredResponse
             {

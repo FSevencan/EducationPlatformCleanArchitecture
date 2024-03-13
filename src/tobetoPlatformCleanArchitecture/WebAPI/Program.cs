@@ -1,17 +1,19 @@
 using Application;
 
-using Core.CrossCuttingConcerns.Exceptions.Extensions;
+
 using Core.Security;
 using Core.Security.Encryption;
 using Core.Security.JWT;
-using Core.WebAPI.Extensions.Swagger;
-using Infrastructure;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Persistence;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
+using Microsoft.Extensions.DependencyInjection;
+using Core.CrossCuttingConcerns.Exceptions.Types;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,6 +26,7 @@ builder.Services.AddSecurityServices();
 builder.Services.AddPersistenceServices(builder.Configuration);
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddHttpContextAccessor();
+
 
 const string tokenOptionsConfigurationSection = "TokenOptions";
 TokenOptions tokenOptions = builder.Configuration.GetSection(tokenOptionsConfigurationSection).Get<TokenOptions>()
@@ -83,15 +86,51 @@ if (app.Environment.IsDevelopment())
     {
         opt.DocExpansion(DocExpansion.None);
     });
+    app.UseDeveloperExceptionPage();
 }
+else
+{
 
+    app.UseExceptionHandler(appError =>
+    {
+        appError.Run(async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.ContentType = "application/json";
+            context.Response.Headers.Add("Access-Control-Allow-Origin", "*");
+
+            var contextFeature = context.Features.Get<IExceptionHandlerFeature>();
+            if (contextFeature != null)
+            {
+                Console.WriteLine($"Something went wrong: {contextFeature.Error}");
+
+                var message = "Internal Server Error. Please try again later.";
+                var statusCode = context.Response.StatusCode;
+
+               
+                if (contextFeature.Error is BusinessException businessException)
+                {
+                    message = businessException.Message; 
+                    statusCode = StatusCodes.Status400BadRequest; 
+                    context.Response.StatusCode = statusCode; 
+                }
+
+                await context.Response.WriteAsync(new
+                {
+                    StatusCode = statusCode,
+                    Message = message
+                }.ToString());
+            }
+        });
+    });
+}
 app.UseHttpsRedirection();
 
 app.UseRouting();
 
 
 app.UseCors(policy =>
-    policy.WithOrigins("http://localhost:3000", "https://tobeto-platform.vercel.app")
+    policy.WithOrigins("http://localhost:3000", "https://tobeto.fatihsevencan.com" )
     .AllowAnyHeader()
     .AllowAnyMethod()
     .AllowCredentials());

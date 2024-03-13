@@ -22,8 +22,6 @@ public class UpdateStudentCommand : IRequest<UpdatedStudentResponse>, ICacheRemo
     public UpdateStudentDto UpdateStudentDto { get; set; }
 
 
-    public string[] Roles => new[] { Admin, Write, StudentsOperationClaims.Update };
-
     public bool BypassCache { get; }
     public string? CacheKey { get; }
     public string CacheGroupKey => "GetStudents";
