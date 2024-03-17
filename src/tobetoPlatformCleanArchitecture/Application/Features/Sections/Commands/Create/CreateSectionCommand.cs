@@ -9,6 +9,11 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Sections.Constants.SectionsOperationClaims;
+using MailKit;
+using Core.Mailing;
+using MimeKit;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace Application.Features.Sections.Commands.Create;
 
@@ -35,13 +40,19 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
         private readonly IMapper _mapper;
         private readonly ISectionRepository _sectionRepository;
         private readonly SectionBusinessRules _sectionBusinessRules;
+        private readonly Core.Mailing.IMailService _mailService;
+        private readonly ISubscriptionRepository _subscriptionRepository;
+        private readonly ILogger<CreateSectionCommandHandler> _logger;
 
         public CreateSectionCommandHandler(IMapper mapper, ISectionRepository sectionRepository,
-                                         SectionBusinessRules sectionBusinessRules)
+                                         SectionBusinessRules sectionBusinessRules, ILogger<CreateSectionCommandHandler> logger, Core.Mailing.IMailService mailService, ISubscriptionRepository subscriptionRepository)
         {
             _mapper = mapper;
             _sectionRepository = sectionRepository;
             _sectionBusinessRules = sectionBusinessRules;
+            _mailService = mailService;
+            _subscriptionRepository = subscriptionRepository;
+            _logger = logger;
         }
 
         public async Task<CreatedSectionResponse> Handle(CreateSectionCommand request, CancellationToken cancellationToken)
@@ -66,8 +77,22 @@ public class CreateSectionCommand : IRequest<CreatedSectionResponse>, ISecuredRe
                 CreatedDate = DateTime.Now,
             }).ToList();
 
-
             await _sectionRepository.AddAsync(section);
+
+            // Yeni eklenen section için abonelere e-posta gönder
+            var subscriptionsForClassRoomType = await _subscriptionRepository.GetListAsync(
+            include: u => u.Include(user => user.User),
+            predicate: sub => request.ClassRoomTypeIds.Contains(sub.ClassRoomTypeId) && sub.DeletedDate == null
+            );
+
+            // E-posta gönderilecek abonelikler filtreleniyor
+            var activeSubscriptions = subscriptionsForClassRoomType.Items
+                .Where(sub => sub.DeletedDate == null)
+                .ToList();
+
+            // Sadece aktif abonelere e-posta gönderiliyor
+            await _mailService.SendSectionCreatedEmailAsync(activeSubscriptions, section);
+
 
             CreatedSectionResponse response = _mapper.Map<CreatedSectionResponse>(section);
             return response;

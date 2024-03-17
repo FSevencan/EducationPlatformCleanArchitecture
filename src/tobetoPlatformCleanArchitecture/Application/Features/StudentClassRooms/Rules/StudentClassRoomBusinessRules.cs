@@ -31,4 +31,13 @@ public class StudentClassRoomBusinessRules : BaseBusinessRules
         );
         await StudentClassRoomShouldExistWhenSelected(studentClassRoom);
     }
+
+    public Task StudentShouldBeAssignedToClassRoom(Student student)
+    {
+        if (student.StudentClassRooms == null || !student.StudentClassRooms.Any())
+            throw new BusinessException("Abone olabilmek için sýnýf atamanýzýn yapýlmasý gerekmektedir.");
+
+        return Task.CompletedTask;
+    }
+
 }

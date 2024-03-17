@@ -5,7 +5,7 @@ using AutoMapper;
 using Domain.Entities;
 using Core.Application.Pipelines.Authorization;
 using MediatR;
-using static Application.Features.ClassRoomTypes.Constants.ClassRoomTypesOperationClaims;
+
 
 namespace Application.Features.ClassRoomTypes.Queries.GetById;
 

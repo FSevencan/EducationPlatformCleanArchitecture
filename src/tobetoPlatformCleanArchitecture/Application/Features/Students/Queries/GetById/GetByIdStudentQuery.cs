@@ -32,19 +32,15 @@ public class GetByIdStudentQuery : IRequest<GetByIdStudentResponse>/*, ISecuredR
         public async Task<GetByIdStudentResponse> Handle(GetByIdStudentQuery request, CancellationToken cancellationToken)
         {
             Student? student = await _studentRepository.GetAsync(
-               predicate: s => s.User.Id == request.UserId,
-               include: s => s.Include(st => st.User)
-                               .Include(st => st.StudentSkills)
-                                    .ThenInclude(st => st.Skill)
-                               .Include(st => st.Certificates)
-                               .Include(st => st.StudentClassRooms)
-                                   .ThenInclude(sc => sc.ClassRoom)
-                                       .ThenInclude(c => c.ClassRoomType)
-                                           .ThenInclude(ct => ct.ClassRoomTypeSection)
-                                               .ThenInclude(cts => cts.Section)
-                                               .ThenInclude(cts=> cts.Category),
-                                                
-                cancellationToken: cancellationToken);
+                    predicate: s => s.User.Id == request.UserId,
+                     include: s => s.Include(st => st.User)
+                    .Include(st => st.StudentSkills).ThenInclude(st => st.Skill)
+                    .Include(st => st.Certificates)
+                    .Include(st => st.StudentClassRooms).ThenInclude(sc => sc.ClassRoom)
+                    .ThenInclude(c => c.ClassRoomType).ThenInclude(ct => ct.ClassRoomTypeSection),
+                  
+
+            cancellationToken: cancellationToken);
 
             await _studentBusinessRules.StudentShouldExistWhenSelected(student);
 

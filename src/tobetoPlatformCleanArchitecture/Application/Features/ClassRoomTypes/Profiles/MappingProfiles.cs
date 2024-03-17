@@ -7,6 +7,7 @@ using AutoMapper;
 using Core.Application.Responses;
 using Domain.Entities;
 using Core.Persistence.Paging;
+using Application.Features.ClassRoomTypes.Queries.GetClassRoomTypeByUserId;
 
 namespace Application.Features.ClassRoomTypes.Profiles;
 
@@ -21,6 +22,7 @@ public class MappingProfiles : Profile
         CreateMap<ClassRoomType, DeleteClassRoomTypeCommand>().ReverseMap();
         CreateMap<ClassRoomType, DeletedClassRoomTypeResponse>().ReverseMap();
         CreateMap<ClassRoomType, GetByIdClassRoomTypeResponse>().ReverseMap();
+        CreateMap<ClassRoomType, GetClassRoomTypeByUserIdResponse>().ReverseMap();
         CreateMap<ClassRoomType, GetListClassRoomTypeListItemDto>().ReverseMap();
         CreateMap<IPaginate<ClassRoomType>, GetListResponse<GetListClassRoomTypeListItemDto>>().ReverseMap();
     }

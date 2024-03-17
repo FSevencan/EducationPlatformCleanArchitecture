@@ -1,0 +1,96 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kurs Güncellemesi</title>
+    <style type="text/css">
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 20px auto;
+            background: #fff;
+            border: 1px solid #dddddd; 
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+        }
+
+        .header {
+            background-color: #2467EC;
+            color: #fff;
+            padding: 20px; 
+            text-align: center;
+            font-size: 24px; 
+        }
+
+        .course-image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .content {
+            padding: 40px; 
+        }
+
+            .content p {
+                font-size: 17px; 
+                line-height: 1.5; 
+                color: #333; 
+            }
+
+        .button {
+            display: block;
+            width: max-content;
+            margin: 20px auto;
+            padding: 15px 30px;
+            background-color: #2467EC; 
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease; 
+        }
+
+            .button:hover {
+                background-color: #FFB013; 
+                cursor: pointer; 
+            }
+
+        .footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 20px; 
+            font-size: 14px; 
+        }
+
+            .footer a {
+                color: #FFC107;
+                text-decoration: none;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://i.imgur.com/EJVWuBJ.png"  width="230" alt="Logo">
+        </div>
+        <div class="course-image">
+            <img src="{SectionImageUrl}" alt="Kurs Resmi">
+        </div>
+        <div class="content">
+            <p>Merhaba {UserName},</p>
+            <p><strong>{SectionName}</strong> adında yeni bir kurs platformumuza eklendi! Bu kurs hakkında daha fazla bilgi edinmek için aşağıdaki butona tıklayabilirsin.</p>
+            <a href="{SectionLink}" class="button">Kursa Git</a>
+        </div>
+        <div class="footer">
+            <p>Bu e-posta otomatik olarak gönderilmiştir. Sorularınız için <a href="mailto:tobeto@fatihsevencan.com">tobeto@fatihsevencan.com</a>'a yazabilirsiniz.</p>
+        </div>
+    </div>
+</body>
+</html>

@@ -13,6 +13,7 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using WebAPI;
 using Microsoft.Extensions.DependencyInjection;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using System.Text.Json;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -107,19 +108,18 @@ else
                 var message = "Internal Server Error. Please try again later.";
                 var statusCode = context.Response.StatusCode;
 
-               
                 if (contextFeature.Error is BusinessException businessException)
                 {
-                    message = businessException.Message; 
-                    statusCode = StatusCodes.Status400BadRequest; 
-                    context.Response.StatusCode = statusCode; 
+                    message = businessException.Message;
+                    statusCode = StatusCodes.Status400BadRequest;
+                    context.Response.StatusCode = statusCode;
                 }
 
-                await context.Response.WriteAsync(new
+                await context.Response.WriteAsync(JsonSerializer.Serialize(new
                 {
                     StatusCode = statusCode,
                     Message = message
-                }.ToString());
+                }));
             }
         });
     });

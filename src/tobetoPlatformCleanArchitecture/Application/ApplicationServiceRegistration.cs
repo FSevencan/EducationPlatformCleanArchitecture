@@ -44,6 +44,7 @@ using Application.Services.UserAnswers;
 using Application.Services.Districts;
 using Application.Services.Provinces;
 using Application.Services.Contacts;
+using Application.Services.Subscriptions;
 
 using Application.Services.StudentSkills;
 
@@ -120,6 +121,7 @@ public static class ApplicationServiceRegistration
   services.AddScoped<IDistrictsService, DistrictsManager>();
   services.AddScoped<IProvincesService, ProvincesManager>();
   services.AddScoped<IContactsService, ContactsManager>();
+  services.AddScoped<ISubscriptionsService, SubscriptionsManager>();
         return services;
     }
 

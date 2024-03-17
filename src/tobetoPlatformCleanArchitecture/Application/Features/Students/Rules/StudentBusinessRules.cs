@@ -34,6 +34,17 @@ public class StudentBusinessRules : BaseBusinessRules
         await StudentShouldExistWhenSelected(student);
     }
 
+    public async Task UserIdShouldExistWhenSelected(int userId, CancellationToken cancellationToken)
+    {
+        Student? student = await _studentRepository.GetAsync(
+            predicate: s => s.UserId == userId,
+            enableTracking: false,
+            cancellationToken: cancellationToken
+        );
+        if (student == null)
+            throw new BusinessException("Sadece öðrenciler Abone olabilir.");
+    }
+
     public void CheckIfPasswordsMatch(string currentPassword, byte[] passwordHash, byte[] passwordSalt)
     {
         if (!HashingHelper.VerifyPasswordHash(currentPassword, passwordHash, passwordSalt))

@@ -2,9 +2,11 @@ using Application.Features.ClassRoomTypes.Commands.Create;
 using Application.Features.ClassRoomTypes.Commands.Delete;
 using Application.Features.ClassRoomTypes.Commands.Update;
 using Application.Features.ClassRoomTypes.Queries.GetById;
+using Application.Features.ClassRoomTypes.Queries.GetClassRoomTypeByUserId;
 using Application.Features.ClassRoomTypes.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
+using Core.CrossCuttingConcerns.Exceptions.Types;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -50,5 +52,13 @@ public class ClassRoomTypesController : BaseController
         GetListClassRoomTypeQuery getListClassRoomTypeQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListClassRoomTypeListItemDto> response = await Mediator.Send(getListClassRoomTypeQuery);
         return Ok(response);
+    }
+
+    [HttpGet("GetByUserId/{userId}")]
+    public async Task<IActionResult> GetClassRoomTypeByUserId([FromRoute] int userId)
+    {
+        GetClassRoomTypeByUserIdResponse response = await Mediator.Send(new GetClassRoomTypeByUserIdQuery { UserId = userId });
+         return Ok(response);
+       
     }
 }

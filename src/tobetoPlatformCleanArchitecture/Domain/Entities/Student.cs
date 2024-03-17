@@ -15,9 +15,10 @@ public class Student : Entity<int>
     public string? GithubUrl { get; set; }
     public string? LinkedinUrl { get; set; }
     public User User { get; set; }
+    public Province? Province { get; set; }
+    public District? District { get; set; }
     public ICollection<StudentSkill> StudentSkills { get; set; }
     public ICollection<StudentClassRoom> StudentClassRooms { get; set; }
     public ICollection<Certificate> Certificates { get; set; }
-    public Province? Province { get; set; }
-    public District? District { get; set; }
+
 }

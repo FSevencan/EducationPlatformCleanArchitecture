@@ -289,7 +289,15 @@ public class OperationClaimConfiguration : IEntityTypeConfiguration<OperationCla
         seeds.Add(new OperationClaim { Id = ++id, Name = "Contacts.Add" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Contacts.Update" });
         seeds.Add(new OperationClaim { Id = ++id, Name = "Contacts.Delete" });
+        #region Subscriptions
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Subscriptions.Admin" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Subscriptions.Read" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Subscriptions.Write" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Subscriptions.Add" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Subscriptions.Update" });
+        seeds.Add(new OperationClaim { Id = ++id, Name = "Subscriptions.Delete" });
         return seeds;
+        #endregion
         #endregion
         #endregion
     }

@@ -87,14 +87,7 @@ public class MappingProfiles : Profile
 
 
        .ForMember(dest => dest.ClassRoomNames, opt => opt.MapFrom(src => src.StudentClassRooms
-                                                                       .Select(sc => sc.ClassRoom.Name)))
-
-       .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.StudentClassRooms
-                                                                .SelectMany(sc => sc.ClassRoom
-                                                                .ClassRoomType
-                                                                .ClassRoomTypeSection
-                                                                .Select(cts => cts.Section))))
-       .ReverseMap();
+                                                                       .Select(sc => sc.ClassRoom.Name))) .ReverseMap();
 
         CreateMap<Section, SectionStudentDto>()
        .ForMember(dest => dest.CategoryName, opt => opt.MapFrom(src => src.Category.Name))
@@ -105,21 +98,20 @@ public class MappingProfiles : Profile
         CreateMap<Instructor, SectionInstructorDto>()
             .ForMember(dest => dest.FullName, opt => opt.MapFrom(src => src.User.FirstName + " " + src.User.LastName));
 
+
         CreateMap<Student, GetBySectionStudentResponse>()
             .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.StudentClassRooms
                                                                 .SelectMany(sc => sc.ClassRoom
                                                                 .ClassRoomType
                                                                 .ClassRoomTypeSection
-                                                                .Select(cts => cts.Section))))
-            .ReverseMap();
+                                                                .Select(cts => cts.Section)))) .ReverseMap();
 
         CreateMap<Student, GetByUserIdStudentLockResponse>()
             .ForMember(dest => dest.Sections, opt => opt.MapFrom(src => src.StudentClassRooms
                                                                 .SelectMany(sc => sc.ClassRoom
                                                                 .ClassRoomType
                                                                 .ClassRoomTypeSection
-                                                                .Select(cts => cts.Section))))
-       .ReverseMap();
+                                                                .Select(cts => cts.Section)))).ReverseMap();
 
         CreateMap<Section, GetLockDto>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id)).ReverseMap();
