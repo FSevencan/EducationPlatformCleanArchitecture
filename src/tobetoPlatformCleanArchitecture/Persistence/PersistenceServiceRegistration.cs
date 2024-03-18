@@ -54,6 +54,7 @@ public static class PersistenceServiceRegistration
         services.AddScoped<IProvinceRepository, ProvinceRepository>();
         services.AddScoped<IContactRepository, ContactRepository>();
         services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
+        services.AddScoped<ILikeRepository, LikeRepository>();
         return services;
     }
 }

@@ -48,6 +48,7 @@ public class BaseDbContext : DbContext
     public DbSet<Province> Provinces { get; set; }
     public DbSet<Contact> Contacts { get; set; }
     public DbSet<Subscription> Subscriptions { get; set; }
+    public DbSet<Like> Likes { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)

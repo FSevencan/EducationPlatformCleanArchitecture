@@ -13,4 +13,6 @@ public class Section : Entity<Guid>
     public ICollection<ClassRoomTypeSection>? ClassRoomTypeSection { get; set; }
     public ICollection<SectionCourse>? SectionCourses { get; set; }
     public ICollection<SectionInstructor>? SectionInstructors { get; set; }
+    public ICollection<Like>? Likes { get; set; }
+
 }

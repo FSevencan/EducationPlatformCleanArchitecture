@@ -20,5 +20,7 @@ public class Student : Entity<int>
     public ICollection<StudentSkill> StudentSkills { get; set; }
     public ICollection<StudentClassRoom> StudentClassRooms { get; set; }
     public ICollection<Certificate> Certificates { get; set; }
+    public ICollection<Like>? Likes { get; set; }
+
 
 }
