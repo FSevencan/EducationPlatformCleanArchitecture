@@ -42,7 +42,7 @@ public class CheckLikeStatusQuery : IRequest<CheckLikeStatusResponse>/*, ISecure
         {
             Student student = await _studentsService.GetAsync(u => u.UserId == request.UserId);
 
-            Like? like = await _likeRepository.GetAsync(predicate: l => l.StudentId == student.Id && l.SectionId == request.SectionId /*&& l.IsActive*/, cancellationToken: cancellationToken);
+            Like? like = await _likeRepository.GetAsync(predicate: l => l.StudentId == student.Id && l.SectionId == request.SectionId , cancellationToken: cancellationToken);
 
             CheckLikeStatusResponse response = _mapper.Map<CheckLikeStatusResponse>(like);
             return response;

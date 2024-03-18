@@ -9,7 +9,6 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Likes.Constants.LikesOperationClaims;
-using Application.Services.Students;
 
 namespace Application.Features.Likes.Commands.Delete;
 

@@ -9,6 +9,4 @@ public class CreatedLikeResponse : IResponse
     public int StudentId { get; set; }
     public Guid SectionId { get; set; }
     public bool IsActive { get; set; }
-    //public Student Student { get; set; }
-    //public Section Section { get; set; }
 }

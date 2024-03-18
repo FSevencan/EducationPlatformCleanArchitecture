@@ -6,10 +6,6 @@ public class CreateLikeCommandValidator : AbstractValidator<CreateLikeCommand>
 {
     public CreateLikeCommandValidator()
     {
-       // RuleFor(c => c.StudentId).NotEmpty();
         RuleFor(c => c.SectionId).NotEmpty();
-       // RuleFor(c => c.IsActive).NotEmpty();
-        //RuleFor(c => c.Student).NotEmpty();
-        //RuleFor(c => c.Section).NotEmpty();
     }
 }

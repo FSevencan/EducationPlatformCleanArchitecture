@@ -18,8 +18,7 @@ public class UpdateLikeCommand : IRequest<UpdatedLikeResponse>, ISecuredRequest,
     public int StudentId { get; set; }
     public Guid SectionId { get; set; }
     public bool IsActive { get; set; }
-    public Student Student { get; set; }
-    public Section Section { get; set; }
+    
 
     public string[] Roles => new[] { Admin, Write, LikesOperationClaims.Update };
 

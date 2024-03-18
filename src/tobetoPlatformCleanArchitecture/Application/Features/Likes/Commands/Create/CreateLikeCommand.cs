@@ -19,11 +19,7 @@ public class CreateLikeCommand : IRequest<CreatedLikeResponse>/*, ISecuredReques
 {
     public int UserId { get; set; }
     public Guid SectionId { get; set; }
-    // public int StudentId { get; set; }
-    //public bool IsActive { get; set; }
-    //public Student Student { get; set; }
-    //public Section Section { get; set; }
-
+    
     public string[] Roles => new[] { Admin, Write, LikesOperationClaims.Create };
 
     public bool BypassCache { get; }
@@ -55,7 +51,6 @@ public class CreateLikeCommand : IRequest<CreatedLikeResponse>/*, ISecuredReques
 
             like.StudentId = student.Id;
             like.SectionId = request.SectionId;
-            //like.IsActive = true;
 
             await _likeRepository.AddAsync(like);
 
