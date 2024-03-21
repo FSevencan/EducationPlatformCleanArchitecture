@@ -9,8 +9,7 @@ namespace Domain.Entities;
 public class Like : Entity<Guid>
 {
     public int StudentId { get; set; }
-    public Guid SectionId { get; set; }
-    public bool IsActive { get; set; } = true;
+    public Guid SectionId { get; set; }    
 
     public Student Student { get; set; }
     public Section Section { get; set; }

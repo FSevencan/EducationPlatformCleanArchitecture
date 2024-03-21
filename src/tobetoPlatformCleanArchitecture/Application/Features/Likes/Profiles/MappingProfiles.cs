@@ -28,6 +28,6 @@ public class MappingProfiles : Profile
 
         CreateMap<Like, CheckLikeStatusResponse>()
         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
-        .ForMember(dest => dest.IsActive, opt => opt.MapFrom(src => src.IsActive)).ReverseMap();
+        .ReverseMap();
     }
 }

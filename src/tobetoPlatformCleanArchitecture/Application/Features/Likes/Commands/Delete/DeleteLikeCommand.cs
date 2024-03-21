@@ -9,6 +9,8 @@ using Core.Application.Pipelines.Logging;
 using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Likes.Constants.LikesOperationClaims;
+using Application.Services.Sections;
+using Application.Features.Sections.Rules;
 
 namespace Application.Features.Likes.Commands.Delete;
 
@@ -29,12 +31,16 @@ public class DeleteLikeCommand : IRequest<DeletedLikeResponse>/*, ISecuredReques
         private readonly IMapper _mapper;
         private readonly ILikeRepository _likeRepository;
         private readonly LikeBusinessRules _likeBusinessRules;
+        private readonly ISectionsService _sectionsService;
+        private readonly SectionBusinessRules _sectionBusinessRules;
 
-        public DeleteLikeCommandHandler(IMapper mapper, ILikeRepository likeRepository, LikeBusinessRules likeBusinessRules)
+        public DeleteLikeCommandHandler(IMapper mapper, ILikeRepository likeRepository, LikeBusinessRules likeBusinessRules, ISectionsService sectionsService, SectionBusinessRules sectionBusinessRules)
         {
             _mapper = mapper;
             _likeRepository = likeRepository;
             _likeBusinessRules = likeBusinessRules;
+            _sectionsService = sectionsService;
+            _sectionBusinessRules = sectionBusinessRules;
         }
 
         public async Task<DeletedLikeResponse> Handle(DeleteLikeCommand request, CancellationToken cancellationToken)
@@ -44,6 +50,12 @@ public class DeleteLikeCommand : IRequest<DeletedLikeResponse>/*, ISecuredReques
             await _likeBusinessRules.LikeShouldExistWhenSelected(like);
 
             await _likeRepository.DeleteAsync(like!, permanent: true);
+
+            Section section = await _sectionsService.GetAsync(s => s.Id == like.SectionId);
+            await _sectionBusinessRules.SectionShouldExistWhenSelected(section);
+
+            section.TotalLike -= 1 ;
+            await _sectionsService.UpdateAsync(section);
 
             DeletedLikeResponse response = _mapper.Map<DeletedLikeResponse>(like);
             return response;

@@ -21,6 +21,7 @@ public class GetByIdSectionResponse : IResponse
     public string ProducerCompanyName { get; set; }
     public string LanguageName { get; set; }
     public DateTime CreatedDate { get; set; }
+    public int TotalLike { get; set; }
 
     public GetListSectionAboutListItemDto SectionAbout { get; set; }
     public ICollection<GetListInstructorDto> Instructors { get; set; }
