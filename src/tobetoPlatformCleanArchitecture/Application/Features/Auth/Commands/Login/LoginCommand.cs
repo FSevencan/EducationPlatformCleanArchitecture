@@ -1,6 +1,7 @@
 ﻿using Application.Features.Auth.Rules;
 using Application.Services.AuthenticatorService;
 using Application.Services.AuthService;
+using Application.Services.Repositories;
 using Application.Services.UsersService;
 using Core.Application.Dtos;
 using Core.Security.Entities;
@@ -33,18 +34,21 @@ public class LoginCommand : IRequest<LoggedResponse>
         private readonly IAuthenticatorService _authenticatorService;
         private readonly IAuthService _authService;
         private readonly IUserService _userService;
+        private readonly IEmailAuthenticatorRepository _emailAuthenticatorRepository;
 
         public LoginCommandHandler(
             IUserService userService,
             IAuthService authService,
             AuthBusinessRules authBusinessRules,
-            IAuthenticatorService authenticatorService
+            IAuthenticatorService authenticatorService,
+            IEmailAuthenticatorRepository emailAuthenticatorRepository
         )
         {
             _userService = userService;
             _authService = authService;
             _authBusinessRules = authBusinessRules;
             _authenticatorService = authenticatorService;
+            _emailAuthenticatorRepository = emailAuthenticatorRepository;
         }
 
         public async Task<LoggedResponse> Handle(LoginCommand request, CancellationToken cancellationToken)
@@ -53,9 +57,16 @@ public class LoginCommand : IRequest<LoggedResponse>
                 predicate: u => u.Email == request.UserForLoginDto.Email,
                 cancellationToken: cancellationToken
             );
+
+            EmailAuthenticator? emailAuthenticator = await _emailAuthenticatorRepository.GetAsync(
+                predicate: e => e.UserId == user.Id,
+                cancellationToken: cancellationToken
+             );
+
+            
             await _authBusinessRules.UserShouldBeExistsWhenSelected(user);
             await _authBusinessRules.UserPasswordShouldBeMatch(user!.Id, request.UserForLoginDto.Password);
-
+            await _authBusinessRules.AuthenticatorActivationKey(emailAuthenticator!);
             LoggedResponse loggedResponse = new();
 
             if (user.AuthenticatorType is not AuthenticatorType.None)
@@ -75,6 +86,7 @@ public class LoginCommand : IRequest<LoggedResponse>
             Core.Security.Entities.RefreshToken createdRefreshToken = await _authService.CreateRefreshToken(user, request.IpAddress);
             Core.Security.Entities.RefreshToken addedRefreshToken = await _authService.AddRefreshToken(createdRefreshToken);
             await _authService.DeleteOldRefreshTokens(user.Id);
+            
 
             loggedResponse.AccessToken = createdAccessToken;
             loggedResponse.RefreshToken = addedRefreshToken;

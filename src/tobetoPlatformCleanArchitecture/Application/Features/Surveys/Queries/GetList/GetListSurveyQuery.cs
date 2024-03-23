@@ -1,16 +1,27 @@
+using Application.Features.Surveys.Constants;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
+using Core.Application.Pipelines.Caching;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Core.Persistence.Paging;
 using MediatR;
+using static Application.Features.Surveys.Constants.SurveysOperationClaims;
 
 namespace Application.Features.Surveys.Queries.GetList;
 
-public class GetListSurveyQuery : IRequest<GetListResponse<GetListSurveyListItemDto>>
+public class GetListSurveyQuery : IRequest<GetListResponse<GetListSurveyListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
+
+    public string[] Roles => new[] { Admin, Read };
+
+    public bool BypassCache { get; }
+    public string CacheKey => $"GetListSurveys({PageRequest.PageIndex},{PageRequest.PageSize})";
+    public string CacheGroupKey => "GetSurveys";
+    public TimeSpan? SlidingExpiration { get; }
 
     public class GetListSurveyQueryHandler : IRequestHandler<GetListSurveyQuery, GetListResponse<GetListSurveyListItemDto>>
     {

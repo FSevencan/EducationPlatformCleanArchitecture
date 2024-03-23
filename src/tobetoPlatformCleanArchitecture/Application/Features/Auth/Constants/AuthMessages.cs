@@ -11,5 +11,8 @@ public static class AuthMessages
     public const string RefreshDontExists = "Refresh don't exists.";
     public const string InvalidRefreshToken = "Invalid refresh token.";
     public const string UserMailAlreadyExists = "User mail already exists.";
+    public const string StudentMailAlreadyExists = "Student mail already exists.";
+    public const string InstructorMailAlreadyExists = "Instructor mail already exists.";
     public const string PasswordDontMatch = "Password don't match.";
+    public const string EmailNotVerified = "You need to verify your email first";
 }

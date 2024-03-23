@@ -2,6 +2,7 @@ using Application.Features.Exams.Commands.Create;
 using Application.Features.Exams.Commands.Delete;
 using Application.Features.Exams.Commands.Update;
 using Application.Features.Exams.Queries.GetById;
+using Application.Features.Exams.Queries.GetByIdForQuestions;
 using Application.Features.Exams.Queries.GetList;
 using Core.Application.Requests;
 using Core.Application.Responses;
@@ -40,7 +41,14 @@ public class ExamsController : BaseController
     [HttpGet("{id}")]
     public async Task<IActionResult> GetById([FromRoute] Guid id)
     {
-        GetByIdExamResponse response = await Mediator.Send(new GetByIdExamQuery { Id = id });
+        GetByIdExamResponse response = await Mediator.Send(new GetByIdExamQuestionsQuery { Id = id });
+        return Ok(response);
+    }
+
+    [HttpGet("questions/{id}")]
+    public async Task<IActionResult> GetByIdForQuestions([FromRoute] Guid id)
+    {
+        GetByIdExamForQuestionsResponse response = await Mediator.Send(new GetByIdExamForQuestionsQuery { Id = id });
         return Ok(response);
     }
 

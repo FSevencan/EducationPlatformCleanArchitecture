@@ -11,6 +11,7 @@ public class ExamConfiguration : IEntityTypeConfiguration<Exam>
         builder.ToTable("Exams").HasKey(e => e.Id);
 
         builder.Property(e => e.Id).HasColumnName("Id").IsRequired();
+        builder.Property(e => e.ClassRoomTypeId).HasColumnName("ClassRoomTypeId");
         builder.Property(e => e.Name).HasColumnName("Name");
         builder.Property(e => e.Description).HasColumnName("Description");
         builder.Property(e => e.Duration).HasColumnName("Duration");

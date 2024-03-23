@@ -3,6 +3,7 @@ namespace Application.Features.SectionAbouts.Constants;
 public static class SectionAboutsOperationClaims
 {
     public const string Admin = "SectionAbouts.Admin";
+    public const string instructor = "instructor";
 
     public const string Read = "SectionAbouts.Read";
     public const string Write = "SectionAbouts.Write";

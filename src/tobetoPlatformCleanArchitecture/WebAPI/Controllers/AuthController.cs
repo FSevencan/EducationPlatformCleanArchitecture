@@ -1,9 +1,11 @@
 ﻿using Application.Features.Auth.Commands.EnableEmailAuthenticator;
 using Application.Features.Auth.Commands.EnableOtpAuthenticator;
+using Application.Features.Auth.Commands.InstructorRegister;
 using Application.Features.Auth.Commands.Login;
 using Application.Features.Auth.Commands.RefreshToken;
 using Application.Features.Auth.Commands.Register;
 using Application.Features.Auth.Commands.RevokeToken;
+using Application.Features.Auth.Commands.StudentRegister;
 using Application.Features.Auth.Commands.VerifyEmailAuthenticator;
 using Application.Features.Auth.Commands.VerifyOtpAuthenticator;
 using Core.Application.Dtos;
@@ -44,6 +46,24 @@ public class AuthController : BaseController
     {
         RegisterCommand registerCommand = new() { UserForRegisterDto = userForRegisterDto, IpAddress = getIpAddress() };
         RegisteredResponse result = await Mediator.Send(registerCommand);
+        setRefreshTokenToCookie(result.RefreshToken);
+        return Created(uri: "", result.AccessToken);
+    }
+
+    [HttpPost("StudentRegister")]
+    public async Task<IActionResult> StudentRegister([FromBody] StudentForRegisterDto studentForRegisterDto)
+    {
+        StudentRegisterCommand studentRegisterCommand = new() { StudentForRegisterDto = studentForRegisterDto, IpAddress = getIpAddress() };
+        StudentRegisteredResponse result = await Mediator.Send(studentRegisterCommand);
+        setRefreshTokenToCookie(result.RefreshToken);
+        return Created(uri: "", result.AccessToken);
+    }
+
+    [HttpPost("InstructorRegister")]
+    public async Task<IActionResult> InstructorRegister([FromBody] InstructorForRegisterDto instructorForRegisterDto)
+    {
+        InstructorRegisterCommand instructorRegisterCommand = new() { InstructorForRegisterDto = instructorForRegisterDto, IpAddress = getIpAddress() };
+        InstructorRegisteredResponse result = await Mediator.Send(instructorRegisterCommand);
         setRefreshTokenToCookie(result.RefreshToken);
         return Created(uri: "", result.AccessToken);
     }
@@ -90,6 +110,7 @@ public class AuthController : BaseController
         await Mediator.Send(verifyEmailAuthenticatorCommand);
         return Ok();
     }
+
 
     [HttpPost("VerifyOtpAuthenticator")]
     public async Task<IActionResult> VerifyOtpAuthenticator([FromBody] string authenticatorCode)

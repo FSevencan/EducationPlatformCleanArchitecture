@@ -6,6 +6,7 @@ public class CreateExamCommandValidator : AbstractValidator<CreateExamCommand>
 {
     public CreateExamCommandValidator()
     {
+        RuleFor(c => c.ClassRoomTypeId).NotEmpty();
         RuleFor(c => c.Name).NotEmpty();
         RuleFor(c => c.Description).NotEmpty();
         RuleFor(c => c.Duration).NotEmpty();
@@ -13,5 +14,6 @@ public class CreateExamCommandValidator : AbstractValidator<CreateExamCommand>
         RuleFor(c => c.QuestionType).NotEmpty();
         RuleFor(c => c.StartDate).NotEmpty();
         RuleFor(c => c.EndDate).NotEmpty();
+        
     }
 }

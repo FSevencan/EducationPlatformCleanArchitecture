@@ -14,17 +14,17 @@ namespace Application.Features.Courses.Commands.Create;
 
 public class CreateCourseCommand : IRequest<CreatedCourseResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
-    public double TotalTime { get; set; }
+    public double? TotalTime { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
+    
 
-    public string[] Roles => new[] { Admin, Write, CoursesOperationClaims.Create };
+    public string[] Roles => new[] { Admin, instructor, Write, CoursesOperationClaims.Create };
 
     public bool BypassCache { get; }
     public string? CacheKey { get; }
     public string CacheGroupKey => "GetCourses";
 
-    public ICollection<Guid> SectionIds { get; set; }
+    public ICollection<Guid> SectionIds { get; set; } // burasý null olabilir düþünülür.
 
     public class CreateCourseCommandHandler : IRequestHandler<CreateCourseCommand, CreatedCourseResponse>
     {

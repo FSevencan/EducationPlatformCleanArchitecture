@@ -9,6 +9,7 @@ public class CreateSurveyCommandValidator : AbstractValidator<CreateSurveyComman
         RuleFor(c => c.Name).NotEmpty();
         RuleFor(c => c.Description).NotEmpty();
         RuleFor(c => c.StartDate).NotEmpty();
-        RuleFor(c => c.FinishDate).NotEmpty();
+        RuleFor(c => c.EndDate).NotEmpty();
+        RuleFor(c => c.FormUrl).NotEmpty();
     }
 }

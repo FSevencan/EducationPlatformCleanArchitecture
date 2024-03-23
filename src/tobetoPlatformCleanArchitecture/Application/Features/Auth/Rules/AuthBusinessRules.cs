@@ -11,10 +11,15 @@ namespace Application.Features.Auth.Rules;
 public class AuthBusinessRules : BaseBusinessRules
 {
     private readonly IUserRepository _userRepository;
+    private readonly IStudentRepository _studentRepository;
+    private readonly IInstructorRepository _instructorRepository;
     private readonly IEmailAuthenticatorRepository _emailAuthenticatorRepository;
 
-    public AuthBusinessRules(IUserRepository userRepository, IEmailAuthenticatorRepository emailAuthenticatorRepository)
+
+    public AuthBusinessRules(IUserRepository userRepository, IEmailAuthenticatorRepository emailAuthenticatorRepository, IStudentRepository studentRepository , IInstructorRepository instructorRepository)
     {
+        _studentRepository = studentRepository;
+        _instructorRepository = instructorRepository;
         _userRepository = userRepository;
         _emailAuthenticatorRepository = emailAuthenticatorRepository;
     }
@@ -47,6 +52,13 @@ public class AuthBusinessRules : BaseBusinessRules
         return Task.CompletedTask;
     }
 
+    public Task AuthenticatorActivationKey(EmailAuthenticator emailAuthenticator)
+    {
+        if (emailAuthenticator.IsVerified==false)
+            throw new BusinessException(AuthMessages.EmailNotVerified);
+        return Task.CompletedTask;
+    }
+    
     public Task UserShouldBeExistsWhenSelected(User? user)
     {
         if (user == null)
@@ -81,6 +93,22 @@ public class AuthBusinessRules : BaseBusinessRules
         if (doesExists)
             throw new BusinessException(AuthMessages.UserMailAlreadyExists);
     }
+
+
+    public async Task StudentEmailShouldBeNotExists(string email)
+    {
+        bool doesExists = await _userRepository.AnyAsync(predicate: u => u.Email == email, enableTracking: false);
+        if (doesExists)
+            throw new BusinessException(AuthMessages.StudentMailAlreadyExists);
+    }
+
+    public async Task InstructorEmailShouldBeNotExists(string email)
+    {
+        bool doesExists = await _userRepository.AnyAsync(predicate: u => u.Email == email, enableTracking: false);
+        if (doesExists)
+            throw new BusinessException(AuthMessages.InstructorMailAlreadyExists);
+    }
+
 
     public async Task UserPasswordShouldBeMatch(int id, string password)
     {

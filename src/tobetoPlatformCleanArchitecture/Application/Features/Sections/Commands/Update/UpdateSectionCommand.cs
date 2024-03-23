@@ -16,11 +16,11 @@ public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ISecuredRe
 {
     public Guid Id { get; set; }
     public Guid CategoryId { get; set; }
-    public Guid SectionAboutId { get; set; }
     public string Name { get; set; }
     public string ImageUrl { get; set; }
     public string Description { get; set; }
 
+    public ICollection<int>? InstructorIds { get; set; }
     public string[] Roles => new[] { Admin, Write, SectionsOperationClaims.Update };
 
     public bool BypassCache { get; }
@@ -45,6 +45,11 @@ public class UpdateSectionCommand : IRequest<UpdatedSectionResponse>, ISecuredRe
         {
             Section? section = await _sectionRepository.GetAsync(predicate: s => s.Id == request.Id, cancellationToken: cancellationToken);
             await _sectionBusinessRules.SectionShouldExistWhenSelected(section);
+            section.SectionInstructors = request.InstructorIds.Select(instructorIds => new SectionInstructor
+            {
+                InstructorId = instructorIds,
+                CreatedDate = DateTime.Now
+            }).ToList();
             section = _mapper.Map(request, section);
 
             await _sectionRepository.UpdateAsync(section!);

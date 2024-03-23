@@ -1,14 +1,19 @@
+using Application.Features.Surveys.Constants;
 using Application.Features.Surveys.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
+using Core.Application.Pipelines.Authorization;
 using MediatR;
+using static Application.Features.Surveys.Constants.SurveysOperationClaims;
 
 namespace Application.Features.Surveys.Queries.GetById;
 
 public class GetByIdSurveyQuery : IRequest<GetByIdSurveyResponse>
 {
     public Guid Id { get; set; }
+
+    public string[] Roles => new[] { Admin, Read };
 
     public class GetByIdSurveyQueryHandler : IRequestHandler<GetByIdSurveyQuery, GetByIdSurveyResponse>
     {

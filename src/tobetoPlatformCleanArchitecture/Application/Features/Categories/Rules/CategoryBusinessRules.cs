@@ -2,6 +2,7 @@ using Application.Features.Categories.Constants;
 using Application.Services.Repositories;
 using Core.Application.Rules;
 using Core.CrossCuttingConcerns.Exceptions.Types;
+using Core.Persistence.Paging;
 using Domain.Entities;
 
 namespace Application.Features.Categories.Rules;
@@ -30,5 +31,12 @@ public class CategoryBusinessRules : BaseBusinessRules
             cancellationToken: cancellationToken
         );
         await CategoryShouldExistWhenSelected(category);
+    }
+
+    public async Task CheckCategoryNameForUniqueness(string name)
+    {
+        IPaginate<Category> result = await _categoryRepository.GetListAsync(c => c.Name == name);
+        if (result.Items.Any())
+            throw new BusinessException("Category name already exists.");
     }
 }

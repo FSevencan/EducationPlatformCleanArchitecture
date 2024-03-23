@@ -15,10 +15,11 @@ namespace Application.Features.Courses.Commands.Update;
 public class UpdateCourseCommand : IRequest<UpdatedCourseResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid Id { get; set; }
-    public double? TotalTime { get; set; }
+    public double TotalTime { get; set; }
     public string Name { get; set; }
-    public string Description { get; set; }
 
+
+    public ICollection<Guid> SectionIds { get; set; }
     public string[] Roles => new[] { Admin, Write, CoursesOperationClaims.Update };
 
     public bool BypassCache { get; }
@@ -44,6 +45,14 @@ public class UpdateCourseCommand : IRequest<UpdatedCourseResponse>, ISecuredRequ
             Course? course = await _courseRepository.GetAsync(predicate: c => c.Id == request.Id, cancellationToken: cancellationToken);
             await _courseBusinessRules.CourseShouldExistWhenSelected(course);
             course = _mapper.Map(request, course);
+
+            course.SectionCourses = request.SectionIds.Select
+              (sectionId => new SectionCourse
+              {
+
+                  SectionId = sectionId,
+                  UpdatedDate = DateTime.Now
+              }).ToList();
 
             await _courseRepository.UpdateAsync(course!);
 

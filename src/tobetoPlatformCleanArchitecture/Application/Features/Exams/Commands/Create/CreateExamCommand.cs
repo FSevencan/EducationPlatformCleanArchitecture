@@ -12,15 +12,17 @@ using static Application.Features.Exams.Constants.ExamsOperationClaims;
 
 namespace Application.Features.Exams.Commands.Create;
 
-public class CreateExamCommand : IRequest<CreatedExamResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateExamCommand : IRequest<CreatedExamResponse>/*, ISecuredRequest*/, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
+    public Guid ClassRoomTypeId { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public string Duration { get; set; }
+    public int Duration { get; set; }
     public int QuestionCount { get; set; }
     public string QuestionType { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+  
 
     public string[] Roles => new[] { Admin, Write, ExamsOperationClaims.Create };
 

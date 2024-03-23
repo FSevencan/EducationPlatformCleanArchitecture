@@ -1,118 +1,47 @@
-<p align="center">
-  <a href="https://github.com/kodlamaio-projects/nArchitecture/graphs/contributors"><img src="https://img.shields.io/github/contributors/kodlamaio-projects/nArchitecture.svg?style=for-the-badge"></a>
-  <a href="https://github.com/kodlamaio-projects/nArchitecture/network/members"><img src="https://img.shields.io/github/forks/kodlamaio-projects/nArchitecture.svg?style=for-the-badge"></a>
-  <a href="https://github.com/kodlamaio-projects/nArchitecture/stargazers"><img src="https://img.shields.io/github/stars/kodlamaio-projects/nArchitecture.svg?style=for-the-badge"></a>
-  <a href="https://github.com/kodlamaio-projects/nArchitecture/issues"><img src="https://img.shields.io/github/issues/kodlamaio-projects/nArchitecture.svg?style=for-the-badge"></a>
-  <a href="https://github.com/kodlamaio-projects/nArchitecture/blob/master/LICENSE"><img src="https://img.shields.io/github/license/kodlamaio-projects/nArchitecture.svg?style=for-the-badge"></a>
-</p><br />
+# Education Platform with Clean Architecture
 
-<p align="center">
-  <a href="https://github.com/kodlamaio-projects/nArchitecture"><img src="https://user-images.githubusercontent.com/53148314/194872467-827dc967-acee-4bca-88a2-59ed5695bebf.png" height="125"></a>
-  <h3 align="center">nArchitecture Project
-</h3>
-  <p align="center">
-    <!-- PROJECT_DESCRIPTION -->
-    <!-- <br />
-    <a href="https://github.com/kodlamaio-projects/nArchitecture"><strong>Explore the docs »</strong></a>
-    <br /> -->
-    <!-- <br />
-    <a href="https://github.com/kodlamaio-projects/nArchitecture">View Demo</a>
-    · -->
-    <a href="https://github.com/kodlamaio-projects/nArchitecture/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/kodlamaio-projects/nArchitecture/issues">Request Feature</a>
-  </p>
-</p>
+## Project Overview
 
-## 💻 About The Project
+This project is a comprehensive education platform that provides personalized learning experiences for students and course management tools for instructors. It offers real-time performance tracking of course progress, secure user experiences through email verification and secure sign-in, and dynamic content updates. The platform assigns students to specific classes, such as .NET-React, Business Analysis, Data Science, etc., allowing them access only to the relevant course materials. A subscription feature notifies students via email about new courses added to their classes. Additionally, the platform features an extensive exam module, advanced search options, polls, certificate generation, and detailed profile management.
 
-As Kodlama.io, we decided to share examples of completed projects. Inspired by Clean Architecture, nArchitecture is a monolith project. In this project, which is a rental car simulation, we have completed the project with advanced techniques. A project has been created that includes Clean Architecture, CQRS, Advanced Repository, Dynamic Querying, JWT, OTP, Google & Microsoft Auth, Role Based Management, Distributed Caching(Redis), Logging (Serilog), Elastic Search, and much more. By contributing, you can support the project and learn new things.
+## Key Features
 
-### Built With
+- **Real-Time Performance Tracking**: Monitor course progression and module completion as it happens for a definitive educational trajectory.
+- **User Engagement**: 'Like' functionality for courses allows students to express their appreciation and helps instructors gauge the popularity of their content.
+- **Secure User Experience**: Rely on email verification and secure login for safeguarding personal data.
+- **Instructor Entry and Course Management:**: Create and upload custom courses, offering tailored educational materials to students.
+- **Dynamic Content Updates**: Enroll in classes by field, such as .NET-React, Business Analysis, or Data Science, accessing only relevant materials. Stay informed on new additions with subscription alerts.
+- **Subscription Management**: Handle course update notifications through a dedicated 'Subscriptions' section in the user profile, with freedom to opt-out anytime.
+- **Exam Module**:  Evaluate knowledge with comprehensive exams and receive feedback instantaneously.
+- **Search and Filtering**: Locate courses and materials swiftly with an advanced search function catering to course titles or subject matter.
+- **Polls and Certificates**: Engage in polls for feedback and showcase achievements with uploadable certificates.
+- **Detailed Profile Information and Skill Display**: Present personal skills and qualifications by uploading them to the platform and keeping the profile up-to-date.
 
-[![](https://img.shields.io/badge/.NET%20Core-512BD4?style=for-the-badge&logo=dotnet&logoColor=white)](https://learn.microsoft.com/tr-tr/dotnet/welcome)
+## Technologies & Languages Used
 
-## ⚙️ Getting Started
+- **Programming Language**: C#
+- **Development Platform**: .NET 7.0
+- **Frontend Technologies**: React, Next.js, CSS, JavaScript, TypeScript
+- **Backend Technologies**: ASP.NET Web API
+- **Architectural Approach**: Clean Architecture, CQRS
+- **Messaging and Operation Management**: MediatR (For managing command and query operations in conjunction with CQRS)
+- **Code Mapping Tool**: AutoMapper
+- **Database and Data Access**: MS SQL Server
+- **Data Querying**: Entity Framework, LINQ
+- **File Storage and Upload Service**: Amazon S3 Bucket
 
-To get a local copy up and running follow these simple steps.
+## Explore the Platform
+- Explore the live version of our project and experience the new era of learning at https://tobeto.fatihsevencan.com
 
-### Prerequisites
+## Screenshots
 
-- .NET 7
+<img src="https://i.imgur.com/AbPzjuF.png" width="900px" />
+<br/>
+<img src="https://i.imgur.com/l3VSxbh.png" width="900px" />
+<br/>
+<img src="https://i.imgur.com/eovQZtB.png" width="900px" />
+<br/>
+<img src="https://i.imgur.com/SlsxPD2.png" width="900px" />
+<br/>
+<img src="https://i.imgur.com/4OYPyTK.png" width="500px" />
 
-### Installation
-
-1. Clone the repo
-   ```sh
-   git clone --recurse-submodules https://github.com/kodlamaio-projects/nArchitecture.git
-   ```
-2. Configure `appsettings.json` in WebAPI.
-3. Run `Update-Database` command with Package Manager Console in WebAPI to create tables in sql server.
-
-- Run the following command to update submodules
-  ```sh
-   git submodule update --remote
-   ```
-
-## 🚀 Usage
-
-1. Run example WebAPI project `dotnet run --project src\rentACar\WebAPI`
-
-### Analysis
-
-1. If not, Install dotnet tool `dotnet tool restore`.
-2. Run anaylsis command `dotnet roslynator analyze`
-
-### Format
-
-1. If not, Install dotnet tool `dotnet tool restore`.
-2. Run format command `dotnet csharpier .`
-
-## 🚧 Roadmap
-
-See the [open issues](https://github.com/kodlamaio-projects/nArchitecture/issues) for a list of proposed features (and known issues).
-
-## 🤝 Contributing
-
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-1. Fork the project and clone your local machine
-2. Create your Feature Branch (`git checkout -b <Feature>/<AmazingFeature>'`)
-3. Develop
-4. Commit your Changes (`git add . && git commit -m '<SemanticCommitType>(<Scope>): <AmazingFeature>'`)
-   💡 Check [Semantic Commit Messages](./docs/Semantic%20Commit%20Messages.md)
-5. Push to the Branch (`git push origin <Feature>/<AmazingFeature>`)
-6. Open a Pull Request
-
-Contributing on Core Packages With This Repo:
-
-1. Fork the [nArchitecture.Core](https://github.com/kodlamaio-projects/nArchitecture.Core) project
-2. Locate to `src/corePackages` path (`cd .\src\corePackages\`)
-3. Add your forked nArchitecture.Core repository remote address (`git remote add <YourUserName> https://github.com/<YourUserName>/nArchitecture.Core.git`)
-4. Create your Feature Branch (`git checkout -b <Feature>/<AmazingFeature>'`)
-5. Develop
-6. Commit your changes (`git add . && git commit -m '<SemanticCommitType>(<Scope>): <AmazingFeature>'`)
-   💡 Check [Semantic Commit Messages](./docs/Semantic%20Commit%20Messages.md)
-7. Push to the branch (`git push <YourUserName> --set-upstream HEAD:refs/heads/<Feature>/<AmazingFeature>`)
-8. Open a Pull Request
-
-If your pull request is accepted and merged:
-
-9. Locate to `src/corePackages` path (`cd .\src\corePackages\`)
-10. Switch to main branch `git checkout main`
-11. Locate root path `/` path (`cd ..\..\`)
-12. Pull repo and submodule `git submodule update --remote`
-13. Commit your changes (`git add . && git commit -m 'build(corePackages): update submodule'`)
-14. Push to the Branch (`git push origin <Feature>/<AmazingFeature>`)
-15. Open a Pull Request
-
-## ⚖️ License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
-## 📧 Contact
-
-**Project Link:** [https://github.com/kodlamaio-projects/nArchitecture](https://github.com/kodlamaio-projects/nArchitecture)
-
-<!-- ## 🙏 Acknowledgements
-- []() -->

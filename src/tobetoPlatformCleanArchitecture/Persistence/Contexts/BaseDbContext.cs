@@ -17,7 +17,6 @@ public class BaseDbContext : DbContext
 
     public DbSet<Announcement> Announcements { get; set; }
     public DbSet<ApplicationEducation> ApplicationEducations { get; set; }
-    public DbSet<AppUser> Users { get; set; }
     public DbSet<Category> Categories { get; set; }
     public DbSet<Course> Courses { get; set; }
     public DbSet<Exam> Exams { get; set; }
@@ -30,9 +29,26 @@ public class BaseDbContext : DbContext
     public DbSet<SectionInstructor> SectionInstructors { get; set; }
     public DbSet<ProducerCompany> ProducerCompanies { get; set; }
     public DbSet<Survey> Surveys { get; set; }
-    public DbSet<UserSection> UserSections { get; set; }
-    public DbSet<UserSurvey> UserSurveys { get; set; }
-    public DbSet<AppUser> AppUsers { get; set; }
+    public DbSet<StudentClassRoom> StudentClassRooms { get; set; }
+
+    public DbSet<Student> Students { get; set; }
+    public DbSet<Skill> Skills { get; set; }
+    public DbSet<StudentSkill> StudentSkills { get; set; }
+    public DbSet<Certificate> Certificates { get; set; }
+    public DbSet<ClassRoom> ClassRooms { get; set; }
+    public DbSet<ClassRoomTypeSection> ClassRoomTypeSections { get; set; }
+    public DbSet<ClassRoomType> ClassRoomTypes { get; set; }
+    public DbSet<MentorshipSession> MentorshipSessions { get; set; }
+    public DbSet<CampusEncounter> CampusEncounters { get; set; }
+    public DbSet<StudentLesson> StudentLessons { get; set; }
+    public DbSet<Choice> Choices { get; set; }
+    public DbSet<Question> Questions { get; set; }
+    public DbSet<UserAnswer> UserAnswers { get; set; }
+    public DbSet<District> Districts { get; set; }
+    public DbSet<Province> Provinces { get; set; }
+    public DbSet<Contact> Contacts { get; set; }
+    public DbSet<Subscription> Subscriptions { get; set; }
+    public DbSet<Like> Likes { get; set; }
 
     public BaseDbContext(DbContextOptions dbContextOptions, IConfiguration configuration)
         : base(dbContextOptions)
@@ -42,14 +58,6 @@ public class BaseDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-       
-
-        modelBuilder.Entity<SectionCourse>()
-             .HasOne(sc => sc.Section)
-             .WithMany(s => s.SectionCourses)
-             .HasForeignKey(sc => sc.SectionId)
-             .OnDelete(DeleteBehavior.NoAction);
-
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 }

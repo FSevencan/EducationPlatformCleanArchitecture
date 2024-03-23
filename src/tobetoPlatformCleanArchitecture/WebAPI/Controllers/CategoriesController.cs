@@ -3,6 +3,7 @@ using Application.Features.Categories.Commands.Delete;
 using Application.Features.Categories.Commands.Update;
 using Application.Features.Categories.Queries.GetById;
 using Application.Features.Categories.Queries.GetList;
+using Application.Features.Categories.Queries.GetListCategorySections;
 using Core.Application.Requests;
 using Core.Application.Responses;
 using Microsoft.AspNetCore.Mvc;
@@ -49,6 +50,14 @@ public class CategoriesController : BaseController
     {
         GetListCategoryQuery getListCategoryQuery = new() { PageRequest = pageRequest };
         GetListResponse<GetListCategoryListItemDto> response = await Mediator.Send(getListCategoryQuery);
+        return Ok(response);
+    }
+    
+    [HttpGet("{categoryId}/sections")]
+    public async Task<IActionResult> GetListCategorySections([FromRoute] Guid categoryId, [FromQuery] PageRequest pageRequest)
+    {
+        GetListCategorySectionsQuery getListCategorySectionsQuery = new() { CategoryId = categoryId, PageRequest = pageRequest };
+        GetListResponse<GetListCategorySectionsListItemDto> response = await Mediator.Send(getListCategorySectionsQuery);
         return Ok(response);
     }
 }

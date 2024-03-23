@@ -12,7 +12,7 @@ using static Application.Features.Exams.Constants.ExamsOperationClaims;
 
 namespace Application.Features.Exams.Queries.GetList;
 
-public class GetListExamQuery : IRequest<GetListResponse<GetListExamListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListExamQuery : IRequest<GetListResponse<GetListExamListItemDto>>/*, ISecuredRequest*/, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 

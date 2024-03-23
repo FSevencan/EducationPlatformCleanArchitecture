@@ -12,20 +12,16 @@ using static Application.Features.SectionAbouts.Constants.SectionAboutsOperation
 
 namespace Application.Features.SectionAbouts.Commands.Create;
 
-public class CreateSectionAboutCommand : IRequest<CreatedSectionAboutResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
+public class CreateSectionAboutCommand : IRequest<CreatedSectionAboutResponse>, ISecuredRequest, ILoggableRequest, ITransactionalRequest
 {
     public Guid ProducerCompanyId { get; set; }
     public Guid SectionId { get; set; }
+    public Guid LanguageId { get; set; }
     public string? Text { get; set; }
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public TimeSpan? EstimatedDuration { get; set; }
+    public double EstimatedDuration { get; set; }
 
-    public string[] Roles => new[] { Admin, Write, SectionAboutsOperationClaims.Create };
 
-    public bool BypassCache { get; }
-    public string? CacheKey { get; }
-    public string CacheGroupKey => "GetSectionAbouts";
+    public string[] Roles => new[] { Admin, instructor, Write, SectionAboutsOperationClaims.Create };
 
     public class CreateSectionAboutCommandHandler : IRequestHandler<CreateSectionAboutCommand, CreatedSectionAboutResponse>
     {

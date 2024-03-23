@@ -9,11 +9,10 @@ using static Application.Features.ProducerCompanies.Constants.ProducerCompaniesO
 
 namespace Application.Features.ProducerCompanies.Queries.GetById;
 
-public class GetByIdProducerCompanyQuery : IRequest<GetByIdProducerCompanyResponse>, ISecuredRequest
+public class GetByIdProducerCompanyQuery : IRequest<GetByIdProducerCompanyResponse>
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
 
     public class GetByIdProducerCompanyQueryHandler : IRequestHandler<GetByIdProducerCompanyQuery, GetByIdProducerCompanyResponse>
     {

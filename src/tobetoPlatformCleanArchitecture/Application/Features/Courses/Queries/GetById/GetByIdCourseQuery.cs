@@ -9,11 +9,11 @@ using static Application.Features.Courses.Constants.CoursesOperationClaims;
 
 namespace Application.Features.Courses.Queries.GetById;
 
-public class GetByIdCourseQuery : IRequest<GetByIdCourseResponse>, ISecuredRequest
+public class GetByIdCourseQuery : IRequest<GetByIdCourseResponse>
 {
     public Guid Id { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
+ 
 
     public class GetByIdCourseQueryHandler : IRequestHandler<GetByIdCourseQuery, GetByIdCourseResponse>
     {

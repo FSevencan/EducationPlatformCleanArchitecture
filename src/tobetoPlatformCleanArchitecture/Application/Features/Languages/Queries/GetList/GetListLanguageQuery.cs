@@ -12,11 +12,10 @@ using static Application.Features.Languages.Constants.LanguagesOperationClaims;
 
 namespace Application.Features.Languages.Queries.GetList;
 
-public class GetListLanguageQuery : IRequest<GetListResponse<GetListLanguageListItemDto>>, ISecuredRequest, ICachableRequest
+public class GetListLanguageQuery : IRequest<GetListResponse<GetListLanguageListItemDto>>, ICachableRequest
 {
     public PageRequest PageRequest { get; set; }
 
-    public string[] Roles => new[] { Admin, Read };
 
     public bool BypassCache { get; }
     public string CacheKey => $"GetListLanguages({PageRequest.PageIndex},{PageRequest.PageSize})";

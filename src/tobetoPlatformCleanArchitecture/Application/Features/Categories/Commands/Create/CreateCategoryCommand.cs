@@ -10,11 +10,13 @@ using Core.Application.Pipelines.Transaction;
 using MediatR;
 using static Application.Features.Categories.Constants.CategoriesOperationClaims;
 
+
 namespace Application.Features.Categories.Commands.Create;
 
 public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>, ISecuredRequest, ICacheRemoverRequest, ILoggableRequest, ITransactionalRequest
 {
     public string Name { get; set; }
+    public string ImageUrl { get; set; }
 
     public string[] Roles => new[] { Admin, Write, CategoriesOperationClaims.Create };
 
@@ -39,7 +41,8 @@ public class CreateCategoryCommand : IRequest<CreatedCategoryResponse>, ISecured
         public async Task<CreatedCategoryResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
         {
             Category category = _mapper.Map<Category>(request);
-
+           
+            await _categoryBusinessRules.CheckCategoryNameForUniqueness(request.Name);
             await _categoryRepository.AddAsync(category);
 
             CreatedCategoryResponse response = _mapper.Map<CreatedCategoryResponse>(category);

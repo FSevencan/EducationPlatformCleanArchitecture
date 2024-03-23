@@ -6,8 +6,10 @@ public class UpdateInstructorCommandValidator : AbstractValidator<UpdateInstruct
 {
     public UpdateInstructorCommandValidator()
     {
-        RuleFor(c => c.Id).NotEmpty();
-        RuleFor(c => c.Name).NotEmpty();
-        RuleFor(c => c.ImageUrl).NotEmpty();
+        RuleFor(c => c.UpdateInstructorDto.Id).NotEmpty();
+        RuleFor(c => c.UpdateInstructorDto.FirstName).NotEmpty();
+        RuleFor(c => c.UpdateInstructorDto.LastName).NotEmpty();
+        RuleFor(c => c.UpdateInstructorDto.Email).NotEmpty();
+       
     }
 }

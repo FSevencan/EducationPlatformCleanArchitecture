@@ -17,6 +17,7 @@ public class UpdateSectionCourseCommand : IRequest<UpdatedSectionCourseResponse>
     public Guid Id { get; set; }
     public Guid CourseId { get; set; }
     public Guid SectionId { get; set; }
+   
 
     public string[] Roles => new[] { Admin, Write, SectionCoursesOperationClaims.Update };
 

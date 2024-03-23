@@ -16,6 +16,7 @@ public class CreateSectionInstructorCommand : IRequest<CreatedSectionInstructorR
 {
     public Guid SectionId { get; set; }
     public Guid InstructorId { get; set; }
+  
 
     public string[] Roles => new[] { Admin, Write, SectionInstructorsOperationClaims.Create };
 
