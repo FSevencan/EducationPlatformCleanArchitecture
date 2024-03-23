@@ -7,6 +7,7 @@ This project is a comprehensive education platform that provides personalized le
 ## Key Features
 
 - **Real-Time Performance Tracking**: Monitor course progression and module completion as it happens for a definitive educational trajectory.
+- **User Engagement**: 'Like' functionality for courses allows students to express their appreciation and helps instructors gauge the popularity of their content.
 - **Secure User Experience**: Rely on email verification and secure login for safeguarding personal data.
 - **Instructor Entry and Course Management:**: Create and upload custom courses, offering tailored educational materials to students.
 - **Dynamic Content Updates**: Enroll in classes by field, such as .NET-React, Business Analysis, or Data Science, accessing only relevant materials. Stay informed on new additions with subscription alerts.
@@ -36,7 +37,7 @@ This project is a comprehensive education platform that provides personalized le
 
 <img src="https://i.imgur.com/AbPzjuF.png" width="900px" />
 <br/>
-<img src="https://i.imgur.com/Pkf97UE.png" width="900px" />
+<img src="https://i.imgur.com/l3VSxbh.png" width="900px" />
 <br/>
 <img src="https://i.imgur.com/eovQZtB.png" width="900px" />
 <br/>
